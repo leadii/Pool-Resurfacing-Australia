@@ -162,6 +162,55 @@
             resize: vertical;
         }
 
+        .form-input.error {
+            border-color: #dc3545;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .input-hint {
+            color: rgba(26, 19, 72, 0.5);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message h3 {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.5rem;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message p {
+            color: rgba(26, 19, 72, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message .team-signature {
+            font-weight: 600;
+            color: var(--navy);
+            margin-top: 1rem;
+        }
+
         .submit-btn {
             width: 100%;
             background-color: var(--yellow);
@@ -279,6 +328,7 @@
             <a href="/" class="logo">
                 <img src="/public/GVMLogo.svg" alt="GVM Upgrades Australia" height="40">
             </a>
+            <a href="/faq" class="contact-btn">FAQ</a>
         </div>
     </header>
 
@@ -288,28 +338,37 @@
             <h1 class="page-title">Contact Us</h1>
             <p class="page-subtitle">Have a question? We're here to help.</p>
 
-            <form class="contact-form" action="thanks.html" method="GET">
+            <form class="contact-form" id="contactForm">
                 <div class="form-group">
-                    <label class="form-label" for="firstName">First Name</label>
+                    <label class="form-label" for="firstName">First Name *</label>
                     <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Enter your first name" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="email">Email</label>
+                    <label class="form-label" for="email">Email *</label>
                     <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
+                    <div class="error-message" id="error-email">Please enter a valid email address</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number" required>
+                    <label class="form-label" for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="04XX XXX XXX" required>
+                    <p class="input-hint">Australian mobile numbers only (04 or 05)</p>
+                    <div class="error-message" id="error-phone">Please enter a valid Australian mobile number</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="message">What's your question or how can we help?</label>
+                    <label class="form-label" for="message">What's your question or how can we help? *</label>
                     <textarea id="message" name="message" class="form-input" placeholder="Tell us how we can assist you..." required></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn">Submit</button>
+                <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
+
+                <div class="success-message" id="successMessage">
+                    <h3>Thanks for your inquiry.</h3>
+                    <p>We'll be in touch within the next 24 hours.</p>
+                    <p class="team-signature">GVM Upgrades Australia team</p>
+                </div>
             </form>
 
             <div class="back-link-wrapper">
@@ -322,6 +381,124 @@
             </div>
         </div>
     </main>
+
+    <script>
+        // Email validation
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const disposableDomains = [
+                'test.com', 'example.com', 'tempmail.com', 'throwaway.com', 'mailinator.com',
+                'guerrillamail.com', 'sharklasers.com', 'yopmail.com', '10minutemail.com'
+            ];
+
+            if (!emailRegex.test(email)) {
+                return { valid: false, message: 'Please enter a valid email address' };
+            }
+
+            const emailDomain = email.split('@')[1]?.toLowerCase();
+            if (disposableDomains.includes(emailDomain)) {
+                return { valid: false, message: 'Please use a valid personal or business email address' };
+            }
+
+            return { valid: true };
+        }
+
+        // Phone validation (Australian mobile)
+        function validatePhone(phone) {
+            const cleanPhone = phone.replace(/\s/g, '');
+            const mobileRegex = /^0[45]\d{8}$/;
+
+            if (!mobileRegex.test(cleanPhone)) {
+                return { valid: false, message: 'Please enter a valid Australian mobile number' };
+            }
+
+            return { valid: true };
+        }
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const firstName = document.getElementById('firstName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value.trim();
+
+            let isValid = true;
+
+            // Validate first name
+            if (!firstName || firstName.length < 2) {
+                document.getElementById('firstName').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('firstName').classList.remove('error');
+            }
+
+            // Validate email
+            const emailResult = validateEmail(email);
+            const emailError = document.getElementById('error-email');
+            if (!emailResult.valid) {
+                emailError.textContent = emailResult.message;
+                emailError.classList.add('show');
+                document.getElementById('email').classList.add('error');
+                isValid = false;
+            } else {
+                emailError.classList.remove('show');
+                document.getElementById('email').classList.remove('error');
+            }
+
+            // Validate phone
+            const phoneResult = validatePhone(phone);
+            const phoneError = document.getElementById('error-phone');
+            if (!phoneResult.valid) {
+                phoneError.textContent = phoneResult.message;
+                phoneError.classList.add('show');
+                document.getElementById('phone').classList.add('error');
+                isValid = false;
+            } else {
+                phoneError.classList.remove('show');
+                document.getElementById('phone').classList.remove('error');
+            }
+
+            // Validate message
+            if (!message) {
+                document.getElementById('message').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('message').classList.remove('error');
+            }
+
+            if (!isValid) return;
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            const formData = {
+                firstName: firstName,
+                email: email,
+                phone: phone.replace(/\s/g, ''),
+                message: message
+            };
+
+            try {
+                await fetch('https://services.leadconnectorhq.com/hooks/K03KP6dfEUp6MFsK9a1b/webhook-trigger/0c53b232-acdf-435e-9ba5-3047b331f4d6', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+            } catch (error) {
+                console.error('Error submitting form:', error);
+            }
+
+            // Hide form fields and show success message
+            document.querySelectorAll('#contactForm .form-group').forEach(el => el.style.display = 'none');
+            submitBtn.style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+        });
+    </script>
 
     <!-- Footer -->
     <footer class="footer">

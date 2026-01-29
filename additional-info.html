@@ -393,8 +393,55 @@
             color: rgba(26, 19, 72, 0.6);
         }
 
-        .not-sure-option {
+        .not-sure-row {
             margin-top: 0.5rem;
+        }
+
+        .not-sure-spacer {
+            min-width: 140px;
+        }
+
+        .inline-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .inline-checkbox input {
+            display: none;
+        }
+
+        .inline-checkbox-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(26, 19, 72, 0.2);
+            border-radius: 4px;
+            background: var(--white);
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .inline-checkbox input:checked + .inline-checkbox-box {
+            background: var(--yellow);
+            border-color: var(--yellow);
+        }
+
+        .inline-checkbox input:checked + .inline-checkbox-box::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid var(--navy);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .inline-checkbox-text {
+            font-size: 0.9rem;
+            color: rgba(26, 19, 72, 0.7);
         }
 
         /* Navigation Buttons */
@@ -717,15 +764,14 @@
                             <input type="number" id="desired_increase" name="desired_increase" placeholder="e.g. 500" min="0" max="2000">
                             <span class="unit">kg</span>
                         </div>
-                        <label class="checkbox-option not-sure-option" style="max-width: 200px;">
-                            <input type="checkbox" name="gvm_not_sure" value="not-sure" id="gvm_not_sure">
-                            <span class="checkbox-custom">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </span>
-                            <span class="checkbox-text">Not sure</span>
-                        </label>
+                        <div class="number-input-group not-sure-row">
+                            <span class="not-sure-spacer"></span>
+                            <label class="inline-checkbox">
+                                <input type="checkbox" name="gvm_not_sure" value="not-sure" id="gvm_not_sure">
+                                <span class="inline-checkbox-box"></span>
+                                <span class="inline-checkbox-text">Not sure</span>
+                            </label>
+                        </div>
                     </div>
                     <div class="nav-buttons">
                         <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>

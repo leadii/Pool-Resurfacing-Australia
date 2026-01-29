@@ -40,6 +40,9 @@
             background-color: var(--cream);
             color: var(--navy);
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Header */
@@ -88,9 +91,11 @@
 
         /* Main Content */
         .main-content {
+            flex: 1;
             max-width: 800px;
             margin: 0 auto;
             padding: 3rem 2rem;
+            width: 100%;
         }
 
         /* Form Container */
@@ -338,11 +343,16 @@
         }
 
         /* Number Inputs */
+        .gvm-inputs-wrapper {
+            margin-top: 1.5rem;
+            animation: fadeIn 0.3s ease;
+        }
+
         .number-inputs {
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .number-input-group {
@@ -753,24 +763,30 @@
                     <span class="question-label">
                         Do you know your current GVM and desired increase?
                     </span>
-                    <div class="number-inputs">
-                        <div class="number-input-group">
-                            <label for="current_gvm">Current GVM:</label>
-                            <input type="number" id="current_gvm" name="current_gvm" placeholder="e.g. 3000" min="0" max="10000">
-                            <span class="unit">kg</span>
-                        </div>
-                        <div class="number-input-group">
-                            <label for="desired_increase">Desired increase:</label>
-                            <input type="number" id="desired_increase" name="desired_increase" placeholder="e.g. 500" min="0" max="2000">
-                            <span class="unit">kg</span>
-                        </div>
-                        <div class="number-input-group not-sure-row">
-                            <span class="not-sure-spacer"></span>
-                            <label class="inline-checkbox">
-                                <input type="checkbox" name="gvm_not_sure" value="not-sure" id="gvm_not_sure">
-                                <span class="inline-checkbox-box"></span>
-                                <span class="inline-checkbox-text">Not sure</span>
-                            </label>
+                    <div class="radio-options">
+                        <label class="radio-option">
+                            <input type="radio" name="knows_gvm" value="yes" id="knows_gvm_yes">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">Yes</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="knows_gvm" value="not-sure" id="knows_gvm_no">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">Not sure</span>
+                        </label>
+                    </div>
+                    <div class="gvm-inputs-wrapper" id="gvmInputsWrapper" style="display: none;">
+                        <div class="number-inputs">
+                            <div class="number-input-group">
+                                <label for="current_gvm">Current GVM:</label>
+                                <input type="number" id="current_gvm" name="current_gvm" placeholder="e.g. 3000" min="0" max="10000">
+                                <span class="unit">kg</span>
+                            </div>
+                            <div class="number-input-group">
+                                <label for="desired_increase">Desired increase:</label>
+                                <input type="number" id="desired_increase" name="desired_increase" placeholder="e.g. 500" min="0" max="2000">
+                                <span class="unit">kg</span>
+                            </div>
                         </div>
                     </div>
                     <div class="nav-buttons">
@@ -929,9 +945,9 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
+            <a href="/faq">FAQ</a>
             <a href="/privacy">Privacy Policy</a>
             <a href="/terms">Terms & Conditions</a>
-            <a href="/faq">FAQ</a>
         </div>
         <p>&copy; <script>document.write(new Date().getFullYear())</script> GVM Upgrades Australia. All rights reserved.</p>
     </footer>
@@ -986,43 +1002,41 @@
         });
 
         // Step 2: GVM details validation
-        const notSureCheckbox = document.getElementById('gvm_not_sure');
+        const knowsGvmRadios = document.querySelectorAll('input[name="knows_gvm"]');
+        const gvmInputsWrapper = document.getElementById('gvmInputsWrapper');
         const currentGvmInput = document.getElementById('current_gvm');
         const desiredIncreaseInput = document.getElementById('desired_increase');
         const step2Continue = document.getElementById('step2Continue');
 
         function validateStep2() {
-            const hasGvmValues = currentGvmInput.value || desiredIncreaseInput.value;
-            const notSureChecked = notSureCheckbox.checked;
-            step2Continue.disabled = !(hasGvmValues || notSureChecked);
+            const knowsGvmYes = document.getElementById('knows_gvm_yes').checked;
+            const knowsGvmNo = document.getElementById('knows_gvm_no').checked;
+
+            if (knowsGvmNo) {
+                step2Continue.disabled = false;
+            } else if (knowsGvmYes) {
+                const hasGvmValues = currentGvmInput.value && desiredIncreaseInput.value;
+                step2Continue.disabled = !hasGvmValues;
+            } else {
+                step2Continue.disabled = true;
+            }
         }
 
-        notSureCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                currentGvmInput.disabled = true;
-                desiredIncreaseInput.disabled = true;
-                currentGvmInput.value = '';
-                desiredIncreaseInput.value = '';
-            } else {
-                currentGvmInput.disabled = false;
-                desiredIncreaseInput.disabled = false;
-            }
-            validateStep2();
+        knowsGvmRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'yes') {
+                    gvmInputsWrapper.style.display = 'block';
+                } else {
+                    gvmInputsWrapper.style.display = 'none';
+                    currentGvmInput.value = '';
+                    desiredIncreaseInput.value = '';
+                }
+                validateStep2();
+            });
         });
 
-        currentGvmInput.addEventListener('input', function() {
-            if (this.value) {
-                notSureCheckbox.checked = false;
-            }
-            validateStep2();
-        });
-
-        desiredIncreaseInput.addEventListener('input', function() {
-            if (this.value) {
-                notSureCheckbox.checked = false;
-            }
-            validateStep2();
-        });
+        currentGvmInput.addEventListener('input', validateStep2);
+        desiredIncreaseInput.addEventListener('input', validateStep2);
 
         // Step 3: Budget validation
         const budgetRadios = document.querySelectorAll('input[name="budget"]');

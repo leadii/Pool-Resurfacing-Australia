@@ -523,3 +523,4 @@ transform: translateY(-2px);
 - Don't use colors outside the defined palette
 - Don't skip hover states on interactive elements
 - Don't use different max-widths for aligned content sections
+- **Don't use cream (`#F3EBD9`) for form element backgrounds** - always use white (`#FFFFFF`) for inputs, radio options, checkbox options, textareas, and selects

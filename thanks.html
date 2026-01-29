@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Submitted | GVM Upgrades Australia</title>
+    <style>
+        @font-face {
+            font-family: 'DIN Condensed Bold';
+            src: url('/fonts/DIN Condensed Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Arial';
+            src: url('/fonts/Arial.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        :root {
+            --yellow: #E7E515;
+            --white: #FFFFFF;
+            --navy: #1A1348;
+            --cream: #F3EBD9;
+            --navy-light: rgba(26, 19, 72, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--navy);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px 100px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Subtle background pattern */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(ellipse at 20% 20%, rgba(231, 229, 21, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(243, 235, 217, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 680px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Success Icon */
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 32px;
+            position: relative;
+            animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            opacity: 0;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-icon .inner-box {
+            position: absolute;
+            inset: 0;
+            background: var(--yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(231, 229, 21, 0.3);
+        }
+
+        .success-icon .checkmark {
+            width: 44px;
+            height: 44px;
+            stroke: var(--navy);
+            stroke-width: 3.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .checkmark path {
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: drawCheck 0.4s 0.5s ease-out forwards;
+        }
+
+        @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Content Header */
+        .content-header {
+            text-align: center;
+            margin-bottom: 48px;
+            animation: fadeUp 0.6s 0.2s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .content-header h1 {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .content-header p {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+        }
+
+        /* Timeline Card */
+        .timeline-card {
+            background: var(--cream);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow:
+                0 4px 6px rgba(26, 19, 72, 0.05),
+                0 20px 40px rgba(26, 19, 72, 0.15),
+                0 0 0 1px rgba(26, 19, 72, 0.03);
+            animation: fadeUp 0.6s 0.4s ease forwards;
+            opacity: 0;
+        }
+
+        .timeline-header {
+            background: var(--yellow);
+            padding: 20px 32px;
+            text-align: center;
+        }
+
+        .timeline-header h2 {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: -0.01em;
+        }
+
+        .timeline-content {
+            padding: 40px 32px 48px;
+        }
+
+        .timeline-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+        }
+
+        .timeline-step {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 20px;
+            position: relative;
+            padding-bottom: 32px;
+        }
+
+        .timeline-step:last-child {
+            padding-bottom: 0;
+        }
+
+        /* Vertical line connecting steps */
+        .timeline-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 28px;
+            top: 56px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--navy-light), transparent);
+        }
+
+        .step-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(26, 19, 72, 0.06);
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step-icon.active {
+            background: var(--yellow);
+        }
+
+        .timeline-step:hover .step-icon {
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(26, 19, 72, 0.12);
+        }
+
+        .step-icon svg {
+            width: 26px;
+            height: 26px;
+            color: var(--navy);
+        }
+
+        .step-content {
+            padding-top: 4px;
+        }
+
+        .step-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+
+        .step-badge.in-progress {
+            background: var(--yellow);
+            color: var(--navy);
+        }
+
+        .step-badge.pending {
+            background: rgba(26, 19, 72, 0.08);
+            color: var(--navy);
+        }
+
+        .step-title {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .step-description {
+            font-size: 0.9375rem;
+            color: rgba(26, 19, 72, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Animated pulse for in-progress */
+        .step-icon.active::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 16px;
+            border: 2px solid var(--yellow);
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Back to home link */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 32px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            animation: fadeUp 0.6s 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .back-link:hover {
+            color: var(--yellow);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--navy);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--yellow);
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .timeline-content {
+                padding: 32px 24px 40px;
+            }
+
+            .timeline-step {
+                grid-template-columns: 48px 1fr;
+                gap: 16px;
+            }
+
+            .step-icon {
+                width: 48px;
+                height: 48px;
+                border-radius: 10px;
+            }
+
+            .timeline-step:not(:last-child)::after {
+                left: 24px;
+                top: 48px;
+            }
+
+            .step-icon svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .step-title {
+                font-size: 1.125rem;
+            }
+
+            .step-description {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Success Icon -->
+        <div class="success-icon">
+            <div class="inner-box">
+                <svg class="checkmark" viewBox="0 0 36 36">
+                    <path d="M8 18 L15 25 L28 12"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Content Header -->
+        <div class="content-header">
+            <h1>Request submitted successfully</h1>
+            <p>We're matching you with a local GVM installer.</p>
+        </div>
+
+        <!-- Timeline Card -->
+        <div class="timeline-card">
+            <div class="timeline-header">
+                <h2>What happens next</h2>
+            </div>
+            <div class="timeline-content">
+                <div class="timeline-steps">
+                    <!-- Step 1 -->
+                    <div class="timeline-step">
+                        <div class="step-icon active">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="step-content">
+                            <span class="step-badge in-progress">In progress</span>
+                            <h3 class="step-title">Matching you with installers</h3>
+                            <p class="step-description">We're reviewing your details and matching you with a suitable GVM installer in your area.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="timeline-step">
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="step-content">
+                            <span class="step-badge pending">Within 24 hours</span>
+                            <h3 class="step-title">Installer makes contact</h3>
+                            <p class="step-description">A local installer will contact you directly to confirm your vehicle details and understand how you use it.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="timeline-step">
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <polyline points="9 12 11 14 15 10"/>
+                            </svg>
+                        </div>
+                        <div class="step-content">
+                            <span class="step-badge pending">Within 24-48 hours</span>
+                            <h3 class="step-title">Discuss options and timing</h3>
+                            <p class="step-description">The installer will talk you through upgrade options, timelines, and any engineering or certification requirements relevant to your vehicle.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">Back to homepage</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> GVM Upgrades Australia. All rights reserved.</p>
+    </footer>
+</body>
+</html>

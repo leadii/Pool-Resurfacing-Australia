@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Information | GVM Upgrades Australia</title>
+    <style>
+        @font-face {
+            font-family: 'DIN Condensed Bold';
+            src: url('/fonts/DIN Condensed Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Arial';
+            src: url('/fonts/Arial.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        :root {
+            --yellow: #E7E515;
+            --white: #FFFFFF;
+            --navy: #1A1348;
+            --cream: #F3EBD9;
+            --navy-light: rgba(26, 19, 72, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--cream);
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            padding: 1rem 2rem;
+            background-color: var(--navy);
+        }
+
+        .header-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .contact-btn {
+            background-color: var(--yellow);
+            color: var(--navy);
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(231, 229, 21, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(26, 19, 72, 0.08);
+        }
+
+        /* Progress Header */
+        .progress-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--navy-light);
+        }
+
+        .step-indicator {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .step-indicator span {
+            color: var(--yellow);
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--navy-light);
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: var(--yellow);
+            transform: scale(1.2);
+        }
+
+        .progress-dot.completed {
+            background: var(--navy);
+        }
+
+        /* Question Steps */
+        .question-step {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .question-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-label {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .question-label .required {
+            color: #e53e3e;
+            margin-left: 0.25rem;
+        }
+
+        /* Radio Options */
+        .radio-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background: var(--white);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(26, 19, 72, 0.08);
+            box-shadow: 0 1px 3px rgba(26, 19, 72, 0.04);
+        }
+
+        .radio-option:hover {
+            border-color: rgba(26, 19, 72, 0.15);
+        }
+
+        .radio-option input[type="radio"] {
+            display: none;
+        }
+
+        .radio-option input[type="radio"]:checked + .radio-custom {
+            background: var(--yellow);
+            border-color: var(--yellow);
+        }
+
+        .radio-option input[type="radio"]:checked + .radio-custom::after {
+            opacity: 1;
+        }
+
+        .radio-option input[type="radio"]:checked ~ .radio-text {
+            font-weight: 600;
+        }
+
+        .radio-option:has(input[type="radio"]:checked) {
+            border-color: var(--yellow);
+            background: var(--white);
+        }
+
+        .radio-custom {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(26, 19, 72, 0.2);
+            border-radius: 50%;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .radio-custom::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: var(--navy);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .radio-text {
+            font-size: 1rem;
+            color: var(--navy);
+            font-weight: 500;
+        }
+
+        /* Checkbox Options */
+        .checkbox-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .checkbox-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background: var(--cream);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(26, 19, 72, 0.05);
+        }
+
+        .checkbox-option:hover {
+            border-color: rgba(26, 19, 72, 0.15);
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkbox-option input[type="checkbox"]:checked + .checkbox-custom {
+            background: var(--yellow);
+            border-color: var(--yellow);
+        }
+
+        .checkbox-option input[type="checkbox"]:checked + .checkbox-custom svg {
+            opacity: 1;
+        }
+
+        .checkbox-option input[type="checkbox"]:checked ~ .checkbox-text {
+            font-weight: 600;
+        }
+
+        .checkbox-option:has(input[type="checkbox"]:checked) {
+            border-color: var(--yellow);
+            background: var(--white);
+        }
+
+        .checkbox-custom {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(26, 19, 72, 0.2);
+            border-radius: 6px;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.3s ease;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkbox-custom svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--navy);
+            stroke-width: 3;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .checkbox-text {
+            font-size: 1rem;
+            color: var(--navy);
+            font-weight: 500;
+        }
+
+        /* Number Inputs */
+        .number-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .number-input-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .number-input-group label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--navy);
+            min-width: 140px;
+        }
+
+        .number-input-group input[type="number"] {
+            flex: 1;
+            max-width: 150px;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            border: 1px solid rgba(26, 19, 72, 0.05);
+            border-radius: 12px;
+            background: var(--cream);
+            color: var(--navy);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .number-input-group input[type="number"]:focus {
+            outline: none;
+            border-color: var(--navy);
+        }
+
+        .number-input-group input[type="number"]:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .number-input-group .unit {
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(26, 19, 72, 0.6);
+        }
+
+        .not-sure-option {
+            margin-top: 0.5rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--yellow);
+            color: var(--navy);
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(231, 229, 21, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--navy);
+            border: 2px solid var(--navy-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--cream);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Form Header */
+        .form-header {
+            background-color: var(--navy);
+            padding: 2.5rem 2rem;
+            border-radius: 24px 24px 0 0;
+            position: relative;
+            overflow: hidden;
+            margin: -2.5rem -2.5rem 2rem -2.5rem;
+        }
+
+        .form-header::after {
+            content: '';
+            position: absolute;
+            right: -80px;
+            top: -80px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .form-header h1 {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: clamp(2rem, 5vw, 2.75rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Back Link */
+        .back-link-wrapper {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: rgba(26, 19, 72, 0.5);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--navy);
+        }
+
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--navy);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--yellow);
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            .number-input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .number-input-group label {
+                min-width: auto;
+            }
+
+            .number-input-group input[type="number"] {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .question-label {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <img src="/GVMLogo.svg" alt="GVM Upgrades Australia" height="40">
+            </a>
+            <a href="/contact" class="contact-btn">CONTACT US</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="form-container">
+            <!-- Form Header -->
+            <div class="form-header">
+                <h1>Additional Info</h1>
+                <p>Takes 60 seconds. A local expert will contact you within 24 hours.</p>
+            </div>
+
+            <!-- Progress Header -->
+            <div class="progress-header">
+                <div class="step-indicator">Step <span id="currentStep">1</span> of 4</div>
+                <div class="progress-dots">
+                    <div class="progress-dot active" data-step="1"></div>
+                    <div class="progress-dot" data-step="2"></div>
+                    <div class="progress-dot" data-step="3"></div>
+                    <div class="progress-dot" data-step="4"></div>
+                </div>
+            </div>
+
+            <form id="additionalInfoForm" action="thanks.html" method="GET">
+
+                <!-- Step 1: Vehicle Age -->
+                <div class="question-step active" data-step="1">
+                    <span class="question-label">
+                        What's your vehicle's age and registration status?
+                    </span>
+                    <div class="radio-options">
+                        <label class="radio-option">
+                            <input type="radio" name="vehicle_age" value="pre-registration" required>
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">Pre-registration (not yet registered)</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="vehicle_age" value="less-than-1-year">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">Less than 1 year old</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="vehicle_age" value="1-3-years">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">1-3 years old</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="vehicle_age" value="3-5-years">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">3-5 years old</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="vehicle_age" value="5-10-years">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">5-10 years old</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="vehicle_age" value="10-plus-years">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">10+ years old</span>
+                        </label>
+                    </div>
+                    <div class="nav-buttons">
+                        <button type="button" class="btn btn-primary" id="step1Continue" onclick="nextStep()" disabled>Continue</button>
+                    </div>
+                    <div class="back-link-wrapper">
+                        <a href="index.html" class="back-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                            </svg>
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Step 2: GVM Details -->
+                <div class="question-step" data-step="2">
+                    <span class="question-label">
+                        Do you know your current GVM and desired increase?
+                    </span>
+                    <div class="number-inputs">
+                        <div class="number-input-group">
+                            <label for="current_gvm">Current GVM:</label>
+                            <input type="number" id="current_gvm" name="current_gvm" placeholder="e.g. 3000" min="0" max="10000">
+                            <span class="unit">kg</span>
+                        </div>
+                        <div class="number-input-group">
+                            <label for="desired_increase">Desired increase:</label>
+                            <input type="number" id="desired_increase" name="desired_increase" placeholder="e.g. 500" min="0" max="2000">
+                            <span class="unit">kg</span>
+                        </div>
+                        <label class="checkbox-option not-sure-option" style="max-width: 200px;">
+                            <input type="checkbox" name="gvm_not_sure" value="not-sure" id="gvm_not_sure">
+                            <span class="checkbox-custom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="checkbox-text">Not sure</span>
+                        </label>
+                    </div>
+                    <div class="nav-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
+                        <button type="button" class="btn btn-primary" id="step2Continue" onclick="nextStep()" disabled>Continue</button>
+                    </div>
+                    <div class="back-link-wrapper">
+                        <a href="index.html" class="back-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                            </svg>
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Step 3: Budget Range -->
+                <div class="question-step" data-step="3">
+                    <span class="question-label">
+                        What's your budget range for the GVM upgrade?
+                    </span>
+                    <div class="radio-options">
+                        <label class="radio-option">
+                            <input type="radio" name="budget" value="12000-plus" required>
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">$12,000+</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="budget" value="10000-12000">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">$10,000 - $12,000</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="budget" value="8000-10000">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">$8,000 - $10,000</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="budget" value="5000-8000">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">$5,000 - $8,000</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="budget" value="3000-5000">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">$3,000 - $5,000</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="budget" value="not-sure">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">Not sure yet</span>
+                        </label>
+                    </div>
+                    <div class="nav-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
+                        <button type="button" class="btn btn-primary" id="budgetContinue" onclick="nextStep()" disabled>Continue</button>
+                    </div>
+                    <div class="back-link-wrapper">
+                        <a href="index.html" class="back-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                            </svg>
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Step 4: Additional Services -->
+                <div class="question-step" data-step="4">
+                    <span class="question-label">
+                        Are you interested in any additional services?
+                    </span>
+                    <div class="checkbox-options">
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="additional_services" value="suspension">
+                            <span class="checkbox-custom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="checkbox-text">Suspension upgrade</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="additional_services" value="brakes">
+                            <span class="checkbox-custom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="checkbox-text">Brake upgrade</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="additional_services" value="wheels-tires">
+                            <span class="checkbox-custom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="checkbox-text">Wheel and tire upgrade</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="additional_services" value="bull-bar">
+                            <span class="checkbox-custom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="checkbox-text">Bull bar or accessories</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="additional_services" value="roof-racks">
+                            <span class="checkbox-custom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="checkbox-text">Roof racks or storage</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="additional_services" value="lighting">
+                            <span class="checkbox-custom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="checkbox-text">Lighting upgrades</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="additional_services" value="gvm-only">
+                            <span class="checkbox-custom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="checkbox-text">Just the GVM upgrade</span>
+                        </label>
+                    </div>
+                    <div class="nav-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <div class="back-link-wrapper">
+                        <a href="index.html" class="back-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                            </svg>
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> GVM Upgrades Australia. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        function updateProgress() {
+            document.getElementById('currentStep').textContent = currentStep;
+
+            document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index + 1 === currentStep) {
+                    dot.classList.add('active');
+                } else if (index + 1 < currentStep) {
+                    dot.classList.add('completed');
+                }
+            });
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.question-step').forEach(s => {
+                s.classList.remove('active');
+            });
+            document.querySelector(`.question-step[data-step="${step}"]`).classList.add('active');
+            updateProgress();
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        // Step 1: Vehicle age validation
+        const vehicleAgeRadios = document.querySelectorAll('input[name="vehicle_age"]');
+        const step1Continue = document.getElementById('step1Continue');
+
+        vehicleAgeRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                step1Continue.disabled = false;
+            });
+        });
+
+        // Step 2: GVM details validation
+        const notSureCheckbox = document.getElementById('gvm_not_sure');
+        const currentGvmInput = document.getElementById('current_gvm');
+        const desiredIncreaseInput = document.getElementById('desired_increase');
+        const step2Continue = document.getElementById('step2Continue');
+
+        function validateStep2() {
+            const hasGvmValues = currentGvmInput.value || desiredIncreaseInput.value;
+            const notSureChecked = notSureCheckbox.checked;
+            step2Continue.disabled = !(hasGvmValues || notSureChecked);
+        }
+
+        notSureCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                currentGvmInput.disabled = true;
+                desiredIncreaseInput.disabled = true;
+                currentGvmInput.value = '';
+                desiredIncreaseInput.value = '';
+            } else {
+                currentGvmInput.disabled = false;
+                desiredIncreaseInput.disabled = false;
+            }
+            validateStep2();
+        });
+
+        currentGvmInput.addEventListener('input', function() {
+            if (this.value) {
+                notSureCheckbox.checked = false;
+            }
+            validateStep2();
+        });
+
+        desiredIncreaseInput.addEventListener('input', function() {
+            if (this.value) {
+                notSureCheckbox.checked = false;
+            }
+            validateStep2();
+        });
+
+        // Step 3: Budget validation
+        const budgetRadios = document.querySelectorAll('input[name="budget"]');
+        const budgetContinue = document.getElementById('budgetContinue');
+
+        budgetRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                budgetContinue.disabled = false;
+            });
+        });
+
+        // Step 4: Additional services validation
+        const serviceCheckboxes = document.querySelectorAll('input[name="additional_services"]');
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+
+        serviceCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const anyChecked = Array.from(serviceCheckboxes).some(cb => cb.checked);
+                submitBtn.disabled = !anyChecked;
+            });
+        });
+    </script>
+</body>
+</html>

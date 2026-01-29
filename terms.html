@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | GVM Upgrades Australia</title>
+    <style>
+        @font-face {
+            font-family: 'DIN Condensed Bold';
+            src: url('/fonts/DIN Condensed Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Arial';
+            src: url('/fonts/Arial.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        :root {
+            --yellow: #E7E515;
+            --white: #FFFFFF;
+            --navy: #1A1348;
+            --cream: #F3EBD9;
+            --navy-light: rgba(26, 19, 72, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--cream);
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            padding: 1rem 2rem;
+            background-color: var(--navy);
+        }
+
+        .header-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .contact-btn {
+            background-color: var(--yellow);
+            color: var(--navy);
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(231, 229, 21, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 19, 72, 0.85), rgba(26, 19, 72, 0.85)), url('/Header.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .last-updated {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section h2 {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--yellow);
+            display: inline-block;
+        }
+
+        .section p {
+            font-size: 0.95rem;
+            color: rgba(26, 19, 72, 0.8);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .section ul li {
+            font-size: 0.95rem;
+            color: rgba(26, 19, 72, 0.8);
+            line-height: 1.8;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .section ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            background: var(--yellow);
+            border-radius: 50%;
+        }
+
+        .company-info {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .company-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .company-info p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--yellow);
+        }
+
+        .back-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--navy);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+        }
+
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--yellow);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <img src="/GVMLogo.svg" alt="GVM Upgrades Australia" height="40">
+            </a>
+            <a href="/contact" class="contact-btn">CONTACT US</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Terms & Conditions</h1>
+            <p>By accessing our services, you agree to these terms and conditions.</p>
+            <span class="last-updated">Last Updated: 1 January, 2026</span>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <a href="index.html" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Home
+        </a>
+
+        <div class="section">
+            <h2>1. Introduction</h2>
+            <p>Welcome to MONTELLE PTY LTD trading as "GVM Upgrades Australia" ("GVM Upgrades Australia," "we," "us," or "our"). These Terms and Conditions ("Terms") govern your use of our website and services. By accessing or using our website and services, you agree to be bound by these Terms. If you do not agree with any part of these Terms, you must not use our website or services.</p>
+        </div>
+
+        <div class="section">
+            <h2>2. Company Information</h2>
+            <div class="company-info">
+                <p><strong>Legal Name:</strong> MONTELLE PTY LTD trading as "GVM Upgrades Australia"</p>
+                <p><strong>ABN:</strong> 65 694 224 792</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. Services Provided</h2>
+            <p>GVM Upgrades Australia connects vehicle owners with certified GVM (Gross Vehicle Mass) upgrade installers across Australia. We facilitate the process of finding qualified professionals who can legally increase your vehicle's payload capacity through engineering modifications and certification.</p>
+        </div>
+
+        <div class="section">
+            <h2>4. Service Delivery</h2>
+            <p>Our services are delivered through our online platform, which connects customers with local GVM upgrade installers. The actual GVM upgrade work is performed by independent, certified installers in your area.</p>
+        </div>
+
+        <div class="section">
+            <h2>5. Geographic Limitations</h2>
+            <p>Our services are available throughout Australia where certified GVM installers operate.</p>
+        </div>
+
+        <div class="section">
+            <h2>6. Customer Engagement</h2>
+            <p>Customers are not required to create an account to use our services. However, we collect information about your vehicle and contact details to match you with suitable installers in your area.</p>
+        </div>
+
+        <div class="section">
+            <h2>7. User Conduct</h2>
+            <p>While we do not have specific rules or guidelines for user interaction with our services, we expect all users to engage respectfully and professionally.</p>
+        </div>
+
+        <div class="section">
+            <h2>8. Payment Terms And Methods</h2>
+            <p>GVM Upgrades Australia is a lead generation service. Payment for GVM upgrade services is made directly to the installer you choose to work with. Payment terms and methods will be determined by the individual installer.</p>
+        </div>
+
+        <div class="section">
+            <h2>9. Refunds, Cancellations, And Disputes</h2>
+            <p>As we connect customers with independent installers, any disputes regarding the actual GVM upgrade work should be resolved directly with the installer. We are happy to assist in facilitating communication where possible.</p>
+        </div>
+
+        <div class="section">
+            <h2>10. Privacy And Data Protection</h2>
+            <p>We use encrypted services to protect your data. We share your contact and vehicle information with installers in your area to facilitate quotes and service delivery. Please see our Privacy Policy for more details.</p>
+        </div>
+
+        <div class="section">
+            <h2>11. Intellectual Property</h2>
+            <p>All content provided on our website and through our services is owned by MONTELLE PTY LTD trading as "GVM Upgrades Australia". We may use third-party content and software in our services.</p>
+        </div>
+
+        <div class="section">
+            <h2>12. User-Generated Content</h2>
+            <p>Contact information submitted through our website will be used to connect you with GVM installers and for related communications.</p>
+        </div>
+
+        <div class="section">
+            <h2>13. Limitation Of Liability</h2>
+            <p>MONTELLE PTY LTD trading as "GVM Upgrades Australia" will not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from (i) your use or inability to use the services; (ii) any unauthorised access to or use of our services and/or any personal information stored therein; (iii) any interruption or cessation of transmission to or from our services; (iv) any bugs, viruses, trojan horses, or the like that may be transmitted to or through our services by any third party; (v) any errors or omissions in any content; and/or (vi) any defamatory, offensive, or illegal conduct of any third party. Our liability is limited to the maximum extent permitted by law.</p>
+            <p>GVM Upgrades Australia is not responsible for the quality, safety, or legality of any GVM upgrade work performed by independent installers. All upgrade work is the responsibility of the installer you choose to engage.</p>
+        </div>
+
+        <div class="section">
+            <h2>14. Indemnification</h2>
+            <p>You agree to defend, indemnify, and hold harmless MONTELLE PTY LTD trading as "GVM Upgrades Australia" and its subsidiaries, agents, licensors, managers, and other affiliated companies, and their employees, contractors, agents, officers, and directors, from and against any and all claims, damages, obligations, losses, liabilities, costs, or debt, and expenses (including but not limited to legal fees) arising from (i) your use of and access to the Services, including any data or content transmitted or received by you; (ii) your violation of any term of these Terms; (iii) your violation of any third-party right, including without limitation any right of privacy or intellectual property rights; (iv) your violation of any applicable law, rule, or regulation; (v) any content that is submitted via your account including without limitation misleading, false, or inaccurate information; (vi) your wilful misconduct; or (vii) any other party's access and use of the Services with your unique username, password, or other appropriate security code.</p>
+        </div>
+
+        <div class="section">
+            <h2>15. Termination And Suspension</h2>
+            <p>We reserve the right to terminate or suspend access to our services immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms. All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.</p>
+        </div>
+
+        <div class="section">
+            <h2>16. Governing Law</h2>
+            <p>These Terms shall be governed and construed in accordance with the laws of Queensland, Australia, without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our services, and supersede and replace any prior agreements we might have had between us regarding the services.</p>
+        </div>
+
+        <div class="section">
+            <h2>17. Amendments</h2>
+            <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion. By continuing to access or use our services after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the services.</p>
+        </div>
+
+        <div class="section">
+            <h2>18. Contact Information</h2>
+            <p>If you have any questions about these Terms, please contact us through the contact form on our website.</p>
+        </div>
+
+        <div class="section">
+            <h2>19. Third-Party Links And Services</h2>
+            <p>Our website and services may contain links to third-party websites or services that are not owned or controlled by MONTELLE PTY LTD trading as "GVM Upgrades Australia". We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services. You further acknowledge and agree that we shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods, or services available on or through any such websites or services. We strongly advise you to read the terms and conditions and privacy policies of any third-party websites or services that you visit.</p>
+        </div>
+
+        <div class="section">
+            <h2>20. Accessibility</h2>
+            <p>We are committed to ensuring that our services are accessible to everyone. If you have any accessibility concerns or need assistance, please contact us through our website.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> GVM Upgrades Australia. All rights reserved.</p>
+    </footer>
+</body>
+</html>

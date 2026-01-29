@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>404 - Page Not Found | GVM Upgrades Australia</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <style>
+        @font-face {
+            font-family: 'DIN Condensed Bold';
+            src: url('/fonts/DIN Condensed Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Arial';
+            src: url('/fonts/Arial.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --yellow: #E7E515;
+            --white: #FFFFFF;
+            --navy: #1A1348;
+            --cream: #F3EBD9;
+            --navy-light: rgba(26, 19, 72, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--navy);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .header {
+            padding: 1rem 2rem;
+            background-color: var(--navy);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+        }
+
+        .error-text {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .error-code {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 4rem;
+            color: var(--yellow);
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .game-instruction {
+            font-size: 0.9rem;
+            color: var(--yellow);
+            margin-bottom: 1rem;
+        }
+
+        .game-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--navy);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            touch-action: none;
+        }
+
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 19, 72, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .game-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .overlay-title {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.6rem;
+            color: var(--yellow);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .overlay-score {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Vehicle Selection - Compact horizontal */
+        .vehicle-grid {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 450px;
+        }
+
+        .vehicle-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 0.75rem 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .vehicle-card:hover {
+            border-color: var(--yellow);
+            background: rgba(231, 229, 21, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .vehicle-card .icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .vehicle-card .label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--white);
+        }
+
+        /* Map Selection - 2x2 grid */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .map-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .map-card:hover {
+            border-color: var(--yellow);
+            background: rgba(231, 229, 21, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .map-card .icon {
+            font-size: 1.75rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .map-card .label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--white);
+        }
+
+        .map-card .sublabel {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.15rem;
+        }
+
+        .play-btn {
+            background-color: var(--yellow);
+            color: var(--navy);
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Arial', sans-serif;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .play-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(231, 229, 21, 0.4);
+        }
+
+        .back-btn-overlay {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn-overlay:hover {
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        .score-display {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(26, 19, 72, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.2rem;
+            color: var(--yellow);
+        }
+
+        .high-score {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(26, 19, 72, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .vehicle-badge {
+            position: absolute;
+            top: 3.5rem;
+            left: 1rem;
+            background: rgba(26, 19, 72, 0.8);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--yellow);
+        }
+
+        .speed-indicator {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            background: rgba(26, 19, 72, 0.8);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--white);
+        }
+
+        .flip-bonus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--yellow);
+            color: var(--navy);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .flip-bonus.show {
+            opacity: 1;
+            animation: flipBonusPop 0.6s ease forwards;
+        }
+
+        @keyframes flipBonusPop {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -80%) scale(1);
+            }
+        }
+
+        .mobile-controls {
+            display: none;
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            gap: 0.75rem;
+        }
+
+        .jump-btn, .flip-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--yellow);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-weight: bold;
+        }
+
+        .flip-btn {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .jump-btn:active, .flip-btn:active {
+            transform: scale(0.95);
+        }
+
+        .back-section {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .back-btn:hover {
+            border-color: var(--yellow);
+            color: var(--yellow);
+        }
+
+        .back-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .controls-hint {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .error-code {
+                font-size: 3rem;
+            }
+
+            .mobile-controls {
+                display: block;
+            }
+
+            .controls-hint {
+                display: none;
+            }
+
+            .vehicle-card {
+                min-width: 100px;
+                padding: 0.6rem 1rem;
+            }
+
+            .vehicle-card .icon {
+                font-size: 1.25rem;
+            }
+
+            .map-grid {
+                max-width: 300px;
+            }
+
+            .map-card {
+                padding: 0.75rem;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .main-content {
+                padding: 1rem;
+            }
+
+            .error-code {
+                font-size: 2.5rem;
+            }
+
+            .back-section {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="/" class="logo">
+                <img src="/GVMLogo.svg" alt="GVM Upgrades Australia" height="40">
+            </a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="error-text">
+            <h1 class="error-code">404</h1>
+            <p class="error-message">Looks like you've gone off-road!</p>
+            <p class="game-instruction">Play while you're here - Jump to avoid obstacles!</p>
+        </div>
+
+        <div class="game-container">
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+
+            <div class="score-display" style="display: none;">
+                Score: <span id="score">0</span>
+            </div>
+
+            <div class="high-score" style="display: none;">
+                Best: <span id="highScore">0</span>
+            </div>
+
+            <div class="vehicle-badge" id="vehicleBadge" style="display: none;"></div>
+
+            <div class="speed-indicator" id="speedIndicator" style="display: none;">
+                Speed: <span id="speedDisplay">1.0x</span>
+            </div>
+
+            <div class="flip-bonus" id="flipBonus">+5 FLIP!</div>
+
+            <!-- Vehicle Selection -->
+            <div class="game-overlay" id="vehicleOverlay">
+                <h2 class="overlay-title">Choose Your Rig</h2>
+                <div class="vehicle-grid" id="vehicleGrid">
+                    <div class="vehicle-card" data-vehicle="nissan">
+                        <div class="icon">🚙</div>
+                        <div class="label">Nissan</div>
+                    </div>
+                    <div class="vehicle-card" data-vehicle="toyota">
+                        <div class="icon">🚗</div>
+                        <div class="label">Toyota</div>
+                    </div>
+                    <div class="vehicle-card" data-vehicle="ford">
+                        <div class="icon">🛻</div>
+                        <div class="label">Ford</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Selection -->
+            <div class="game-overlay hidden" id="mapOverlay">
+                <h2 class="overlay-title">Choose Your Track</h2>
+                <div class="map-grid" id="mapGrid">
+                    <div class="map-card" data-map="rainforest">
+                        <div class="icon">🌴</div>
+                        <div class="label">Rainforest</div>
+                        <div class="sublabel">Daintree, QLD</div>
+                    </div>
+                    <div class="map-card" data-map="desert">
+                        <div class="icon">🏜️</div>
+                        <div class="label">Outback</div>
+                        <div class="sublabel">Red Centre, NT</div>
+                    </div>
+                    <div class="map-card" data-map="mountains">
+                        <div class="icon">⛰️</div>
+                        <div class="label">Mountains</div>
+                        <div class="sublabel">Snowy Mountains</div>
+                    </div>
+                    <div class="map-card" data-map="beach">
+                        <div class="icon">🏖️</div>
+                        <div class="label">Beach</div>
+                        <div class="sublabel">Fraser Island</div>
+                    </div>
+                </div>
+                <button class="back-btn-overlay" id="mapBackBtn">← Change Vehicle</button>
+            </div>
+
+            <!-- Game Over -->
+            <div class="game-overlay hidden" id="gameOverOverlay">
+                <h2 class="overlay-title">Game Over!</h2>
+                <p class="overlay-score">Score: <span id="finalScore">0</span></p>
+                <button class="play-btn" id="restartBtn">Play Again</button>
+                <button class="back-btn-overlay" id="changeSetupBtn">Change Vehicle / Map</button>
+            </div>
+
+            <div class="mobile-controls" id="mobileControls" style="display: none;">
+                <button class="flip-btn" id="flipBtn">🔄</button>
+                <button class="jump-btn" id="jumpBtn">↑</button>
+            </div>
+        </div>
+
+        <div class="back-section">
+            <a href="/" class="back-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Home
+            </a>
+        </div>
+
+        <p class="controls-hint">SPACE: Double Jump | UP: Flip (+5pts) | LEFT/RIGHT: Speed</p>
+    </main>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let gameRunning = false;
+        let score = 0;
+        let highScore = localStorage.getItem('gvmHighScore') || 0;
+        let gameSpeed = 5;
+        let frameCount = 0;
+        let selectedVehicle = null;
+        let selectedMap = null;
+
+        document.getElementById('highScore').textContent = highScore;
+
+        const vehicles = {
+            nissan: { name: 'Nissan', color: '#C0C0C0', accent: '#1A1348', wheelColor: '#1A1348' },
+            toyota: { name: 'Toyota', color: '#FFFFFF', accent: '#CC0000', wheelColor: '#333' },
+            ford: { name: 'Ford', color: '#003478', accent: '#FFFFFF', wheelColor: '#1A1348' }
+        };
+
+        const maps = {
+            rainforest: {
+                name: 'Rainforest',
+                skyTop: '#1a3a1a',
+                skyMid: '#2d5a2d',
+                skyBottom: '#4a7a4a',
+                groundColor: '#3d2817',
+                groundAccent: '#2a1a0f',
+                obstacles: ['tree', 'koala', 'snake', 'spider', 'fern'],
+                bgElements: 'trees'
+            },
+            desert: {
+                name: 'Outback',
+                skyTop: '#ff6b35',
+                skyMid: '#ff8c42',
+                skyBottom: '#ffd166',
+                groundColor: '#c44536',
+                groundAccent: '#8b3025',
+                obstacles: ['rock', 'kangaroo', 'snake', 'spider', 'spinifex'],
+                bgElements: 'uluru'
+            },
+            mountains: {
+                name: 'Mountains',
+                skyTop: '#1a0a3e',
+                skyMid: '#2d1f5c',
+                skyBottom: '#6b88a8',
+                groundColor: '#5a6a5a',
+                groundAccent: '#3a4a3a',
+                obstacles: ['rock', 'wombat', 'spider', 'log', 'boulder'],
+                bgElements: 'mountains'
+            },
+            beach: {
+                name: 'Beach',
+                skyTop: '#87CEEB',
+                skyMid: '#98D8E8',
+                skyBottom: '#B0E0E6',
+                groundColor: '#f4d58d',
+                groundAccent: '#d4b56d',
+                obstacles: ['driftwood', 'crab', 'seagull', 'spider', 'shell'],
+                bgElements: 'ocean'
+            }
+        };
+
+        const truck = {
+            x: 100,
+            y: 280,
+            width: 80,
+            height: 50,
+            velocityY: 0,
+            jumping: false,
+            groundY: 280,
+            jumpCount: 0,
+            rotation: 0,
+            isFlipping: false,
+            flipCompleted: false
+        };
+
+        let baseSpeed = 5;
+        let speedModifier = 0; // Player-controlled speed adjustment
+
+        let obstacles = [];
+        let terrainPoints = [];
+        const terrainSegmentWidth = 20;
+        let particles = [];
+
+        function initTerrain() {
+            terrainPoints = [];
+            let y = 330;
+            for (let x = 0; x <= canvas.width + 100; x += terrainSegmentWidth) {
+                y += (Math.random() - 0.5) * 10;
+                y = Math.max(320, Math.min(350, y));
+                terrainPoints.push({ x, y });
+            }
+        }
+
+        function createDustParticle() {
+            if (!truck.jumping && Math.random() > 0.6) {
+                const mapConfig = maps[selectedMap];
+                particles.push({
+                    x: truck.x + 10,
+                    y: truck.y + truck.height,
+                    vx: -Math.random() * 2 - 1,
+                    vy: -Math.random() * 2,
+                    life: 30,
+                    size: Math.random() * 4 + 2,
+                    color: mapConfig.groundColor
+                });
+            }
+        }
+
+        function updateParticles() {
+            particles = particles.filter(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.1;
+                p.life--;
+                return p.life > 0;
+            });
+        }
+
+        function drawParticles() {
+            particles.forEach(p => {
+                ctx.globalAlpha = p.life / 30;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            });
+        }
+
+        function drawTruck() {
+            const x = truck.x;
+            const y = truck.y;
+            const v = vehicles[selectedVehicle];
+
+            // Save context for rotation
+            ctx.save();
+
+            // Apply rotation around truck center
+            if (truck.rotation !== 0) {
+                const centerX = x + truck.width / 2;
+                const centerY = y + truck.height / 2;
+                ctx.translate(centerX, centerY);
+                ctx.rotate(truck.rotation);
+                ctx.translate(-centerX, -centerY);
+            }
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.fillRect(x + 5, y + truck.height + 5, truck.width, 10);
+
+            ctx.fillStyle = v.color;
+            ctx.fillRect(x + 10, y + 10, 60, 25);
+
+            ctx.fillStyle = v.accent;
+            ctx.fillRect(x + 35, y, 30, 20);
+
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(x + 40, y + 3, 20, 12);
+
+            ctx.fillStyle = '#333';
+            ctx.fillRect(x, y + 20, 15, 15);
+            ctx.fillRect(x + 65, y + 15, 15, 20);
+
+            ctx.fillStyle = '#666';
+            ctx.fillRect(x + 38, y - 5, 27, 5);
+            ctx.fillRect(x + 15, y + 35, 10, 10);
+            ctx.fillRect(x + 55, y + 35, 10, 10);
+
+            const wheelRadius = 18;
+
+            ctx.fillStyle = v.wheelColor;
+            ctx.beginPath();
+            ctx.arc(x + 20, y + truck.height + 5, wheelRadius, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = v.accent;
+            ctx.beginPath();
+            ctx.arc(x + 20, y + truck.height + 5, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = v.wheelColor;
+            ctx.beginPath();
+            ctx.arc(x + 60, y + truck.height + 5, wheelRadius, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = v.accent;
+            ctx.beginPath();
+            ctx.arc(x + 60, y + truck.height + 5, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.strokeStyle = '#0a0a0a';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < 8; i++) {
+                const angle = (frameCount * 0.15 + i * Math.PI / 4);
+                ctx.beginPath();
+                ctx.moveTo(x + 20 + Math.cos(angle) * 10, y + truck.height + 5 + Math.sin(angle) * 10);
+                ctx.lineTo(x + 20 + Math.cos(angle) * 17, y + truck.height + 5 + Math.sin(angle) * 17);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x + 60 + Math.cos(angle) * 10, y + truck.height + 5 + Math.sin(angle) * 10);
+                ctx.lineTo(x + 60 + Math.cos(angle) * 17, y + truck.height + 5 + Math.sin(angle) * 17);
+                ctx.stroke();
+            }
+
+            // Restore context after rotation
+            ctx.restore();
+        }
+
+        function drawSky() {
+            const mapConfig = maps[selectedMap];
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, mapConfig.skyTop);
+            gradient.addColorStop(0.5, mapConfig.skyMid);
+            gradient.addColorStop(1, mapConfig.skyBottom);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            drawBackgroundElements();
+        }
+
+        function drawBackgroundElements() {
+            const mapConfig = maps[selectedMap];
+
+            if (mapConfig.bgElements === 'trees') {
+                ctx.fillStyle = '#1a4a1a';
+                for (let i = 0; i < 8; i++) {
+                    const x = (i * 120 + frameCount * 0.3) % (canvas.width + 100) - 50;
+                    const height = 200 + Math.sin(i * 2) * 50;
+                    ctx.fillStyle = '#4a3020';
+                    ctx.fillRect(x + 20, 400 - height, 15, height - 100);
+                    ctx.fillStyle = '#1a4a1a';
+                    ctx.beginPath();
+                    ctx.arc(x + 27, 400 - height + 30, 45, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#2a5a2a';
+                    ctx.beginPath();
+                    ctx.arc(x + 35, 400 - height + 50, 35, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            } else if (mapConfig.bgElements === 'uluru') {
+                ctx.fillStyle = '#8b3025';
+                ctx.beginPath();
+                ctx.moveTo(300, 350);
+                ctx.quadraticCurveTo(400, 150, 500, 350);
+                ctx.fill();
+                ctx.fillStyle = '#FFD700';
+                ctx.beginPath();
+                ctx.arc(650, 80, 40, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (mapConfig.bgElements === 'mountains') {
+                ctx.fillStyle = '#4a5a6a';
+                for (let i = 0; i < 5; i++) {
+                    const x = i * 200 - 50;
+                    ctx.beginPath();
+                    ctx.moveTo(x, 400);
+                    ctx.lineTo(x + 100, 100 + i * 20);
+                    ctx.lineTo(x + 200, 400);
+                    ctx.fill();
+                }
+                ctx.fillStyle = '#FFFFFF';
+                for (let i = 0; i < 5; i++) {
+                    const x = i * 200 - 50;
+                    ctx.beginPath();
+                    ctx.moveTo(x + 80, 130 + i * 20);
+                    ctx.lineTo(x + 100, 100 + i * 20);
+                    ctx.lineTo(x + 120, 130 + i * 20);
+                    ctx.fill();
+                }
+            } else if (mapConfig.bgElements === 'ocean') {
+                ctx.fillStyle = '#4a90a4';
+                ctx.beginPath();
+                ctx.moveTo(0, 250);
+                for (let wx = 0; wx <= canvas.width; wx += 20) {
+                    const wy = 250 + Math.sin((wx + frameCount * 2) * 0.03) * 10;
+                    ctx.lineTo(wx, wy);
+                }
+                ctx.lineTo(canvas.width, 400);
+                ctx.lineTo(0, 400);
+                ctx.fill();
+                ctx.fillStyle = '#FFD93D';
+                ctx.beginPath();
+                ctx.arc(650, 80, 35, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawTerrain() {
+            const mapConfig = maps[selectedMap];
+            ctx.fillStyle = mapConfig.groundColor;
+            ctx.beginPath();
+            ctx.moveTo(0, 400);
+            terrainPoints.forEach((point, i) => {
+                if (i === 0) ctx.moveTo(point.x, point.y);
+                else ctx.lineTo(point.x, point.y);
+            });
+            ctx.lineTo(canvas.width, 400);
+            ctx.lineTo(0, 400);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.strokeStyle = mapConfig.groundAccent;
+            ctx.lineWidth = 1;
+            for (let i = 0; i < terrainPoints.length - 1; i++) {
+                if (i % 3 === 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(terrainPoints[i].x, terrainPoints[i].y + 5);
+                    ctx.lineTo(terrainPoints[i].x + 10, terrainPoints[i].y + 15);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        function updateTerrain() {
+            terrainPoints.forEach(point => point.x -= gameSpeed);
+            if (terrainPoints[0].x < -terrainSegmentWidth) {
+                terrainPoints.shift();
+                const lastPoint = terrainPoints[terrainPoints.length - 1];
+                let newY = lastPoint.y + (Math.random() - 0.5) * 10;
+                newY = Math.max(320, Math.min(350, newY));
+                terrainPoints.push({ x: lastPoint.x + terrainSegmentWidth, y: newY });
+            }
+        }
+
+        function createObstacle() {
+            const mapConfig = maps[selectedMap];
+            const type = mapConfig.obstacles[Math.floor(Math.random() * mapConfig.obstacles.length)];
+
+            let width, height;
+            switch (type) {
+                case 'kangaroo': width = 40; height = 60; break;
+                case 'koala': width = 35; height = 40; break;
+                case 'wombat': width = 40; height = 30; break;
+                case 'snake': width = 50; height = 15; break;
+                case 'spider': width = 35; height = 30; break;
+                case 'tree': case 'fern': width = 30; height = 50; break;
+                case 'rock': case 'boulder': width = 40; height = 40; break;
+                case 'log': case 'driftwood': width = 55; height = 25; break;
+                case 'crab': width = 30; height = 20; break;
+                case 'seagull': width = 35; height = 25; break;
+                case 'spinifex': case 'shell': width = 25; height = 25; break;
+                default: width = 35; height = 35;
+            }
+
+            obstacles.push({
+                x: canvas.width + 50,
+                y: 330 - height,
+                width, height, type,
+                passed: false,
+                frame: 0
+            });
+        }
+
+        function drawObstacle(obs) {
+            const x = obs.x;
+            const y = obs.y;
+
+            switch (obs.type) {
+                case 'kangaroo':
+                    ctx.fillStyle = '#8B6914';
+                    ctx.beginPath();
+                    ctx.ellipse(x + 20, y + 35, 15, 20, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.ellipse(x + 30, y + 15, 10, 12, 0.3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.ellipse(x + 25, y + 3, 4, 8, -0.3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.ellipse(x + 35, y + 5, 4, 8, 0.3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.lineWidth = 6;
+                    ctx.strokeStyle = '#8B6914';
+                    ctx.beginPath();
+                    ctx.moveTo(x + 5, y + 40);
+                    ctx.quadraticCurveTo(x - 10, y + 50, x, y + 60);
+                    ctx.stroke();
+                    ctx.fillStyle = '#8B6914';
+                    ctx.fillRect(x + 15, y + 50, 8, 12);
+                    ctx.fillRect(x + 25, y + 50, 8, 12);
+                    ctx.fillStyle = '#000';
+                    ctx.beginPath();
+                    ctx.arc(x + 33, y + 13, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+
+                case 'koala':
+                    ctx.fillStyle = '#808080';
+                    ctx.beginPath();
+                    ctx.ellipse(x + 18, y + 25, 15, 18, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x + 18, y + 8, 12, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#606060';
+                    ctx.beginPath();
+                    ctx.arc(x + 6, y + 3, 6, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x + 30, y + 3, 6, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#333';
+                    ctx.beginPath();
+                    ctx.ellipse(x + 18, y + 12, 5, 4, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#000';
+                    ctx.beginPath();
+                    ctx.arc(x + 12, y + 6, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x + 24, y + 6, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+
+                case 'wombat':
+                    ctx.fillStyle = '#5C4033';
+                    ctx.beginPath();
+                    ctx.ellipse(x + 20, y + 18, 18, 12, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.ellipse(x + 35, y + 15, 10, 8, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x + 32, y + 7, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x + 40, y + 8, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#333';
+                    ctx.beginPath();
+                    ctx.arc(x + 42, y + 15, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+
+                case 'snake':
+                    ctx.strokeStyle = '#228B22';
+                    ctx.lineWidth = 8;
+                    ctx.lineCap = 'round';
+                    ctx.beginPath();
+                    ctx.moveTo(x, y + 10);
+                    for (let i = 0; i < 5; i++) {
+                        ctx.quadraticCurveTo(x + i * 12 + 6, y + (i % 2 === 0 ? 3 : 17), x + (i + 1) * 10, y + 10);
+                    }
+                    ctx.stroke();
+                    ctx.fillStyle = '#228B22';
+                    ctx.beginPath();
+                    ctx.arc(x + 50, y + 10, 5, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#FF0000';
+                    ctx.beginPath();
+                    ctx.arc(x + 52, y + 8, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+
+                case 'spider':
+                    // Body
+                    ctx.fillStyle = '#1a1a1a';
+                    ctx.beginPath();
+                    ctx.ellipse(x + 18, y + 18, 10, 8, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    // Head
+                    ctx.beginPath();
+                    ctx.arc(x + 28, y + 18, 6, 0, Math.PI * 2);
+                    ctx.fill();
+                    // Legs
+                    ctx.strokeStyle = '#1a1a1a';
+                    ctx.lineWidth = 2;
+                    for (let i = 0; i < 4; i++) {
+                        // Left legs
+                        ctx.beginPath();
+                        ctx.moveTo(x + 15, y + 18);
+                        ctx.quadraticCurveTo(x + 5 - i * 2, y + 10 + i * 3, x + 2, y + 25 + i * 2);
+                        ctx.stroke();
+                        // Right legs
+                        ctx.beginPath();
+                        ctx.moveTo(x + 20, y + 18);
+                        ctx.quadraticCurveTo(x + 30 + i * 2, y + 10 + i * 3, x + 33, y + 25 + i * 2);
+                        ctx.stroke();
+                    }
+                    // Red marking (redback)
+                    ctx.fillStyle = '#CC0000';
+                    ctx.beginPath();
+                    ctx.ellipse(x + 18, y + 16, 4, 3, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    // Eyes
+                    ctx.fillStyle = '#FF0000';
+                    ctx.beginPath();
+                    ctx.arc(x + 30, y + 16, 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x + 30, y + 20, 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+
+                case 'tree':
+                case 'fern':
+                    ctx.fillStyle = '#4a3020';
+                    ctx.fillRect(x + 10, y + 30, 10, 25);
+                    ctx.fillStyle = '#228B22';
+                    ctx.beginPath();
+                    ctx.moveTo(x + 15, y);
+                    ctx.lineTo(x + 30, y + 35);
+                    ctx.lineTo(x, y + 35);
+                    ctx.fill();
+                    break;
+
+                case 'rock':
+                case 'boulder':
+                    ctx.fillStyle = '#696969';
+                    ctx.beginPath();
+                    ctx.moveTo(x + obs.width / 2, y);
+                    ctx.lineTo(x + obs.width, y + obs.height);
+                    ctx.lineTo(x, y + obs.height);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.fillStyle = '#808080';
+                    ctx.beginPath();
+                    ctx.moveTo(x + obs.width / 2, y + 5);
+                    ctx.lineTo(x + obs.width * 0.7, y + obs.height * 0.6);
+                    ctx.lineTo(x + obs.width * 0.3, y + obs.height * 0.6);
+                    ctx.fill();
+                    break;
+
+                case 'log':
+                case 'driftwood':
+                    ctx.fillStyle = '#4a3728';
+                    ctx.fillRect(x, y, obs.width, obs.height);
+                    ctx.fillStyle = '#5a4738';
+                    ctx.beginPath();
+                    ctx.ellipse(x + obs.width, y + obs.height / 2, 5, obs.height / 2, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+
+                case 'crab':
+                    ctx.fillStyle = '#FF6347';
+                    ctx.beginPath();
+                    ctx.ellipse(x + 15, y + 12, 12, 8, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x + 2, y + 8, 5, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x + 28, y + 8, 5, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#000';
+                    ctx.beginPath();
+                    ctx.arc(x + 12, y + 5, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x + 18, y + 5, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+
+                case 'seagull':
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.beginPath();
+                    ctx.ellipse(x + 18, y + 15, 15, 10, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x + 30, y + 10, 7, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#FFA500';
+                    ctx.beginPath();
+                    ctx.moveTo(x + 35, y + 10);
+                    ctx.lineTo(x + 42, y + 12);
+                    ctx.lineTo(x + 35, y + 14);
+                    ctx.fill();
+                    ctx.fillStyle = '#D3D3D3';
+                    ctx.beginPath();
+                    ctx.ellipse(x + 15, y + 12, 12, 6, -0.2, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+
+                case 'spinifex':
+                    ctx.strokeStyle = '#9ACD32';
+                    ctx.lineWidth = 2;
+                    for (let i = 0; i < 8; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(x + 12, y + 25);
+                        const angle = -Math.PI / 2 + (i - 4) * 0.3;
+                        ctx.lineTo(x + 12 + Math.cos(angle) * 20, y + 25 + Math.sin(angle) * 20);
+                        ctx.stroke();
+                    }
+                    break;
+
+                case 'shell':
+                    ctx.fillStyle = '#DEB887';
+                    ctx.beginPath();
+                    ctx.arc(x + 12, y + 15, 12, Math.PI, 0);
+                    ctx.fill();
+                    ctx.strokeStyle = '#8B7355';
+                    ctx.lineWidth = 2;
+                    for (let i = 0; i < 5; i++) {
+                        ctx.beginPath();
+                        ctx.arc(x + 12, y + 15, 4 + i * 2, Math.PI, 0);
+                        ctx.stroke();
+                    }
+                    break;
+            }
+        }
+
+        function updateObstacles() {
+            obstacles.forEach(obs => {
+                obs.x -= gameSpeed;
+                obs.frame++;
+                if (!obs.passed && obs.x + obs.width < truck.x) {
+                    obs.passed = true;
+                    score++;
+                    document.getElementById('score').textContent = score;
+                }
+            });
+
+            obstacles = obstacles.filter(obs => obs.x > -100);
+
+            const spawnRate = Math.max(50, 100 - score);
+            if (frameCount % spawnRate === 0) {
+                createObstacle();
+            }
+        }
+
+        function checkCollision() {
+            const truckBox = {
+                x: truck.x + 15,
+                y: truck.y + 10,
+                width: truck.width - 25,
+                height: truck.height + 10
+            };
+
+            for (let obs of obstacles) {
+                const obsBox = {
+                    x: obs.x + 5,
+                    y: obs.y + 5,
+                    width: obs.width - 10,
+                    height: obs.height - 5
+                };
+
+                if (truckBox.x < obsBox.x + obsBox.width &&
+                    truckBox.x + truckBox.width > obsBox.x &&
+                    truckBox.y < obsBox.y + obsBox.height &&
+                    truckBox.y + truckBox.height > obsBox.y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function jump() {
+            if (gameRunning && truck.jumpCount < 2) {
+                truck.jumping = true;
+                truck.jumpCount++;
+                truck.velocityY = -15;
+            }
+        }
+
+        function flip() {
+            if (truck.jumping && gameRunning && !truck.isFlipping) {
+                truck.isFlipping = true;
+                truck.flipCompleted = false;
+            }
+        }
+
+        function adjustSpeed(delta) {
+            if (gameRunning) {
+                speedModifier = Math.max(-3, Math.min(5, speedModifier + delta));
+            }
+        }
+
+        function updateTruck() {
+            if (truck.jumping) {
+                truck.velocityY += 0.8;
+                truck.y += truck.velocityY;
+
+                // Handle flip rotation
+                if (truck.isFlipping) {
+                    truck.rotation += 0.15;
+                    // Check if flip completed (360 degrees = 2*PI)
+                    if (truck.rotation >= Math.PI * 2) {
+                        truck.flipCompleted = true;
+                        truck.rotation = truck.rotation % (Math.PI * 2);
+                    }
+                }
+
+                if (truck.y >= truck.groundY) {
+                    truck.y = truck.groundY;
+                    truck.jumping = false;
+                    truck.velocityY = 0;
+                    truck.jumpCount = 0;
+
+                    // Award flip bonus points on landing
+                    if (truck.flipCompleted) {
+                        score += 5; // Bonus points for completing a flip
+                        document.getElementById('score').textContent = score;
+                        // Show flip bonus text
+                        const flipBonus = document.getElementById('flipBonus');
+                        flipBonus.classList.remove('show');
+                        void flipBonus.offsetWidth; // Trigger reflow
+                        flipBonus.classList.add('show');
+                        setTimeout(() => flipBonus.classList.remove('show'), 600);
+                        // Show flip bonus effect
+                        for (let i = 0; i < 10; i++) {
+                            particles.push({
+                                x: truck.x + truck.width / 2,
+                                y: truck.y,
+                                vx: (Math.random() - 0.5) * 6,
+                                vy: -Math.random() * 4 - 2,
+                                life: 40,
+                                size: Math.random() * 4 + 2,
+                                color: '#E7E515'
+                            });
+                        }
+                    }
+
+                    truck.rotation = 0;
+                    truck.isFlipping = false;
+                    truck.flipCompleted = false;
+                }
+            }
+
+            // Update effective game speed
+            gameSpeed = baseSpeed + speedModifier;
+
+            // Update speed display
+            const speedMultiplier = (gameSpeed / 5).toFixed(1);
+            document.getElementById('speedDisplay').textContent = speedMultiplier + 'x';
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            document.querySelector('.score-display').style.display = 'none';
+            document.querySelector('.high-score').style.display = 'none';
+            document.getElementById('vehicleBadge').style.display = 'none';
+            document.getElementById('mobileControls').style.display = 'none';
+            document.getElementById('speedIndicator').style.display = 'none';
+
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('gvmHighScore', highScore);
+                document.getElementById('highScore').textContent = highScore;
+            }
+
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('gameOverOverlay').classList.remove('hidden');
+        }
+
+        function startGame() {
+            score = 0;
+            baseSpeed = 5;
+            speedModifier = 0;
+            gameSpeed = 5;
+            frameCount = 0;
+            obstacles = [];
+            particles = [];
+            truck.y = truck.groundY;
+            truck.jumping = false;
+            truck.velocityY = 0;
+            truck.jumpCount = 0;
+            truck.rotation = 0;
+            truck.isFlipping = false;
+            truck.flipCompleted = false;
+
+            document.getElementById('score').textContent = '0';
+            document.querySelector('.score-display').style.display = 'block';
+            document.querySelector('.high-score').style.display = 'block';
+            document.getElementById('vehicleBadge').textContent = vehicles[selectedVehicle].name;
+            document.getElementById('vehicleBadge').style.display = 'block';
+            document.getElementById('speedIndicator').style.display = 'block';
+            document.getElementById('speedDisplay').textContent = '1.0x';
+
+            if (window.innerWidth <= 600) {
+                document.getElementById('mobileControls').style.display = 'flex';
+            }
+
+            document.getElementById('mapOverlay').classList.add('hidden');
+            document.getElementById('gameOverOverlay').classList.add('hidden');
+
+            initTerrain();
+            gameRunning = true;
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (selectedMap) {
+                drawSky();
+                drawTerrain();
+
+                if (gameRunning) {
+                    frameCount++;
+                    // Progressive speed increase over time
+                    if (frameCount % 400 === 0 && baseSpeed < 15) {
+                        baseSpeed += 0.5;
+                    }
+                    updateTerrain();
+                    updateTruck();
+                    updateObstacles();
+                    updateParticles();
+                    createDustParticle();
+                    if (checkCollision()) {
+                        gameOver();
+                    }
+                }
+
+                obstacles.forEach(drawObstacle);
+                drawParticles();
+                if (selectedVehicle) drawTruck();
+            } else {
+                const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                gradient.addColorStop(0, '#1a0a3e');
+                gradient.addColorStop(1, '#2d1f5c');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Vehicle selection - auto advance
+        document.querySelectorAll('#vehicleGrid .vehicle-card').forEach(card => {
+            card.addEventListener('click', () => {
+                selectedVehicle = card.dataset.vehicle;
+                document.getElementById('vehicleOverlay').classList.add('hidden');
+                document.getElementById('mapOverlay').classList.remove('hidden');
+            });
+        });
+
+        // Map selection - auto start game
+        document.querySelectorAll('#mapGrid .map-card').forEach(card => {
+            card.addEventListener('click', () => {
+                selectedMap = card.dataset.map;
+                startGame();
+            });
+        });
+
+        document.getElementById('mapBackBtn').addEventListener('click', () => {
+            document.getElementById('mapOverlay').classList.add('hidden');
+            document.getElementById('vehicleOverlay').classList.remove('hidden');
+            selectedVehicle = null;
+            selectedMap = null;
+        });
+
+        document.getElementById('restartBtn').addEventListener('click', startGame);
+
+        document.getElementById('changeSetupBtn').addEventListener('click', () => {
+            document.getElementById('gameOverOverlay').classList.add('hidden');
+            document.getElementById('vehicleOverlay').classList.remove('hidden');
+            selectedVehicle = null;
+            selectedMap = null;
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (gameRunning) jump();
+            } else if (e.code === 'ArrowUp') {
+                e.preventDefault();
+                if (gameRunning) flip();
+            } else if (e.code === 'ArrowRight') {
+                e.preventDefault();
+                adjustSpeed(1);
+            } else if (e.code === 'ArrowLeft') {
+                e.preventDefault();
+                adjustSpeed(-1);
+            }
+        });
+
+        canvas.addEventListener('click', () => { if (gameRunning) jump(); });
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); if (gameRunning) jump(); });
+
+        document.getElementById('jumpBtn').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            jump();
+        });
+
+        document.getElementById('jumpBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            jump();
+        });
+
+        document.getElementById('flipBtn').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            flip();
+        });
+
+        document.getElementById('flipBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            flip();
+        });
+
+        function resizeCanvas() {
+            const container = document.querySelector('.game-container');
+            const containerWidth = container.clientWidth;
+            const scale = containerWidth / 800;
+            canvas.style.height = (400 * scale) + 'px';
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        initTerrain();
+        gameLoop();
+    </script>
+</body>
+</html>

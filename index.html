@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GVM Upgrades Australia - Find a Local GVM Installer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <style>
         @font-face {
             font-family: 'DIN Condensed Bold';
@@ -1256,7 +1257,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-inner">
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <img src="/GVMLogo.svg" alt="GVM Upgrades Australia" height="40">
             </a>
             <a href="/contact" class="contact-btn">CONTACT US</a>
@@ -1749,7 +1750,7 @@
                 <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
         </button>
-        <a href="faq.html" class="read-all-faqs">Read all FAQs</a>
+        <a href="/faq" class="read-all-faqs">Read all FAQs</a>
     </section>
 
     <!-- CTA Section -->
@@ -1768,9 +1769,9 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="terms.html">Terms & Conditions</a>
-            <a href="faq.html">FAQ</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms & Conditions</a>
+            <a href="/faq">FAQ</a>
         </div>
         <p>&copy; <script>document.write(new Date().getFullYear())</script> GVM Upgrades Australia. All rights reserved.</p>
     </footer>
@@ -1943,7 +1944,7 @@
                     throw new Error('Network response was not ok');
                 }
 
-                window.location.href = 'thanks.html';
+                window.location.href = '/thanks';
             } catch (error) {
                 console.error('Submission error:', error);
                 showToast('Something went wrong. Please try again.');

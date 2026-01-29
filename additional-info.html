@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Additional Information | GVM Upgrades Australia</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <style>
         @font-face {
             font-family: 'DIN Condensed Bold';
@@ -615,7 +616,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-inner">
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <img src="/GVMLogo.svg" alt="GVM Upgrades Australia" height="40">
             </a>
             <a href="/contact" class="contact-btn">CONTACT US</a>
@@ -685,7 +686,7 @@
                         <button type="button" class="btn btn-primary" id="step1Continue" onclick="nextStep()" disabled>Continue</button>
                     </div>
                     <div class="back-link-wrapper">
-                        <a href="index.html" class="back-link">
+                        <a href="/" class="back-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M19 12H5M12 19l-7-7 7-7"/>
                             </svg>
@@ -725,7 +726,7 @@
                         <button type="button" class="btn btn-primary" id="step2Continue" onclick="nextStep()" disabled>Continue</button>
                     </div>
                     <div class="back-link-wrapper">
-                        <a href="index.html" class="back-link">
+                        <a href="/" class="back-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M19 12H5M12 19l-7-7 7-7"/>
                             </svg>
@@ -776,7 +777,7 @@
                         <button type="button" class="btn btn-primary" id="budgetContinue" onclick="nextStep()" disabled>Continue</button>
                     </div>
                     <div class="back-link-wrapper">
-                        <a href="index.html" class="back-link">
+                        <a href="/" class="back-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M19 12H5M12 19l-7-7 7-7"/>
                             </svg>
@@ -860,7 +861,7 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     <div class="back-link-wrapper">
-                        <a href="index.html" class="back-link">
+                        <a href="/" class="back-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M19 12H5M12 19l-7-7 7-7"/>
                             </svg>
@@ -876,9 +877,9 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="terms.html">Terms & Conditions</a>
-            <a href="faq.html">FAQ</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms & Conditions</a>
+            <a href="/faq">FAQ</a>
         </div>
         <p>&copy; <script>document.write(new Date().getFullYear())</script> GVM Upgrades Australia. All rights reserved.</p>
     </footer>
@@ -997,6 +998,32 @@
         document.getElementById('additionalInfoForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
+            // Validate all required fields before submission
+            const vehicleAge = document.querySelector('input[name="vehicle_age"]:checked');
+            const currentGvm = document.getElementById('currentGvm')?.value;
+            const targetGvm = document.getElementById('targetGvm')?.value;
+            const notSure = document.getElementById('notSure')?.checked;
+            const budget = document.querySelector('input[name="budget"]:checked');
+            const services = document.querySelectorAll('input[name="additional_services"]:checked');
+
+            // Check all required fields
+            if (!vehicleAge) {
+                showToast('Please select your vehicle\'s age and registration status.');
+                return;
+            }
+            if (!currentGvm && !targetGvm && !notSure) {
+                showToast('Please enter GVM details or select "Not sure".');
+                return;
+            }
+            if (!budget) {
+                showToast('Please select your budget range.');
+                return;
+            }
+            if (services.length === 0) {
+                showToast('Please select at least one additional service.');
+                return;
+            }
+
             const submitBtn = document.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
@@ -1013,7 +1040,7 @@
             };
 
             try {
-                const response = await fetch('https://services.leadconnectorhq.com/hooks/K03KP6dfEUp6MFsK9a1b/webhook-trigger/a6035601-78e8-427e-8fc9-52d0c5571d63', {
+                const response = await fetch('https://services.leadconnectorhq.com/hooks/K03KP6dfEUp6MFsK9a1b/webhook-trigger/3VAokbH30oUQKJC91IDY', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -1025,7 +1052,7 @@
                     throw new Error('Network response was not ok');
                 }
 
-                window.location.href = 'thanks.html';
+                window.location.href = '/thanks';
             } catch (error) {
                 console.error('Submission error:', error);
                 showToast('Something went wrong. Please try again.');

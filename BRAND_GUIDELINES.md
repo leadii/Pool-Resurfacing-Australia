@@ -466,6 +466,7 @@ transform: translateY(-2px);
 ├── thanks.html             # Form submission success page
 ├── terms.html              # Terms & Conditions
 ├── privacy.html            # Privacy Policy
+├── 404.html                # 404 error page with monster truck game
 ├── BRAND_GUIDELINES.md     # This file
 ├── CLAUDE.md               # AI assistant instructions
 └── public/

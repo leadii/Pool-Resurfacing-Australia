@@ -29,6 +29,7 @@
 - `thanks.html` - Form submission success page
 - `terms.html` - Terms & Conditions
 - `privacy.html` - Privacy Policy
+- `404.html` - 404 error page with interactive monster truck game
 
 ### Key Rules
 

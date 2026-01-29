@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Submitted | GVM Upgrades Australia</title>
+    <title>Thank You | GVM Upgrades Australia</title>
     <link rel="icon" type="image/svg+xml" href="/public/favicon.svg">
     <style>
         @font-face {
@@ -220,6 +220,10 @@
             background: linear-gradient(to bottom, var(--navy-light), transparent);
         }
 
+        .timeline-step.completed:not(:last-child)::after {
+            background: linear-gradient(to bottom, var(--yellow), var(--navy-light));
+        }
+
         .step-icon {
             width: 56px;
             height: 56px;
@@ -235,6 +239,10 @@
         }
 
         .step-icon.active {
+            background: var(--yellow);
+        }
+
+        .step-icon.completed {
             background: var(--yellow);
         }
 
@@ -262,6 +270,11 @@
             text-transform: uppercase;
             letter-spacing: 0.04em;
             margin-bottom: 8px;
+        }
+
+        .step-badge.completed {
+            background: var(--yellow);
+            color: var(--navy);
         }
 
         .step-badge.in-progress {
@@ -411,8 +424,8 @@
 
         <!-- Content Header -->
         <div class="content-header">
-            <h1>Request submitted successfully</h1>
-            <p>We're matching you with a local GVM installer.</p>
+            <h1>Thank you for your additional information</h1>
+            <p>Your installer will be in touch shortly.</p>
         </div>
 
         <!-- Timeline Card -->
@@ -422,24 +435,23 @@
             </div>
             <div class="timeline-content">
                 <div class="timeline-steps">
-                    <!-- Step 1 -->
-                    <div class="timeline-step">
-                        <div class="step-icon active">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
+                    <!-- Step 1 - Completed -->
+                    <div class="timeline-step completed">
+                        <div class="step-icon completed">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
                             </svg>
                         </div>
                         <div class="step-content">
-                            <span class="step-badge in-progress">In progress</span>
+                            <span class="step-badge completed">Completed</span>
                             <h3 class="step-title">Matching you with installers</h3>
-                            <p class="step-description">We're reviewing your details and matching you with a suitable GVM installer in your area.</p>
+                            <p class="step-description">We've reviewed your details and matched you with a suitable GVM installer in your area.</p>
                         </div>
                     </div>
 
-                    <!-- Step 2 -->
+                    <!-- Step 2 - In Progress -->
                     <div class="timeline-step">
-                        <div class="step-icon">
+                        <div class="step-icon active">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                                 <circle cx="9" cy="7" r="4"/>
@@ -448,13 +460,13 @@
                             </svg>
                         </div>
                         <div class="step-content">
-                            <span class="step-badge pending">Within 24 hours</span>
+                            <span class="step-badge in-progress">In progress</span>
                             <h3 class="step-title">Installer makes contact</h3>
                             <p class="step-description">A local installer will contact you directly to confirm your vehicle details and understand how you use it.</p>
                         </div>
                     </div>
 
-                    <!-- Step 3 -->
+                    <!-- Step 3 - Pending -->
                     <div class="timeline-step">
                         <div class="step-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

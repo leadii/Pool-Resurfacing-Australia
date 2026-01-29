@@ -1066,9 +1066,9 @@
 
             // Validate all required fields before submission
             const vehicleAge = document.querySelector('input[name="vehicle_age"]:checked');
-            const currentGvm = document.getElementById('currentGvm')?.value;
-            const targetGvm = document.getElementById('targetGvm')?.value;
-            const notSure = document.getElementById('notSure')?.checked;
+            const knowsGvm = document.querySelector('input[name="knows_gvm"]:checked');
+            const currentGvmVal = document.getElementById('current_gvm')?.value;
+            const desiredIncreaseVal = document.getElementById('desired_increase')?.value;
             const budget = document.querySelector('input[name="budget"]:checked');
             const services = document.querySelectorAll('input[name="additional_services"]:checked');
 
@@ -1077,8 +1077,13 @@
                 showToast('Please select your vehicle\'s age and registration status.');
                 return;
             }
-            if (!currentGvm && !targetGvm && !notSure) {
-                showToast('Please enter GVM details or select "Not sure".');
+            if (!knowsGvm) {
+                showToast('Please answer whether you know your GVM details.');
+                return;
+            }
+            // If user said "yes" they know GVM, check that they entered values
+            if (knowsGvm.value === 'yes' && (!currentGvmVal || !desiredIncreaseVal)) {
+                showToast('Please enter your current GVM and desired increase.');
                 return;
             }
             if (!budget) {
@@ -1096,11 +1101,12 @@
             submitBtn.innerHTML = 'Submitting...';
 
             // Collect form data
+            const knowsGvmValue = document.querySelector('input[name="knows_gvm"]:checked')?.value;
             const formData = {
                 vehicle_age: document.querySelector('input[name="vehicle_age"]:checked')?.value,
-                current_gvm: document.getElementById('currentGvm')?.value || null,
-                target_gvm: document.getElementById('targetGvm')?.value || null,
-                gvm_not_sure: document.getElementById('notSure')?.checked || false,
+                knows_gvm: knowsGvmValue,
+                current_gvm: knowsGvmValue === 'yes' ? document.getElementById('current_gvm')?.value || null : null,
+                desired_increase: knowsGvmValue === 'yes' ? document.getElementById('desired_increase')?.value || null : null,
                 budget: document.querySelector('input[name="budget"]:checked')?.value,
                 additional_services: Array.from(document.querySelectorAll('input[name="additional_services"]:checked')).map(cb => cb.value)
             };

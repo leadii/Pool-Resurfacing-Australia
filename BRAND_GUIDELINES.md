@@ -524,3 +524,70 @@ transform: translateY(-2px);
 - Don't skip hover states on interactive elements
 - Don't use different max-widths for aligned content sections
 - **Don't use cream (`#F3EBD9`) for form element backgrounds** - always use white (`#FFFFFF`) for inputs, radio options, checkbox options, textareas, and selects
+
+---
+
+## Footer
+
+### Sticky Footer Layout
+All pages must have a footer that sticks to the bottom of the viewport, even when content is short. Use the following flexbox pattern:
+
+```css
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+}
+```
+
+### Footer Link Order
+Footer links must always appear in this order:
+1. FAQ
+2. Privacy Policy
+3. Terms & Conditions
+
+```html
+<footer class="footer">
+    <div class="footer-links">
+        <a href="/faq">FAQ</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms & Conditions</a>
+    </div>
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> GVM Upgrades Australia. All rights reserved.</p>
+</footer>
+```
+
+### Footer Styling
+```css
+.footer {
+    background-color: #1A1348; /* var(--navy) */
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-links {
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin: 0 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #E7E515; /* var(--yellow) */
+}
+
+.footer p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+}
+```

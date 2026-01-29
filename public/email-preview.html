@@ -347,8 +347,9 @@
             <tbody>
                 <tr>
                     <td style="font-size: 16px; line-height: 1.7em; color: #1A1348;">
-                        <p style="margin: 0 0 16px 0;">Hi <strong>John</strong>,</p>
-                        <p style="margin: 0;">Thank you for requesting a GVM upgrade quote through GVM Upgrades Australia. We've matched you with a qualified installer in your area who will be in contact shortly to discuss your vehicle and requirements.</p>
+                        <p style="margin: 0 0 16px 0;">Hi <strong>{{contact.first_name}}</strong>,</p>
+                        <p style="margin: 0 0 16px 0;">Thank you for requesting a GVM upgrade quote through GVM Upgrades Australia.</p>
+                        <p style="margin: 0;">In order to match you with the most suitable installer for your vehicle, we would love a few additional details.</p>
                     </td>
                 </tr>
             </tbody>
@@ -390,8 +391,8 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">Toyota LandCruiser</div>
-                                                <div style="font-size: 13px; color: rgba(26, 19, 72, 0.6); margin-top: 4px;">Towing a caravan or trailer</div>
+                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{contact.vehicle_type}}</div>
+                                                <div style="font-size: 13px; color: rgba(26, 19, 72, 0.6); margin-top: 4px;">{{contact.reason_for_upgrade}}</div>
                                             </td>
                                         </tr>
                                     </table>
@@ -423,8 +424,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">4000</div>
-                                                <div style="font-size: 13px; color: rgba(26, 19, 72, 0.6); margin-top: 4px;">Brisbane, QLD</div>
+                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{contact.postal_code}}</div>
                                             </td>
                                         </tr>
                                     </table>
@@ -442,7 +442,7 @@
             <tbody>
                 <tr>
                     <td align="center" style="padding: 0 20px;">
-                        <a href="#" class="cta-button">View Your Request</a>
+                        <a href="https://gvmupgradesaustralia.com/additional-info?email={{contact.email}}" class="cta-button">Add Additional Details</a>
                     </td>
                 </tr>
             </tbody>

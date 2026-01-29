@@ -1027,6 +1027,20 @@
         let currentStep = 1;
         const totalSteps = 5;
 
+        // Auto-fill email from URL parameter
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const emailParam = urlParams.get('email');
+            if (emailParam && !emailParam.includes('{{')) {
+                const emailInput = document.getElementById('email');
+                if (emailInput) {
+                    emailInput.value = decodeURIComponent(emailParam);
+                    // Trigger validation
+                    emailInput.dispatchEvent(new Event('input'));
+                }
+            }
+        });
+
         function updateProgress() {
             document.getElementById('currentStep').textContent = currentStep;
 

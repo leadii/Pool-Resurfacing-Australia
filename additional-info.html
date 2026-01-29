@@ -359,8 +359,7 @@
         }
 
         .number-input-group input[type="number"] {
-            flex: 1;
-            max-width: 150px;
+            width: 180px;
             padding: 1rem 1.25rem;
             font-size: 1rem;
             border: 1px solid rgba(26, 19, 72, 0.08);
@@ -369,6 +368,13 @@
             color: var(--navy);
             font-family: inherit;
             transition: all 0.3s ease;
+            -moz-appearance: textfield;
+        }
+
+        .number-input-group input[type="number"]::-webkit-outer-spin-button,
+        .number-input-group input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
 
         .number-input-group input[type="number"]:focus {

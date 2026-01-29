@@ -555,6 +555,60 @@
                 font-size: 1.1rem;
             }
         }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #dc3545;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            max-width: 90%;
+            width: auto;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toast-message {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.25rem;
+            margin-left: 0.5rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .toast-close:hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -588,7 +642,7 @@
                 </div>
             </div>
 
-            <form id="additionalInfoForm" action="thanks.html" method="GET">
+            <form id="additionalInfoForm">
 
                 <!-- Step 1: Vehicle Age -->
                 <div class="question-step active" data-step="1">
@@ -938,6 +992,80 @@
                 submitBtn.disabled = !anyChecked;
             });
         });
+
+        // Form submission handler
+        document.getElementById('additionalInfoForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Submitting...';
+
+            // Collect form data
+            const formData = {
+                vehicle_age: document.querySelector('input[name="vehicle_age"]:checked')?.value,
+                current_gvm: document.getElementById('currentGvm')?.value || null,
+                target_gvm: document.getElementById('targetGvm')?.value || null,
+                gvm_not_sure: document.getElementById('notSure')?.checked || false,
+                budget: document.querySelector('input[name="budget"]:checked')?.value,
+                additional_services: Array.from(document.querySelectorAll('input[name="additional_services"]:checked')).map(cb => cb.value)
+            };
+
+            try {
+                const response = await fetch('https://services.leadconnectorhq.com/hooks/K03KP6dfEUp6MFsK9a1b/webhook-trigger/a6035601-78e8-427e-8fc9-52d0c5571d63', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                window.location.href = 'thanks.html';
+            } catch (error) {
+                console.error('Submission error:', error);
+                showToast('Something went wrong. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+
+        // Toast notification functions
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = toast.querySelector('.toast-message');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                hideToast();
+            }, 5000);
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('show');
+        }
     </script>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span class="toast-message">Something went wrong. Please try again.</span>
+        <button class="toast-close" onclick="hideToast()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+    </div>
 </body>
 </html>

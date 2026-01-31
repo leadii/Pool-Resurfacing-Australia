@@ -4,18 +4,29 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GVM Upgrades Australia - Email Preview</title>
+    <title>GVM Upgrades Australia - Thanks For Your Submission!</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
         body {
             margin: 0;
             padding: 20px 0;
             background: #E8E4DC;
-            font-family: Arial, sans-serif;
+            font-family: "DM Sans", Arial, sans-serif;
             color: #1A1348;
         }
 
         .im {
-            color: #1A1348 !important;
+            color: #1A1348;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            background-color: #FAFAF8;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(26, 19, 72, 0.08);
         }
 
         img {
@@ -24,384 +35,598 @@
             display: block;
         }
 
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .content-padding {
+            padding-right: 40px !important;
+            padding-left: 40px !important;
+        }
+
         @media only screen and (max-width: 600px) {
-            .stack-column {
+            .stack-column,
+            .stack-column td,
+            .responsive-td {
                 display: block !important;
                 width: 100% !important;
-                padding-left: 0 !important;
-                padding-right: 0 !important;
             }
 
-            .mobile-padding {
+            .stack-column,
+            .stack-column td {
+                text-align: center !important;
+            }
+
+            .responsive-td {
+                padding: 10px 0 !important;
+                text-align: left !important;
+            }
+
+            .mobile-margin {
                 padding-left: 20px !important;
                 padding-right: 20px !important;
             }
 
-            .mobile-hide {
-                display: none !important;
+            .content-padding {
+                padding-right: 20px !important;
+                padding-left: 20px !important;
             }
 
-            .mobile-center {
+            .center-mobile-img {
+                display: block !important;
+                margin: 20px auto !important;
+            }
+
+            .footer-inner {
+                display: block !important;
+                width: 100% !important;
+            }
+
+            .footer-inner td {
+                display: block !important;
+                width: 100% !important;
+            }
+
+            .text-right,
+            .text-left {
                 text-align: center !important;
+            }
+
+            .stack-row,
+            .stack-column {
+                display: block !important;
+                width: 100% !important;
+            }
+
+            .stack-column {
+                margin-bottom: 20px !important;
+                box-sizing: border-box;
+                text-align: left !important;
+            }
+
+            .desktop-gap {
+                display: none !important;
             }
 
             .hero-title {
                 font-size: 32px !important;
+                line-height: 1.1em !important;
+            }
+
+            .trust-badges {
+                flex-direction: column !important;
+                gap: 12px !important;
+            }
+
+            .trust-badge {
+                justify-content: center !important;
+                padding-left:5px !important;
+            }
+
+            .benefit-cards .stack-column {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+        }
+
+        .social-table img {
+            padding: 0 4px;
+        }
+
+        .desktop-footer {
+            display: block;
+        }
+
+        .mobile-footer {
+            display: none;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .desktop-footer {
+                display: none !important;
+            }
+
+            .mobile-footer {
+                display: block !important;
+            }
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .trust-badge-icon {
+            width: 20px;
+            height: 20px;
+            background-color: #E7E515;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .yellow-bar {
+            height: 4px;
+            background-color: #E7E515;
+            width: 100%;
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .info-card-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #E7E515;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .cta-button {
+            background-color: #E7E515;
+            color: #1A1348 !important;
+            text-decoration: none !important;
+            font-family: "DM Sans", Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 16px 40px;
+            border-radius: 100px;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #d4d213;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(231, 229, 21, 0.4);
+        }
+
+        .secondary-button {
+            background-color: #1A1348;
+            color: #ffffff !important;
+            text-decoration: none !important;
+            font-family: "DM Sans", Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 100px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .secondary-button:hover {
+            background-color: #2a2358;
+        }
+
+        .section-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1A1348;
+            margin-bottom: 12px;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background-color: #E7E515;
+            color: #1A1348;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .divider {
+            border: none;
+            border-top: 2px solid rgba(26, 19, 72, 0.1);
+            margin: 32px 40px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .divider {
+                margin: 24px 20px;
             }
         }
     </style>
-</head>
+<!-- outlook-fixes-applied --></head>
 
-<body style="margin: 0; padding: 20px 0; background-color: #E8E4DC; font-family: Arial, sans-serif; color: #1A1348;">
-    <!-- Wrapper Table -->
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#E8E4DC">
-        <tr>
-            <td align="center">
-                <!-- Main Container -->
-                <table width="640" cellpadding="0" cellspacing="0" border="0" bgcolor="#FAFAF8" style="max-width: 640px; border-radius: 8px; overflow: hidden;">
+<body>
+    <div class="container">
+        <!-- YELLOW TOP BAR -->
+        <div class="yellow-bar"></div>
 
-                    <!-- YELLOW TOP BAR -->
-                    <tr>
-                        <td bgcolor="#E7E515" style="height: 4px; font-size: 1px; line-height: 1px;">&nbsp;</td>
-                    </tr>
+        <!-- HERO SECTION -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" class="content-padding" style="
+            background: linear-gradient(135deg, rgba(26, 19, 72, 0.9) 0%, rgba(26, 19, 72, 0.75) 100%), url('Header-email.jpg') no-repeat center/cover;
+            background-color: #1A1348;
+            padding-top: 30px;
+            padding-bottom: 40px;
+        ">
+            <tbody>
+                <tr>
+                    <td align="left" style="padding-bottom: 40px;">
+                        <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bc5cd1f68d12d7b0ae426.png" width="140" alt="GVM Upgrades Australia" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h1 class="hero-title" style="
+                            font-family: 'Plus Jakarta Sans', sans-serif;
+                            font-size: 42px;
+                            color: #ffffff;
+                            line-height: 1.1em;
+                            margin: 0 0 24px 0;
+                            font-weight: 800;
+                        ">Thanks for Your Submission!</h1>
+                        <p style="
+                            color: rgba(255, 255, 255, 0.85);
+                            font-size: 16px;
+                            line-height: 1.6em;
+                            margin: 0 0 28px 0;
+                            max-width: 480px;
+                        ">We've received your details and a local GVM installer will be in touch within 24 hours.</p>
+                        <table cellpadding="0" cellspacing="0" border="0" class="trust-badges">
+                            <tr>
+                                <td class="trust-badge" style="padding-right: 24px;">
+                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741311f68acfd029bc.png" width="22" height="22" alt="" style="display: inline-block; vertical-align: middle;" />
+                                </td>
+                                <td class="trust-badge" style="color: #ffffff; font-size: 14px; font-weight: 500; padding-right: 32px;">
+                                    ADR Compliant
+                                </td>
+                                <td class="trust-badge" style="padding-right: 8px;">
+                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741311f68acfd029bc.png" width="22" height="22" alt="" style="display: inline-block; vertical-align: middle;" />
+                                </td>
+                                <td class="trust-badge" style="color: #ffffff; font-size: 14px; font-weight: 500;">
+                                    National Network
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-                    <!-- HERO SECTION -->
-                    <tr>
-                        <td bgcolor="#1A1348" style="padding: 30px 40px 40px 40px;" class="mobile-padding">
-                            <!-- Logo -->
-                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                <tr>
-                                    <td style="padding-bottom: 40px;">
-                                        <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bc5cd1f68d12d7b0ae426.png" width="140" alt="GVM Upgrades Australia" style="display: block;" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h1 class="hero-title" style="font-family: Arial, sans-serif; font-size: 42px; color: #ffffff; line-height: 1.1; margin: 0 0 24px 0; font-weight: 800;">Thanks for Your Submission!</h1>
-                                        <p style="color: #ffffff; opacity: 0.85; font-size: 16px; line-height: 1.6; margin: 0 0 28px 0; max-width: 480px;">We've received your details and a local GVM installer will be in touch within 24 hours.</p>
+        <!-- INTRO TEXT -->
+        <table width="100%" cellpadding="0" cellspacing="0" class="content-padding" style="margin-top: 32px;">
+            <tbody>
+                <tr>
+                    <td style="font-size: 16px; line-height: 1.7em; color: #1A1348;">
+                        <p style="margin: 0 0 16px 0;">Hi <strong>{{contact.first_name}}</strong>,</p>
+                        <p style="margin: 0 0 16px 0;">Thank you for requesting a GVM upgrade quote through GVM Upgrades Australia.</p>
+                        <p style="margin: 0;">In order to match you with the most suitable installer for your vehicle, we would love a few additional details.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-                                        <!-- Trust Badges -->
-                                        <table cellpadding="0" cellspacing="0" border="0">
-                                            <tr>
-                                                <td valign="middle" style="padding-right: 8px;">
-                                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bd1caa74ce60847a11576.png" width="22" height="22" alt="" style="display: block;" />
-                                                </td>
-                                                <td valign="middle" style="color: #ffffff; font-size: 14px; font-weight: 500; padding-right: 24px;">
-                                                    ADR Compliant
-                                                </td>
-                                                <td valign="middle" style="padding-right: 8px;">
-                                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bd1caa74ce60847a11576.png" width="22" height="22" alt="" style="display: block;" />
-                                                </td>
-                                                <td valign="middle" style="color: #ffffff; font-size: 14px; font-weight: 500;">
-                                                    National Network
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+        <!-- INFO CARDS -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 32px;">
+            <tbody>
+                <tr>
+                    <td class="mobile-margin" style="padding: 0 20px;">
+                        <table width="100%" cellpadding="0" cellspacing="0" style="background: #ffffff; border-radius: 16px; overflow: hidden; padding: 16px;">
+                            <tr class="stack-row">
+                                <td class="desktop-gap" style="width: 8px; min-width: 8px; background: transparent;"></td>
+                                <!-- Your Vehicle Card -->
+                                <td class="stack-column" valign="top" style="background: #F3EBD9; border-radius: 12px; padding: 24px; width: 45%;">
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td style="padding-bottom: 8px;">
+                                                <span style="display: inline-flex; align-items: center; gap: 10px;">
+                                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741fd8277732cd267d.png" width="36" height="36" alt="" style="display: inline-block; vertical-align: middle; margin-right: 4px;" />
+                                                    <span style="font-weight: 700; font-size: 15px; color: #1A1348;">Your Vehicle</span>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{contact.vehicle_type}}</div>
+                                                <div style="font-size: 13px; color: rgba(26, 19, 72, 0.6); margin-top: 4px;">{{contact.reason_for_upgrade}}</div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td class="desktop-gap" style="width: 16px; min-width: 16px; background: transparent;"></td>
+                                <!-- Location Card -->
+                                <td class="stack-column" valign="top" style="background: #F3EBD9; border-radius: 12px; padding: 24px; width: 45%;">
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td style="padding-bottom: 8px;">
+                                                <span style="display: inline-flex; align-items: center; gap: 10px;">
+                                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c3874f7a87736785af43a.png" width="36" height="36" alt="" style="display: inline-block; vertical-align: middle; margin-right: 4px;" />
+                                                    <span style="font-weight: 700; font-size: 15px; color: #1A1348;">Your Location</span>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{contact.postal_code}}</div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td class="desktop-gap" style="width: 8px; min-width: 8px; background: transparent;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-                    <!-- INTRO TEXT -->
-                    <tr>
-                        <td style="padding: 32px 40px 0 40px;" class="mobile-padding">
-                            <p style="margin: 0 0 16px 0; font-size: 16px; line-height: 1.7; color: #1A1348;">Hi <strong>{{contact.first_name}}</strong>,</p>
-                            <p style="margin: 0 0 16px 0; font-size: 16px; line-height: 1.7; color: #1A1348;">Thank you for requesting a GVM upgrade quote through GVM Upgrades Australia.</p>
-                            <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #1A1348;">In order to match you with the most suitable installer for your vehicle, we would love a few additional details.</p>
-                        </td>
-                    </tr>
+        <!-- CTA BUTTON -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 32px;">
+            <tbody>
+                <tr>
+                    <td align="center" style="padding: 0 20px;">
+                        <a style="color: #1A1348 !important; mso-style-textfill-fill-color: #1A1348;" href="https://gvmupgradesaustralia.com/additional-info?email={{contact.email}}" class="cta-button"><!--[if mso]><font color="#1A1348"><![endif]-->Add Additional Details<!--[if mso]></font><![endif]--></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-                    <!-- INFO CARDS -->
-                    <tr>
-                        <td style="padding: 32px 20px 0 20px;">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="border-radius: 16px;">
-                                <tr>
-                                    <td style="padding: 16px;">
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                            <tr>
-                                                <!-- Your Vehicle Card -->
-                                                <td class="stack-column" valign="top" width="48%" bgcolor="#F3EBD9" style="border-radius: 12px; padding: 24px;">
-                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                        <tr>
-                                                            <td>
-                                                                <table cellpadding="0" cellspacing="0" border="0">
-                                                                    <tr>
-                                                                        <td valign="middle" style="padding-right: 10px;">
-                                                                            <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bd1caa74ce67cdfa11580.png" width="36" height="36" alt="" style="display: block;" />
-                                                                        </td>
-                                                                        <td valign="middle" style="font-weight: 700; font-size: 15px; color: #1A1348;">
-                                                                            Your Vehicle
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-top: 12px;">
-                                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348;">{{contact.vehicle_type}}</div>
-                                                                <div style="font-size: 13px; color: #666666; margin-top: 4px;">{{contact.reason_for_upgrade}}</div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
+        <hr class="divider" />
 
-                                                <!-- Spacer -->
-                                                <td class="mobile-hide" width="4%">&nbsp;</td>
+        <!-- WHAT HAPPENS NEXT -->
+        <div class="content-padding" style="padding-top: 0;">
+            <h2 class="section-title">What Happens Next?</h2>
+            <p style="margin-bottom: 24px; color: rgba(26, 19, 72, 0.7); font-size: 15px; line-height: 1.6em;">Here's what to expect from your GVM upgrade journey:</p>
 
-                                                <!-- Location Card -->
-                                                <td class="stack-column" valign="top" width="48%" bgcolor="#F3EBD9" style="border-radius: 12px; padding: 24px;">
-                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                        <tr>
-                                                            <td>
-                                                                <table cellpadding="0" cellspacing="0" border="0">
-                                                                    <tr>
-                                                                        <td valign="middle" style="padding-right: 10px;">
-                                                                            <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bd1ca1fd827457eaaf580.png" width="36" height="36" alt="" style="display: block;" />
-                                                                        </td>
-                                                                        <td valign="middle" style="font-weight: 700; font-size: 15px; color: #1A1348;">
-                                                                            Your Location
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-top: 12px;">
-                                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348;">{{contact.postal_code}}</div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="padding-bottom: 20px;">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="top" style="padding-right: 16px;">
+                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c387466e7ca167b0e4bb4.png" width="32" height="32" alt="1" style="display: inline-block; vertical-align: middle;" />
+                                </td>
+                                <td>
+                                    <strong style="font-size: 15px; color: #1A1348;">Local Installer Contact</strong>
+                                    <p style="margin: 4px 0 0 0; font-size: 14px; color: rgba(26, 19, 72, 0.7); line-height: 1.5em;">A qualified GVM specialist in your area will reach out within 24 hours to discuss your requirements.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-bottom: 20px;">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="top" style="padding-right: 16px;">
+                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741311f6068bd029bd.png" width="32" height="32" alt="2" style="display: inline-block; vertical-align: middle;" />
+                                </td>
+                                <td>
+                                    <strong style="font-size: 15px; color: #1A1348;">Vehicle Assessment</strong>
+                                    <p style="margin: 4px 0 0 0; font-size: 14px; color: rgba(26, 19, 72, 0.7); line-height: 1.5em;">Your installer will assess your vehicle and recommend the best GVM upgrade solution for your needs.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="top" style="padding-right: 16px;">
+                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741311f6b189d029be.png" width="32" height="32" alt="3" style="display: inline-block; vertical-align: middle;" />
+                                </td>
+                                <td>
+                                    <strong style="font-size: 15px; color: #1A1348;">Quote & Installation</strong>
+                                    <p style="margin: 4px 0 0 0; font-size: 14px; color: rgba(26, 19, 72, 0.7); line-height: 1.5em;">Receive a detailed quote and book your installation at a time that suits you.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-                    <!-- CTA BUTTON -->
-                    <tr>
-                        <td align="center" style="padding: 32px 20px;">
-                            <table cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td bgcolor="#E7E515" style="border-radius: 100px;">
-                                        <a href="https://gvmupgradesaustralia.com/additional-info?email={{contact.email}}" style="display: inline-block; padding: 16px 40px; font-family: Arial, sans-serif; font-size: 16px; font-weight: 700; color: #1A1348; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px;">Add Additional Details</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+        <hr class="divider" />
 
-                    <!-- DIVIDER -->
-                    <tr>
-                        <td style="padding: 0 40px;" class="mobile-padding">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="border-top: 2px solid #E8E4DC; font-size: 1px; line-height: 1px;">&nbsp;</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+        <!-- WHY GVM UPGRADES -->
+        <div class="content-padding">
+            <h2 class="section-title">Why Choose a GVM Upgrade?</h2>
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-top: 20px;" class="benefit-cards">
+                <tr class="stack-row">
+                    <td class="stack-column" valign="top" style="width: 50%; padding-right: 8px; padding-bottom: 16px;">
+                        <table cellpadding="0" cellspacing="0" style="background: #ffffff; border-radius: 12px; padding: 20px; width: 100%;">
+                            <tr>
+                                <td>
+                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741f68d1e9522e4ed6.png" width="40" height="40" alt="" style="display: inline-block; margin-bottom: 12px;" />
+                                    <h4 style="margin: 12px 0 6px 0; font-size: 15px; color: #1A1348;">Stay Legal & Compliant</h4>
+                                    <p style="margin: 0; font-size: 13px; color: rgba(26, 19, 72, 0.7); line-height: 1.5em;">Avoid fines and ensure your vehicle meets Australian regulations.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="stack-column" valign="top" style="width: 50%; padding-left: 8px; padding-bottom: 16px;">
+                        <table cellpadding="0" cellspacing="0" style="background: #ffffff; border-radius: 12px; padding: 20px; width: 100%;">
+                            <tr>
+                                <td>
+                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741fd827f248cd267c.png" width="40" height="40" alt="" style="display: inline-block; margin-bottom: 12px;" />
+                                    <h4 style="margin: 12px 0 6px 0; font-size: 15px; color: #1A1348;">Increased Payload</h4>
+                                    <p style="margin: 0; font-size: 13px; color: rgba(26, 19, 72, 0.7); line-height: 1.5em;">Legally carry heavier loads for work, towing, or adventure.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-                    <!-- WHAT HAPPENS NEXT -->
-                    <tr>
-                        <td style="padding: 32px 40px 0 40px;" class="mobile-padding">
-                            <h2 style="font-family: Arial, sans-serif; font-size: 22px; font-weight: 700; color: #1A1348; margin: 0 0 12px 0;">What Happens Next?</h2>
-                            <p style="margin: 0 0 24px 0; color: #666666; font-size: 15px; line-height: 1.6;">Here's what to expect from your GVM upgrade journey:</p>
+        <hr class="divider" />
 
-                            <!-- Step 1 -->
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 20px;">
-                                <tr>
-                                    <td valign="top" width="48" style="padding-right: 16px;">
-                                        <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bd1ca04b05b07bb61de77.png" width="32" height="32" alt="1" style="display: block;" />
-                                    </td>
-                                    <td valign="top">
-                                        <strong style="font-size: 15px; color: #1A1348;">Local Installer Contact</strong>
-                                        <p style="margin: 4px 0 0 0; font-size: 14px; color: #666666; line-height: 1.5;">A qualified GVM specialist in your area will reach out within 24 hours to discuss your requirements.</p>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <!-- Step 2 -->
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 20px;">
-                                <tr>
-                                    <td valign="top" width="48" style="padding-right: 16px;">
-                                        <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bd1caf7a877008e39034b.png" width="32" height="32" alt="2" style="display: block;" />
-                                    </td>
-                                    <td valign="top">
-                                        <strong style="font-size: 15px; color: #1A1348;">Vehicle Assessment</strong>
-                                        <p style="margin: 4px 0 0 0; font-size: 14px; color: #666666; line-height: 1.5;">Your installer will assess your vehicle and recommend the best GVM upgrade solution for your needs.</p>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <!-- Step 3 -->
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td valign="top" width="48" style="padding-right: 16px;">
-                                        <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bd1cae98b4820a847ff3f.png" width="32" height="32" alt="3" style="display: block;" />
-                                    </td>
-                                    <td valign="top">
-                                        <strong style="font-size: 15px; color: #1A1348;">Quote & Installation</strong>
-                                        <p style="margin: 4px 0 0 0; font-size: 14px; color: #666666; line-height: 1.5;">Receive a detailed quote and book your installation at a time that suits you.</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- DIVIDER -->
-                    <tr>
-                        <td style="padding: 32px 40px;" class="mobile-padding">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="border-top: 2px solid #E8E4DC; font-size: 1px; line-height: 1px;">&nbsp;</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- WHY GVM UPGRADES -->
-                    <tr>
-                        <td style="padding: 0 40px;" class="mobile-padding">
-                            <h2 style="font-family: Arial, sans-serif; font-size: 22px; font-weight: 700; color: #1A1348; margin: 0 0 20px 0;">Why Choose a GVM Upgrade?</h2>
-
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <!-- Stay Legal Card -->
-                                    <td class="stack-column" valign="top" width="48%" bgcolor="#ffffff" style="border-radius: 12px; padding: 20px;">
-                                        <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bd1ca4d56832aa2c205e4.png" width="40" height="40" alt="" style="display: block; margin-bottom: 12px;" />
-                                        <h4 style="margin: 0 0 6px 0; font-size: 15px; color: #1A1348;">Stay Legal & Compliant</h4>
-                                        <p style="margin: 0; font-size: 13px; color: #666666; line-height: 1.5;">Avoid fines and ensure your vehicle meets Australian regulations.</p>
-                                    </td>
-
-                                    <!-- Spacer -->
-                                    <td class="mobile-hide" width="4%">&nbsp;</td>
-
-                                    <!-- Increased Payload Card -->
-                                    <td class="stack-column" valign="top" width="48%" bgcolor="#ffffff" style="border-radius: 12px; padding: 20px;">
-                                        <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bd1caff9d326993b329f9.png" width="40" height="40" alt="" style="display: block; margin-bottom: 12px;" />
-                                        <h4 style="margin: 0 0 6px 0; font-size: 15px; color: #1A1348;">Increased Payload</h4>
-                                        <p style="margin: 0; font-size: 13px; color: #666666; line-height: 1.5;">Legally carry heavier loads for work, towing, or adventure.</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- DIVIDER -->
-                    <tr>
-                        <td style="padding: 32px 40px;" class="mobile-padding">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="border-top: 2px solid #E8E4DC; font-size: 1px; line-height: 1px;">&nbsp;</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- HAVE QUESTIONS SECTION -->
-                    <tr>
-                        <td style="padding: 0 20px 20px 20px;">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F3EBD9" style="border-radius: 16px;">
+        <!-- HAVE QUESTIONS SECTION -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                <tr>
+                    <td align="center" class="mobile-margin">
+                        <table width="100%" style="max-width: 580px; background-color: #F3EBD9; border-radius: 16px; margin-bottom: 20px;">
+                            <tbody>
                                 <tr>
                                     <td style="padding: 32px;">
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                            <tr>
-                                                <td class="stack-column" valign="top" width="65%">
-                                                    <h3 style="margin: 0 0 12px 0; font-size: 20px; font-weight: 700; color: #1A1348;">Have Questions?</h3>
-                                                    <p style="margin: 0 0 20px 0; line-height: 1.6; color: #666666; font-size: 15px;">
-                                                        Our team is here to help. Reach out <a href="mailto:support@gvmupgradesaustralia.com" style="color: #1A1348; text-decoration: underline;">via email</a> or <a href="https://gvmupgradesaustralia.com/faq" style="color: #1A1348; text-decoration: underline;">check our FAQ</a> for quick answers.
-                                                    </p>
-                                                    <table cellpadding="0" cellspacing="0" border="0">
-                                                        <tr>
-                                                            <td bgcolor="#1A1348" style="border-radius: 100px;">
-                                                                <a href="https://gvmupgradesaustralia.com/faq" style="display: inline-block; padding: 14px 28px; font-family: Arial, sans-serif; font-size: 14px; font-weight: 600; color: #ffffff; text-decoration: none;">View FAQs</a>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td class="stack-column mobile-hide" valign="middle" width="35%" align="right">
-                                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bd1cab3ae837a2eb9e587.png" width="100" height="100" alt="?" style="display: block; margin-left: auto;" />
-                                                </td>
-                                            </tr>
+                                        <table width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="stack-column" width="65%" valign="top" style="font-family: 'DM Sans', Arial, sans-serif; font-size: 15px;">
+                                                        <h3 style="margin: 0 0 12px 0; font-size: 20px; font-weight: 700; color: #1A1348;">Have Questions?</h3>
+                                                        <p style="margin: 0 0 20px 0; line-height: 1.6em; color: rgba(26, 19, 72, 0.7);">
+                                                            Our team is here to help. Reach out <a href="mailto:support@gvmupgradesaustralia.com" style="color: #1A1348; text-decoration: underline;; color: #1A1348 !important; mso-style-textfill-fill-color: #1A1348;"><!--[if mso]><font color="#1A1348"><![endif]-->via email<!--[if mso]></font><![endif]--></a> or <a href="https://gvmupgradesaustralia.com/faq" style="color: #1A1348; text-decoration: underline;; color: #1A1348 !important; mso-style-textfill-fill-color: #1A1348;"><!--[if mso]><font color="#1A1348"><![endif]-->check our FAQ<!--[if mso]></font><![endif]--></a> for quick answers.
+                                                        </p>
+                                                        <a style="color: #E7E515 !important; mso-style-textfill-fill-color: #E7E515;" href="https://gvmupgradesaustralia.com/faq" class="secondary-button"><!--[if mso]><font color="#E7E515"><![endif]-->View FAQs<!--[if mso]></font><![endif]--></a>
+                                                    </td>
+                                                    <td class="stack-column" width="35%" valign="middle" align="right">
+                                                        <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741fd82739dfcd267b.png" width="100" height="100" alt="?" style="display: block; margin-left: auto;" />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                     </td>
                                 </tr>
-                            </table>
-                        </td>
-                    </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-                    <!-- FOOTER -->
+        <!-- FOOTER DESKTOP -->
+        <div class="desktop-footer">
+            <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#1A1348"
+                style="color: white; font-family: 'DM Sans', Arial, sans-serif" class="content-padding">
+                <tbody>
                     <tr>
-                        <td bgcolor="#1A1348" style="padding: 40px 40px 0 40px;" class="mobile-padding">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td class="stack-column mobile-center" valign="top" width="50%">
-                                        <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bc5cd1f68d12d7b0ae426.png" width="120" alt="GVM Upgrades Australia" style="display: block; margin-bottom: 16px;" />
-                                        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #cccccc;">
-                                            Find a local GVM upgrade<br/>installer in 60 seconds.
-                                        </p>
-                                    </td>
-                                    <td class="stack-column mobile-center" valign="top" width="50%" align="right" style="padding-top: 0;">
-                                        <table cellpadding="0" cellspacing="0" border="0" align="right" class="mobile-center" style="text-align: right;">
-                                            <tr>
-                                                <td style="padding: 4px 10px;">
-                                                    <a href="https://gvmupgradesaustralia.com" style="color: #ffffff; text-decoration: none; font-size: 14px;">Home</a>
-                                                </td>
-                                                <td style="padding: 4px 10px;">
-                                                    <a href="https://gvmupgradesaustralia.com/privacy" style="color: #ffffff; text-decoration: none; font-size: 14px;">Privacy Policy</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 4px 10px;">
-                                                    <a href="https://gvmupgradesaustralia.com/faq" style="color: #ffffff; text-decoration: none; font-size: 14px;">FAQs</a>
-                                                </td>
-                                                <td style="padding: 4px 10px;">
-                                                    <a href="https://gvmupgradesaustralia.com/terms" style="color: #ffffff; text-decoration: none; font-size: 14px;">Terms & Conditions</a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
+                        <td style="padding: 40px 0 0 0">
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="vertical-align: top; padding-right: 10px">
+                                            <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bc5cd1f68d12d7b0ae426.png" width="120" alt="GVM Upgrades Australia"
+                                                style="padding-bottom: 16px; display: block" />
+                                            <p style="margin: 0; font-size: 14px; line-height: 1.5em; color: rgba(255,255,255,0.8);">
+                                                Find a local GVM upgrade<br/>installer in 60 seconds.
+                                            </p>
+                                        </td>
+                                        <td style="text-align: right; vertical-align: top;">
+                                            <table align="right" style="margin-top: 0;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="padding: 4px 10px">
+                                                            <a href="https://gvmupgradesaustralia.com" style="color: white; text-decoration: none; font-size: 14px;; color: white !important; mso-style-textfill-fill-color: white;"><!--[if mso]><font color="white"><![endif]-->Home<!--[if mso]></font><![endif]--></a>
+                                                        </td>
+                                                        <td style="padding: 4px 10px">
+                                                            <a href="https://gvmupgradesaustralia.com/privacy" style="color: white; text-decoration: none; font-size: 14px;; color: white !important; mso-style-textfill-fill-color: white;"><!--[if mso]><font color="white"><![endif]-->Privacy Policy<!--[if mso]></font><![endif]--></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding: 4px 10px">
+                                                            <a href="https://gvmupgradesaustralia.com/faq" style="color: white; text-decoration: none; font-size: 14px;; color: white !important; mso-style-textfill-fill-color: white;"><!--[if mso]><font color="white"><![endif]-->FAQs<!--[if mso]></font><![endif]--></a>
+                                                        </td>
+                                                        <td style="padding: 4px 10px">
+                                                            <a href="https://gvmupgradesaustralia.com/terms" style="color: white; text-decoration: none; font-size: 14px;; color: white !important; mso-style-textfill-fill-color: white;"><!--[if mso]><font color="white"><![endif]-->Terms & Conditions<!--[if mso]></font><![endif]--></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </td>
                     </tr>
-                    <tr>
-                        <td bgcolor="#1A1348" style="padding: 24px 40px 16px 40px;" class="mobile-padding">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="border-top: 1px solid #333333; font-size: 1px; line-height: 1px;">&nbsp;</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#1A1348" style="padding: 0 40px 20px 40px;" class="mobile-padding">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td class="mobile-center" style="font-size: 13px; color: #999999;" align="left">
-                                        &copy; 2026 GVM Upgrades Australia. All rights reserved.
-                                    </td>
-                                    <td class="mobile-center" style="font-size: 13px; color: #999999;" align="right">
-                                        <a href="{{unsubscribe}}" style="color: #999999; text-decoration: underline;">Unsubscribe</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#1A1348"
+                style="color: white; font-family: 'DM Sans', Arial, sans-serif;" class="content-padding">
+                <tr>
+                    <td>
+                        <hr style="height: 1px; background-color: rgba(255, 255, 255, 0.2); border: none; margin-top: 24px; margin-bottom: 0;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table style="width: 100%; margin-bottom: 10px;" class="footer-inner">
+                            <tr>
+                                <td class="text-left" style="padding: 16px 0px; font-size: 13px; color: rgba(255,255,255,0.6);" align="left" valign="center">
+                                    &copy; 2026 GVM Upgrades Australia. All rights reserved.
+                                </td>
+                                <td class="text-right" style="padding: 16px 0px; font-size: 13px; color: rgba(255,255,255,0.6);" align="right" valign="center">
+                                    <a href="{{unsubscribe}}" style="color: rgba(255,255,255,0.6); text-decoration: underline;; color: #ffffff !important; mso-style-textfill-fill-color: #ffffff;"><!--[if mso]><font color="#ffffff"><![endif]-->Unsubscribe<!--[if mso]></font><![endif]--></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-                    <!-- YELLOW BOTTOM BAR -->
-                    <tr>
-                        <td bgcolor="#E7E515" style="height: 4px; font-size: 1px; line-height: 1px;">&nbsp;</td>
-                    </tr>
+        <!-- FOOTER MOBILE -->
+        <div class="mobile-footer" style="display:none;">
+            <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#1A1348"
+                style="color: white; font-family: 'DM Sans', Arial, sans-serif;" class="content-padding">
+                <tr>
+                    <td style="padding: 40px 0 0 0; text-align: center;">
+                        <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697bc5cd1f68d12d7b0ae426.png" width="120" alt="GVM Upgrades Australia"
+                            style="padding-bottom: 16px; display: block; margin: 0 auto;" />
+                        <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.5em; color: rgba(255,255,255,0.8);">
+                            Find a local GVM upgrade<br/>installer in 60 seconds.
+                        </p>
+                        <div style="margin-bottom: 24px;">
+                            <a href="https://gvmupgradesaustralia.com" style="color: white; text-decoration: none; font-size: 15px; display: block; margin-bottom: 10px;; color: white !important; mso-style-textfill-fill-color: white;"><!--[if mso]><font color="white"><![endif]-->Home<!--[if mso]></font><![endif]--></a>
+                            <a href="https://gvmupgradesaustralia.com/faq" style="color: white; text-decoration: none; font-size: 15px; display: block; margin-bottom: 10px;; color: white !important; mso-style-textfill-fill-color: white;"><!--[if mso]><font color="white"><![endif]-->FAQs<!--[if mso]></font><![endif]--></a>
+                            <a href="https://gvmupgradesaustralia.com/privacy" style="color: white; text-decoration: none; font-size: 15px; display: block; margin-bottom: 10px;; color: white !important; mso-style-textfill-fill-color: white;"><!--[if mso]><font color="white"><![endif]-->Privacy Policy<!--[if mso]></font><![endif]--></a>
+                            <a href="https://gvmupgradesaustralia.com/terms" style="color: white; text-decoration: none; font-size: 15px; display: block;; color: white !important; mso-style-textfill-fill-color: white;"><!--[if mso]><font color="white"><![endif]-->Terms & Conditions<!--[if mso]></font><![endif]--></a>
+                        </div>
+                        <hr style="height: 1px; background-color: rgba(255, 255, 255, 0.2); border: none; margin: 24px 0;" />
+                        <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 12px;">&copy; 2026 GVM Upgrades Australia. All rights reserved.</div>
+                        <a href="{{unsubscribe}}" style="color: rgba(255,255,255,0.6); text-decoration: underline; font-size: 13px;; color: #ffffff !important; mso-style-textfill-fill-color: #ffffff;"><!--[if mso]><font color="#ffffff"><![endif]-->Unsubscribe<!--[if mso]></font><![endif]--></a>
+                        <div style="height: 20px;"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-                </table>
-            </td>
-        </tr>
-    </table>
+        <!-- YELLOW BOTTOM BAR -->
+        <div class="yellow-bar"></div>
+    </div>
 </body>
 
 </html>

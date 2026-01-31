@@ -108,13 +108,13 @@ function HeroSection() {
               icon="wrench"
               number="150+"
               title="Local Installer Network."
-              subtitle="Matched by location."
+              subtitle="Matched by location across Australia."
             />
             <StatCard
               icon="truck"
               number="5,000+"
               title="GVM Upgrade Specialists."
-              subtitle="Passenger & commercial vehicles"
+              subtitle="Passenger & commercial vehicles."
             />
             <StatCard
               icon="shield"

@@ -107,20 +107,20 @@ function HeroSection() {
             <StatCard
               icon="wrench"
               number="150+"
-              title="Local Installer Network Matched"
-              subtitle="by location across Australia"
+              title="Local Installer Network."
+              subtitle="Matched by location."
             />
             <StatCard
               icon="truck"
               number="5,000+"
-              title="GVM Upgrade Specialists"
+              title="GVM Upgrade Specialists."
               subtitle="Passenger & commercial vehicles"
             />
             <StatCard
               icon="shield"
               number="100%"
-              title="Installer-led compliance"
-              subtitle="Requirements confirmed directly"
+              title="Installer-led compliance."
+              subtitle="Requirements confirmed directly."
             />
           </div>
         </div>
@@ -161,7 +161,7 @@ function StatCard({ icon, number, title, subtitle }: {
       </div>
       <div className="min-w-0">
         <div className="text-xl sm:text-2xl font-bold text-white leading-tight">{number}</div>
-        <div className="text-xs sm:text-sm font-medium text-white/90 leading-tight mt-0.5">{title}</div>
+        <div className="text-xs sm:text-sm font-bold text-white/90 leading-tight mt-0.5">{title}</div>
         <div className="text-[10px] sm:text-xs text-white/70 leading-tight mt-0.5">{subtitle}</div>
       </div>
     </div>

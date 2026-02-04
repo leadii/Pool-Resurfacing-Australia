@@ -237,7 +237,7 @@
             <tbody>
                 <tr>
                     <td style="font-size: 16px; line-height: 1.7em; color: #1A1348;">
-                        <p style="margin: 0 0 16px 0;">Hi <strong>{{first_name}}</strong>,</p>
+                        <p style="margin: 0 0 16px 0;">Hi <strong>{{contact.first_name}}</strong>,</p>
                         <p style="margin: 0 0 16px 0;">Thank you for providing the additional information about your GVM upgrade requirements.</p>
                         <p style="margin: 0;">We will reach out within the next <strong>48 hours</strong> to connect you with the best-suited GVM installer for your vehicle and location.</p>
                     </td>
@@ -259,30 +259,15 @@
                                         <tr>
                                             <td style="padding-bottom: 8px;">
                                                 <span style="display: inline-flex; align-items: center; gap: 10px;">
-                                                    <span style="
-                                                        width: 36px;
-                                                        height: 36px;
-                                                        background-color: #E7E515;
-                                                        border-radius: 8px;
-                                                        display: inline-flex;
-                                                        align-items: center;
-                                                        justify-content: center;
-                                                    ">
-                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1348" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                            <rect x="1" y="3" width="15" height="13"></rect>
-                                                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                                                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                                                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                                                        </svg>
-                                                    </span>
+                                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741fd8277732cd267d.png" width="36" height="36" alt="" style="display: inline-block; vertical-align: middle;" />
                                                     <span style="font-weight: 700; font-size: 15px; color: #1A1348;">Your Vehicle</span>
                                                 </span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{vehicle_name}}</div>
-                                                <div style="font-size: 13px; color: rgba(26, 19, 72, 0.6); margin-top: 4px;">{{upgrade_reason}}</div>
+                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{contact.vehicle_type}}</div>
+                                                <div style="font-size: 13px; color: rgba(26, 19, 72, 0.6); margin-top: 4px;">{{contact.reason_for_upgrade}}</div>
                                             </td>
                                         </tr>
                                     </table>
@@ -294,27 +279,14 @@
                                         <tr>
                                             <td style="padding-bottom: 8px;">
                                                 <span style="display: inline-flex; align-items: center; gap: 10px;">
-                                                    <span style="
-                                                        width: 36px;
-                                                        height: 36px;
-                                                        background-color: #E7E515;
-                                                        border-radius: 8px;
-                                                        display: inline-flex;
-                                                        align-items: center;
-                                                        justify-content: center;
-                                                    ">
-                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1348" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                                            <circle cx="12" cy="10" r="3"></circle>
-                                                        </svg>
-                                                    </span>
+                                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c3874f7a87736785af43a.png" width="36" height="36" alt="" style="display: inline-block; vertical-align: middle;" />
                                                     <span style="font-weight: 700; font-size: 15px; color: #1A1348;">Your Location</span>
                                                 </span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{postcode}}</div>
+                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{contact.postal_code}}</div>
                                                                                             </td>
                                         </tr>
                                     </table>
@@ -340,7 +312,7 @@
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td valign="top" style="padding-right: 16px;">
-                                    <span class="step-number">1</span>
+                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c387466e7ca167b0e4bb4.png" width="32" height="32" alt="1" style="display: inline-block; vertical-align: middle; min-width: 32px; min-height: 32px;" />
                                 </td>
                                 <td>
                                     <strong style="font-size: 15px; color: #1A1348;">Installer Matching</strong>
@@ -355,7 +327,7 @@
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td valign="top" style="padding-right: 16px;">
-                                    <span class="step-number">2</span>
+                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741311f6068bd029bd.png" width="32" height="32" alt="2" style="display: inline-block; vertical-align: middle; min-width: 32px; min-height: 32px;" />
                                 </td>
                                 <td>
                                     <strong style="font-size: 15px; color: #1A1348;">Installer Contact</strong>
@@ -370,7 +342,7 @@
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td valign="top" style="padding-right: 16px;">
-                                    <span class="step-number">3</span>
+                                    <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741311f6b189d029be.png" width="32" height="32" alt="3" style="display: inline-block; vertical-align: middle; min-width: 32px; min-height: 32px;" />
                                 </td>
                                 <td>
                                     <strong style="font-size: 15px; color: #1A1348;">Quote & Installation</strong>
@@ -405,18 +377,7 @@
                                                         <a href="https://gvmupgradesaustralia.com/faq" class="secondary-button">View FAQs</a>
                                                     </td>
                                                     <td class="stack-column" width="35%" valign="middle" align="right">
-                                                        <div style="
-                                                            width: 100px;
-                                                            height: 100px;
-                                                            background-color: #E7E515;
-                                                            border-radius: 50%;
-                                                            display: flex;
-                                                            align-items: center;
-                                                            justify-content: center;
-                                                            margin-left: auto;
-                                                        ">
-                                                            <span style="font-size: 56px; font-weight: 800; color: #1A1348; font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1;">?</span>
-                                                        </div>
+                                                        <img src="https://storage.googleapis.com/msgsndr/K03KP6dfEUp6MFsK9a1b/media/697c38741fd82739dfcd267b.png" width="100" height="100" alt="?" style="display: block; margin-left: auto;" />
                                                     </td>
                                                 </tr>
                                             </tbody>

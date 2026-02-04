@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thanks for Your Submission - GVM Upgrades Australia</title>
+    <title>You're So Close! - GVM Upgrades Australia</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
         body {
@@ -113,15 +113,6 @@
                 line-height: 1.1em !important;
             }
 
-            .trust-badges {
-                flex-direction: column !important;
-                gap: 12px !important;
-            }
-
-            .trust-badge {
-                justify-content: center !important;
-            }
-
             .step-number {
                 width: 32px !important;
                 height: 32px !important;
@@ -153,47 +144,10 @@
             }
         }
 
-        .trust-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .trust-badge-icon {
-            width: 20px;
-            height: 20px;
-            background-color: #E7E515;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .yellow-bar {
             height: 4px;
             background-color: #E7E515;
             width: 100%;
-        }
-
-        .info-card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 16px;
-        }
-
-        .info-card-icon {
-            width: 48px;
-            height: 48px;
-            background-color: #E7E515;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 16px;
         }
 
         .cta-button {
@@ -234,24 +188,25 @@
             margin-bottom: 12px;
         }
 
-        .step-number {
-            width: 32px;
-            height: 32px;
-            background-color: #E7E515;
-            color: #1A1348;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-            margin-right: 12px;
-        }
-
         .divider {
             border: none;
             border-top: 2px solid rgba(26, 19, 72, 0.1);
             margin: 32px 40px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 15px;
+            line-height: 1.5em;
+        }
+
+        .check-icon {
+            color: #E7E515;
+            font-size: 18px;
+            margin-right: 10px;
+            flex-shrink: 0;
         }
     </style>
 </head>
@@ -283,14 +238,14 @@
                             line-height: 1.1em;
                             margin: 0 0 24px 0;
                             font-weight: 800;
-                        ">Thanks for Your Submission!</h1>
+                        ">You're So Close!</h1>
                         <p style="
                             color: rgba(255, 255, 255, 0.85);
                             font-size: 16px;
                             line-height: 1.6em;
                             margin: 0 0 28px 0;
                             max-width: 480px;
-                        ">We've received your details and a local GVM installer will be in touch within 24 hours.</p>
+                        ">Certified GVM installers in {{postcode}} are ready to help, but we need a few more details to connect you.</p>
                     </td>
                 </tr>
             </tbody>
@@ -302,87 +257,48 @@
                 <tr>
                     <td style="font-size: 16px; line-height: 1.7em; color: #1A1348;">
                         <p style="margin: 0 0 16px 0;">Hi <strong>{{first_name}}</strong>,</p>
-                        <p style="margin: 0;">Thank you for requesting a quote through GVM Upgrades Australia.</p>
+                        <p style="margin: 0 0 16px 0;">You started your GVM upgrade enquiry but haven't completed the additional details form yet.</p>
+                        <p style="margin: 0;"><strong>Without these details, we can't match you with the right installer.</strong> Complete the form now to get:</p>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <!-- INFO CARDS -->
-        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 32px;">
+        <!-- BENEFITS LIST -->
+        <table width="100%" cellpadding="0" cellspacing="0" class="content-padding" style="margin-top: 24px;">
             <tbody>
                 <tr>
-                    <td class="mobile-margin" style="padding: 0 20px;">
-                        <table width="100%" cellpadding="0" cellspacing="0" style="background: #ffffff; border-radius: 16px; overflow: hidden;">
-                            <tr class="stack-row">
-                                <td class="desktop-gap" style="width: 16px; min-width: 16px; background: transparent;"></td>
-                                <!-- Your Vehicle Card -->
-                                <td class="stack-column" valign="top" style="background: #F3EBD9; border-radius: 12px; padding: 24px; width: 45%;">
-                                    <table cellpadding="0" cellspacing="0" width="100%">
+                    <td>
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td style="padding-bottom: 12px;">
+                                    <table cellpadding="0" cellspacing="0">
                                         <tr>
-                                            <td style="padding-bottom: 8px;">
-                                                <span style="display: inline-flex; align-items: center; gap: 10px;">
-                                                    <span style="
-                                                        width: 36px;
-                                                        height: 36px;
-                                                        background-color: #E7E515;
-                                                        border-radius: 8px;
-                                                        display: inline-flex;
-                                                        align-items: center;
-                                                        justify-content: center;
-                                                    ">
-                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1348" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                            <rect x="1" y="3" width="15" height="13"></rect>
-                                                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                                                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                                                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                                                        </svg>
-                                                    </span>
-                                                    <span style="font-weight: 700; font-size: 15px; color: #1A1348;">Your Vehicle</span>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{vehicle_name}}</div>
-                                                <div style="font-size: 13px; color: rgba(26, 19, 72, 0.6); margin-top: 4px;">{{upgrade_reason}}</div>
-                                            </td>
+                                            <td valign="top" style="padding-right: 10px; color: #E7E515; font-size: 18px;">✓</td>
+                                            <td style="font-size: 15px; line-height: 1.5em; color: #1A1348;">Free quotes from certified installers in your area</td>
                                         </tr>
                                     </table>
                                 </td>
-                                <td class="desktop-gap" style="width: 16px; min-width: 16px; background: transparent;"></td>
-                                <!-- Location Card -->
-                                <td class="stack-column" valign="top" style="background: #F3EBD9; border-radius: 12px; padding: 24px; width: 45%;">
-                                    <table cellpadding="0" cellspacing="0" width="100%">
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 12px;">
+                                    <table cellpadding="0" cellspacing="0">
                                         <tr>
-                                            <td style="padding-bottom: 8px;">
-                                                <span style="display: inline-flex; align-items: center; gap: 10px;">
-                                                    <span style="
-                                                        width: 36px;
-                                                        height: 36px;
-                                                        background-color: #E7E515;
-                                                        border-radius: 8px;
-                                                        display: inline-flex;
-                                                        align-items: center;
-                                                        justify-content: center;
-                                                    ">
-                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1348" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                                            <circle cx="12" cy="10" r="3"></circle>
-                                                        </svg>
-                                                    </span>
-                                                    <span style="font-weight: 700; font-size: 15px; color: #1A1348;">Your Location</span>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{postcode}}</div>
-                                                                                            </td>
+                                            <td valign="top" style="padding-right: 10px; color: #E7E515; font-size: 18px;">✓</td>
+                                            <td style="font-size: 15px; line-height: 1.5em; color: #1A1348;">Expert advice on your {{vehicle_name}} upgrade</td>
                                         </tr>
                                     </table>
                                 </td>
-                                <td class="desktop-gap" style="width: 16px; min-width: 16px; background: transparent;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td valign="top" style="padding-right: 10px; color: #E7E515; font-size: 18px;">✓</td>
+                                            <td style="font-size: 15px; line-height: 1.5em; color: #1A1348;">Competitive pricing and fast scheduling</td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                         </table>
                     </td>
@@ -395,7 +311,22 @@
             <tbody>
                 <tr>
                     <td align="center" style="padding: 0 20px;">
-                        <a href="https://www.gvmupgradesaustralia.com/additional-info?email={{contact.email}}" class="cta-button">Add Additional Details</a>
+                        <a href="https://www.gvmupgradesaustralia.com/additional-info?email={{contact.email}}" class="cta-button">Complete Your Details Now</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- URGENCY MESSAGE -->
+        <table width="100%" cellpadding="0" cellspacing="0" class="content-padding" style="margin-top: 32px;">
+            <tbody>
+                <tr>
+                    <td align="center">
+                        <div style="background-color: #FFF3CD; border-radius: 8px; padding: 16px 20px; display: inline-block;">
+                            <p style="margin: 0; font-size: 14px; color: #1A1348; font-weight: 600;">
+                                ⏰ This is your final reminder. After 48 hours, your request will be archived.
+                            </p>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -403,117 +334,88 @@
 
         <hr class="divider" />
 
-        <!-- WHAT HAPPENS NEXT -->
+        <!-- INFO CARDS -->
         <div class="content-padding" style="padding-top: 0;">
-            <h2 class="section-title">What Happens Next?</h2>
-            <p style="margin-bottom: 24px; color: rgba(26, 19, 72, 0.7); font-size: 15px; line-height: 1.6em;">Here's what to expect from your GVM upgrade journey:</p>
-
-            <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td style="padding-bottom: 20px;">
-                        <table cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td valign="top" style="padding-right: 16px;">
-                                    <span class="step-number">1</span>
-                                </td>
-                                <td>
-                                    <strong style="font-size: 15px; color: #1A1348;">Local Installer Contact</strong>
-                                    <p style="margin: 4px 0 0 0; font-size: 14px; color: rgba(26, 19, 72, 0.7); line-height: 1.5em;">A qualified GVM specialist in your area will reach out within 24 hours to discuss your requirements.</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding-bottom: 20px;">
-                        <table cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td valign="top" style="padding-right: 16px;">
-                                    <span class="step-number">2</span>
-                                </td>
-                                <td>
-                                    <strong style="font-size: 15px; color: #1A1348;">Vehicle Assessment</strong>
-                                    <p style="margin: 4px 0 0 0; font-size: 14px; color: rgba(26, 19, 72, 0.7); line-height: 1.5em;">Your installer will assess your vehicle and recommend the best GVM upgrade solution for your needs.</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <table cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td valign="top" style="padding-right: 16px;">
-                                    <span class="step-number">3</span>
-                                </td>
-                                <td>
-                                    <strong style="font-size: 15px; color: #1A1348;">Quote & Installation</strong>
-                                    <p style="margin: 4px 0 0 0; font-size: 14px; color: rgba(26, 19, 72, 0.7); line-height: 1.5em;">Receive a detailed quote and book your installation at a time that suits you.</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <hr class="divider" />
-
-        <!-- WHY GVM UPGRADES -->
-        <div class="content-padding">
-            <h2 class="section-title">Why Choose a GVM Upgrade?</h2>
-            <table width="100%" cellpadding="0" cellspacing="0" style="margin-top: 20px;">
-                <tr class="stack-row">
-                    <td class="stack-column" valign="top" style="width: 50%; padding-right: 12px; padding-bottom: 16px;">
-                        <table cellpadding="0" cellspacing="0" style="background: #ffffff; border-radius: 12px; padding: 20px; width: 100%;">
-                            <tr>
-                                <td>
-                                    <span style="
-                                        width: 40px;
-                                        height: 40px;
-                                        background-color: #E7E515;
-                                        border-radius: 10px;
-                                        display: inline-flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        margin-bottom: 12px;
-                                    ">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1348" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                                        </svg>
-                                    </span>
-                                    <h4 style="margin: 12px 0 6px 0; font-size: 15px; color: #1A1348;">Stay Legal & Compliant</h4>
-                                    <p style="margin: 0; font-size: 13px; color: rgba(26, 19, 72, 0.7); line-height: 1.5em;">Avoid fines and ensure your vehicle meets Australian regulations.</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td class="stack-column" valign="top" style="width: 50%; padding-left: 12px; padding-bottom: 16px;">
-                        <table cellpadding="0" cellspacing="0" style="background: #ffffff; border-radius: 12px; padding: 20px; width: 100%;">
-                            <tr>
-                                <td>
-                                    <span style="
-                                        width: 40px;
-                                        height: 40px;
-                                        background-color: #E7E515;
-                                        border-radius: 10px;
-                                        display: inline-flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        margin-bottom: 12px;
-                                    ">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1348" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                        </svg>
-                                    </span>
-                                    <h4 style="margin: 12px 0 6px 0; font-size: 15px; color: #1A1348;">Increased Payload</h4>
-                                    <p style="margin: 0; font-size: 13px; color: rgba(26, 19, 72, 0.7); line-height: 1.5em;">Legally carry heavier loads for work, towing, or adventure.</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+            <h2 class="section-title">Your Current Details</h2>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 16px;">
+                <tbody>
+                    <tr>
+                        <td>
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background: #ffffff; border-radius: 16px; overflow: hidden;">
+                                <tr class="stack-row">
+                                    <td class="desktop-gap" style="width: 16px; min-width: 16px; background: transparent;"></td>
+                                    <!-- Your Vehicle Card -->
+                                    <td class="stack-column" valign="top" style="background: #F3EBD9; border-radius: 12px; padding: 24px; width: 45%;">
+                                        <table cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td style="padding-bottom: 8px;">
+                                                    <span style="display: inline-flex; align-items: center; gap: 10px;">
+                                                        <span style="
+                                                            width: 36px;
+                                                            height: 36px;
+                                                            background-color: #E7E515;
+                                                            border-radius: 8px;
+                                                            display: inline-flex;
+                                                            align-items: center;
+                                                            justify-content: center;
+                                                        ">
+                                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1348" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <rect x="1" y="3" width="15" height="13"></rect>
+                                                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                                                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                                                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                                                            </svg>
+                                                        </span>
+                                                        <span style="font-weight: 700; font-size: 15px; color: #1A1348;">Your Vehicle</span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{vehicle_name}}</div>
+                                                    <div style="font-size: 13px; color: rgba(26, 19, 72, 0.6); margin-top: 4px;">{{upgrade_reason}}</div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class="desktop-gap" style="width: 16px; min-width: 16px; background: transparent;"></td>
+                                    <!-- Location Card -->
+                                    <td class="stack-column" valign="top" style="background: #F3EBD9; border-radius: 12px; padding: 24px; width: 45%;">
+                                        <table cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td style="padding-bottom: 8px;">
+                                                    <span style="display: inline-flex; align-items: center; gap: 10px;">
+                                                        <span style="
+                                                            width: 36px;
+                                                            height: 36px;
+                                                            background-color: #E7E515;
+                                                            border-radius: 8px;
+                                                            display: inline-flex;
+                                                            align-items: center;
+                                                            justify-content: center;
+                                                        ">
+                                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1348" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                                                <circle cx="12" cy="10" r="3"></circle>
+                                                            </svg>
+                                                        </span>
+                                                        <span style="font-weight: 700; font-size: 15px; color: #1A1348;">Your Location</span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div style="font-size: 18px; font-weight: 600; color: #1A1348; margin-top: 8px;">{{postcode}}</div>
+                                                                                                    </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class="desktop-gap" style="width: 16px; min-width: 16px; background: transparent;"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
 

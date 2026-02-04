@@ -1,0 +1,14 @@
+# robots.txt for GVM Upgrades Australia
+# https://gvmupgradesaustralia.com.au
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://gvmupgradesaustralia.com.au/sitemap.xml
+
+# Disallow utility pages from indexing
+Disallow: /thanks.html
+Disallow: /thanks-additional.html
+Disallow: /public/email-preview.html
+Disallow: /public/email-template.html

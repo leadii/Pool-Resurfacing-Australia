@@ -1101,17 +1101,28 @@
         function validateEmail() {
             const email = emailInput.value.trim();
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const disposableDomains = [
+                'test.com', 'example.com', 'tempmail.com', 'throwaway.com', 'mailinator.com',
+                'guerrillamail.com', 'sharklasers.com', 'yopmail.com', '10minutemail.com'
+            ];
+            const emailDomain = email.split('@')[1]?.toLowerCase();
 
-            if (emailRegex.test(email)) {
-                emailContinue.disabled = false;
-                emailInput.classList.remove('error');
-                emailError.classList.remove('show');
-            } else {
+            if (!emailRegex.test(email)) {
                 emailContinue.disabled = true;
                 if (email.length > 0) {
                     emailInput.classList.add('error');
+                    emailError.textContent = 'Please enter a valid email address';
                     emailError.classList.add('show');
                 }
+            } else if (disposableDomains.includes(emailDomain)) {
+                emailContinue.disabled = true;
+                emailInput.classList.add('error');
+                emailError.textContent = 'Please use a valid personal or business email address';
+                emailError.classList.add('show');
+            } else {
+                emailContinue.disabled = false;
+                emailInput.classList.remove('error');
+                emailError.classList.remove('show');
             }
         }
 

@@ -506,6 +506,43 @@
             border-color: #dc3545;
         }
 
+        /* Year Input */
+        .year-input-wrapper {
+            margin-top: 1rem;
+        }
+
+        .year-input-wrapper input[type="number"] {
+            width: 100%;
+            max-width: 200px;
+            padding: 1rem 1.25rem;
+            font-size: 1.25rem;
+            border: 1px solid rgba(26, 19, 72, 0.08);
+            border-radius: 12px;
+            background: var(--white);
+            color: var(--navy);
+            font-family: inherit;
+            transition: all 0.3s ease;
+            -moz-appearance: textfield;
+            text-align: center;
+            letter-spacing: 0.1em;
+        }
+
+        .year-input-wrapper input[type="number"]::-webkit-outer-spin-button,
+        .year-input-wrapper input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .year-input-wrapper input[type="number"]:focus {
+            outline: none;
+            border-color: var(--navy);
+            box-shadow: 0 0 0 4px rgba(26, 19, 72, 0.1);
+        }
+
+        .year-input-wrapper input[type="number"].error {
+            border-color: #dc3545;
+        }
+
         .error-message {
             display: none;
             color: #dc3545;
@@ -658,6 +695,82 @@
             font-size: 0.75rem;
         }
 
+        /* Tooltip */
+        .tooltip-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tooltip-icon {
+            width: 18px;
+            height: 18px;
+            background: rgba(26, 19, 72, 0.1);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: help;
+            flex-shrink: 0;
+        }
+
+        .tooltip-icon svg {
+            width: 12px;
+            height: 12px;
+            color: var(--navy);
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: calc(100% + 8px);
+            background: var(--navy);
+            color: var(--white);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            font-family: 'Arial', sans-serif;
+            width: 280px;
+            text-align: center;
+            z-index: 100;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            line-height: 1.4;
+        }
+
+        .tooltip-text::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--navy);
+        }
+
+        .tooltip-icon:hover + .tooltip-text,
+        .tooltip-icon:focus + .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .tooltip-text {
+                width: 220px;
+                left: 0;
+                transform: none;
+            }
+
+            .tooltip-text::after {
+                left: 20px;
+                transform: none;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             .form-container {
@@ -765,13 +878,12 @@
 
             <!-- Progress Header -->
             <div class="progress-header">
-                <div class="step-indicator">Step <span id="currentStep">1</span> of 5</div>
+                <div class="step-indicator">Step <span id="currentStep">1</span> of 4</div>
                 <div class="progress-dots">
                     <div class="progress-dot active" data-step="1"></div>
                     <div class="progress-dot" data-step="2"></div>
                     <div class="progress-dot" data-step="3"></div>
                     <div class="progress-dot" data-step="4"></div>
-                    <div class="progress-dot" data-step="5"></div>
                 </div>
             </div>
 
@@ -802,40 +914,20 @@
 
                 <!-- Step 2: Vehicle Age -->
                 <div class="question-step" data-step="2">
-                    <span class="question-label">
-                        What's your vehicle's age and registration status?
+                    <span class="question-label tooltip-wrapper">
+                        What year was your car manufactured?
+                        <span class="tooltip-icon" tabindex="0">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                        </span>
+                        <span class="tooltip-text">The year you bought your vehicle is not necessarily the year it was manufactured. Check your registration papers for the model year.</span>
                     </span>
-                    <div class="radio-options">
-                        <label class="radio-option">
-                            <input type="radio" name="vehicle_age" value="pre-registration" required>
-                            <span class="radio-custom"></span>
-                            <span class="radio-text">Pre-registration (not yet registered)</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="vehicle_age" value="less-than-1-year">
-                            <span class="radio-custom"></span>
-                            <span class="radio-text">Less than 1 year old</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="vehicle_age" value="1-3-years">
-                            <span class="radio-custom"></span>
-                            <span class="radio-text">1-3 years old</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="vehicle_age" value="3-5-years">
-                            <span class="radio-custom"></span>
-                            <span class="radio-text">3-5 years old</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="vehicle_age" value="5-10-years">
-                            <span class="radio-custom"></span>
-                            <span class="radio-text">5-10 years old</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="vehicle_age" value="10-plus-years">
-                            <span class="radio-custom"></span>
-                            <span class="radio-text">10+ years old</span>
-                        </label>
+                    <div class="year-input-wrapper">
+                        <input type="number" id="manufacture_year" name="manufacture_year" placeholder="e.g. 2020" min="1900" max="2026" required>
+                        <span class="error-message" id="error-year">Please enter a valid year (1900 - present)</span>
                     </div>
                     <div class="nav-buttons">
                         <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
@@ -851,53 +943,8 @@
                     </div>
                 </div>
 
-                <!-- Step 3: GVM Details -->
+                <!-- Step 3: Budget Range -->
                 <div class="question-step" data-step="3">
-                    <span class="question-label">
-                        Do you know your current GVM and desired increase?
-                    </span>
-                    <div class="radio-options">
-                        <label class="radio-option">
-                            <input type="radio" name="knows_gvm" value="yes" id="knows_gvm_yes">
-                            <span class="radio-custom"></span>
-                            <span class="radio-text">Yes</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="knows_gvm" value="not-sure" id="knows_gvm_no">
-                            <span class="radio-custom"></span>
-                            <span class="radio-text">Not sure</span>
-                        </label>
-                    </div>
-                    <div class="gvm-inputs-wrapper" id="gvmInputsWrapper" style="display: none;">
-                        <div class="number-inputs">
-                            <div class="number-input-group">
-                                <label for="current_gvm">Current GVM:</label>
-                                <input type="number" id="current_gvm" name="current_gvm" placeholder="e.g. 3000" min="0" max="10000">
-                                <span class="unit">kg</span>
-                            </div>
-                            <div class="number-input-group">
-                                <label for="desired_increase">Desired increase:</label>
-                                <input type="number" id="desired_increase" name="desired_increase" placeholder="e.g. 500" min="0" max="2000">
-                                <span class="unit">kg</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nav-buttons">
-                        <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-                        <button type="button" class="btn btn-primary" id="step3Continue" onclick="nextStep()" disabled>Continue</button>
-                    </div>
-                    <div class="back-link-wrapper">
-                        <a href="/" class="back-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7"/>
-                            </svg>
-                            Back to Home
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Step 4: Budget Range -->
-                <div class="question-step" data-step="4">
                     <span class="question-label">
                         What's your budget range for the GVM upgrade?
                     </span>
@@ -930,7 +977,7 @@
                     </div>
                     <div class="nav-buttons">
                         <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-                        <button type="button" class="btn btn-primary" id="step4Continue" onclick="nextStep()" disabled>Continue</button>
+                        <button type="button" class="btn btn-primary" id="step3Continue" onclick="nextStep()" disabled>Continue</button>
                     </div>
                     <div class="back-link-wrapper">
                         <a href="/" class="back-link">
@@ -942,8 +989,8 @@
                     </div>
                 </div>
 
-                <!-- Step 5: Additional Services -->
-                <div class="question-step" data-step="5">
+                <!-- Step 4: Additional Services -->
+                <div class="question-step" data-step="4">
                     <span class="question-label">
                         Are you interested in any additional services?
                     </span>
@@ -1042,7 +1089,7 @@
 
     <script>
         let currentStep = 1;
-        const totalSteps = 5;
+        const totalSteps = 4;
 
         // Auto-fill email from URL parameter
         document.addEventListener('DOMContentLoaded', function() {
@@ -1133,64 +1180,56 @@
             }
         });
 
-        // Step 2: Vehicle age validation
-        const vehicleAgeRadios = document.querySelectorAll('input[name="vehicle_age"]');
+        // Step 2: Manufacture year validation
+        const yearInput = document.getElementById('manufacture_year');
         const step2Continue = document.getElementById('step2Continue');
+        const yearError = document.getElementById('error-year');
 
-        vehicleAgeRadios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                step2Continue.disabled = false;
-            });
-        });
+        function validateYear() {
+            const year = parseInt(yearInput.value);
+            const currentYear = new Date().getFullYear();
 
-        // Step 3: GVM details validation
-        const knowsGvmRadios = document.querySelectorAll('input[name="knows_gvm"]');
-        const gvmInputsWrapper = document.getElementById('gvmInputsWrapper');
-        const currentGvmInput = document.getElementById('current_gvm');
-        const desiredIncreaseInput = document.getElementById('desired_increase');
-        const step3Continue = document.getElementById('step3Continue');
-
-        function validateStep3() {
-            const knowsGvmYes = document.getElementById('knows_gvm_yes').checked;
-            const knowsGvmNo = document.getElementById('knows_gvm_no').checked;
-
-            if (knowsGvmNo) {
-                step3Continue.disabled = false;
-            } else if (knowsGvmYes) {
-                const hasGvmValues = currentGvmInput.value && desiredIncreaseInput.value;
-                step3Continue.disabled = !hasGvmValues;
-            } else {
-                step3Continue.disabled = true;
+            if (!yearInput.value || yearInput.value.length !== 4) {
+                step2Continue.disabled = true;
+                if (yearInput.value.length > 0) {
+                    yearInput.classList.add('error');
+                    yearError.classList.add('show');
+                }
+                return false;
             }
+
+            if (year < 1900 || year > currentYear) {
+                step2Continue.disabled = true;
+                yearInput.classList.add('error');
+                yearError.textContent = `Please enter a valid year (1900 - ${currentYear})`;
+                yearError.classList.add('show');
+                return false;
+            }
+
+            step2Continue.disabled = false;
+            yearInput.classList.remove('error');
+            yearError.classList.remove('show');
+            return true;
         }
 
-        knowsGvmRadios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                if (this.value === 'yes') {
-                    gvmInputsWrapper.style.display = 'block';
-                } else {
-                    gvmInputsWrapper.style.display = 'none';
-                    currentGvmInput.value = '';
-                    desiredIncreaseInput.value = '';
-                }
-                validateStep3();
-            });
+        yearInput.addEventListener('input', validateYear);
+        yearInput.addEventListener('blur', function() {
+            if (this.value.length > 0) {
+                validateYear();
+            }
         });
 
-        currentGvmInput.addEventListener('input', validateStep3);
-        desiredIncreaseInput.addEventListener('input', validateStep3);
-
-        // Step 4: Budget validation
+        // Step 3: Budget validation
         const budgetRadios = document.querySelectorAll('input[name="budget"]');
-        const step4Continue = document.getElementById('step4Continue');
+        const step3Continue = document.getElementById('step3Continue');
 
         budgetRadios.forEach(radio => {
             radio.addEventListener('change', function() {
-                step4Continue.disabled = false;
+                step3Continue.disabled = false;
             });
         });
 
-        // Step 5: Additional services validation
+        // Step 4: Additional services validation
         const serviceCheckboxes = document.querySelectorAll('input[name="additional_services"]');
         const submitBtn = document.querySelector('button[type="submit"]');
         submitBtn.disabled = true;
@@ -1209,10 +1248,8 @@
             // Validate all required fields before submission
             const email = document.getElementById('email')?.value?.trim();
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const vehicleAge = document.querySelector('input[name="vehicle_age"]:checked');
-            const knowsGvm = document.querySelector('input[name="knows_gvm"]:checked');
-            const currentGvmVal = document.getElementById('current_gvm')?.value;
-            const desiredIncreaseVal = document.getElementById('desired_increase')?.value;
+            const manufactureYear = document.getElementById('manufacture_year')?.value;
+            const currentYear = new Date().getFullYear();
             const budget = document.querySelector('input[name="budget"]:checked');
             const services = document.querySelectorAll('input[name="additional_services"]:checked');
 
@@ -1221,17 +1258,8 @@
                 showToast('Please enter a valid email address.');
                 return;
             }
-            if (!vehicleAge) {
-                showToast('Please select your vehicle\'s age and registration status.');
-                return;
-            }
-            if (!knowsGvm) {
-                showToast('Please answer whether you know your GVM details.');
-                return;
-            }
-            // If user said "yes" they know GVM, check that they entered values
-            if (knowsGvm.value === 'yes' && (!currentGvmVal || !desiredIncreaseVal)) {
-                showToast('Please enter your current GVM and desired increase.');
+            if (!manufactureYear || manufactureYear.length !== 4 || parseInt(manufactureYear) < 1900 || parseInt(manufactureYear) > currentYear) {
+                showToast('Please enter a valid manufacture year.');
                 return;
             }
             if (!budget) {
@@ -1249,13 +1277,9 @@
             submitBtn.innerHTML = 'Submitting...';
 
             // Collect form data
-            const knowsGvmValue = document.querySelector('input[name="knows_gvm"]:checked')?.value;
             const formData = {
                 email: document.getElementById('email')?.value?.trim(),
-                vehicle_age: document.querySelector('input[name="vehicle_age"]:checked')?.value,
-                knows_gvm: knowsGvmValue,
-                current_gvm: knowsGvmValue === 'yes' ? document.getElementById('current_gvm')?.value || null : null,
-                desired_increase: knowsGvmValue === 'yes' ? document.getElementById('desired_increase')?.value || null : null,
+                manufacture_year: document.getElementById('manufacture_year')?.value,
                 budget: document.querySelector('input[name="budget"]:checked')?.value,
                 additional_services: Array.from(document.querySelectorAll('input[name="additional_services"]:checked')).map(cb => cb.value)
             };

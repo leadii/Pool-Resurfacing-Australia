@@ -1,0 +1,67 @@
+{
+  "Nissan": {
+    "Patrol Y62": { "yearStart": 2010, "yearEnd": null },
+    "Patrol Y61 GU": { "yearStart": 2007, "yearEnd": null },
+    "Navara NP300": { "yearStart": 2015, "yearEnd": null }
+  },
+  "Toyota": {
+    "LandCruiser 300 Series": { "yearStart": 2021, "yearEnd": null },
+    "LandCruiser 200 Series": { "yearStart": 2007, "yearEnd": 2021 },
+    "LandCruiser 79 Series": { "yearStart": 2007, "yearEnd": 2022 },
+    "LandCruiser J7 79 Series": { "yearStart": 2022, "yearEnd": null },
+    "LandCruiser 78 Series Troop": { "yearStart": 2007, "yearEnd": 2022 },
+    "LandCruiser J7 78 Series": { "yearStart": 2022, "yearEnd": null },
+    "LandCruiser 76 Series Wagon": { "yearStart": 2007, "yearEnd": 2022 },
+    "Prado 250 Series": { "yearStart": 2024, "yearEnd": null },
+    "Prado 150 Series": { "yearStart": 2009, "yearEnd": 2024 },
+    "Hilux N80": { "yearStart": 2015, "yearEnd": null },
+    "Hilux N70": { "yearStart": 2005, "yearEnd": 2015 },
+    "Tundra XK70": { "yearStart": 2022, "yearEnd": null }
+  },
+  "Ford": {
+    "Ranger Next Gen": { "yearStart": 2022, "yearEnd": null },
+    "Ranger PX3": { "yearStart": 2018, "yearEnd": 2022 },
+    "Ranger PX1/PX2": { "yearStart": 2012, "yearEnd": 2018 },
+    "Everest Next Gen": { "yearStart": 2022, "yearEnd": null },
+    "Everest UA": { "yearStart": 2018, "yearEnd": 2022 },
+    "F-150": { "yearStart": 2024, "yearEnd": null },
+    "F-250/F-350": { "yearStart": 2017, "yearEnd": 2024 }
+  },
+  "Mitsubishi": {
+    "Triton MV": { "yearStart": 2024, "yearEnd": null },
+    "Pajero Sport QE": { "yearStart": 2015, "yearEnd": null }
+  },
+  "Isuzu": {
+    "D-MAX RG": { "yearStart": 2020, "yearEnd": null },
+    "D-MAX": { "yearStart": 2012, "yearEnd": 2020 },
+    "MU-X": { "yearStart": 2021, "yearEnd": null }
+  },
+  "Volkswagen": {
+    "Amarok": { "yearStart": 2023, "yearEnd": null }
+  },
+  "Jeep": {
+    "Gladiator": { "yearStart": 2020, "yearEnd": null },
+    "Wrangler": { "yearStart": 2016, "yearEnd": null },
+    "Rubicon": { "yearStart": 2016, "yearEnd": null }
+  },
+  "Mazda": {
+    "BT-50": { "yearStart": 2012, "yearEnd": null }
+  },
+  "Chevrolet": {
+    "Silverado 1500": { "yearStart": 2020, "yearEnd": null },
+    "Silverado 2500HD": { "yearStart": 2016, "yearEnd": null }
+  },
+  "Ineos": {
+    "Grenadier Wagon": { "yearStart": 2023, "yearEnd": null },
+    "Grenadier Quartermaster": { "yearStart": 2024, "yearEnd": null }
+  },
+  "Ram": {
+    "1500 DT": { "yearStart": 2021, "yearEnd": null },
+    "1500 DS": { "yearStart": 2018, "yearEnd": 2021 },
+    "2500": { "yearStart": 2016, "yearEnd": null }
+  },
+  "Suzuki": {
+    "Jimny (3 door)": { "yearStart": 2018, "yearEnd": null },
+    "Jimny (5 door)": { "yearStart": 2024, "yearEnd": null }
+  }
+}

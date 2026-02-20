@@ -506,51 +506,59 @@
             line-height: 1.4;
         }
 
-        /* Vehicle Confirmation */
-        .vehicle-confirmation {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.25rem;
-            background: rgba(231, 229, 21, 0.1);
-            border: 2px solid var(--yellow);
-            border-radius: 12px;
-            margin-bottom: 1rem;
+        /* Form Row */
+        .form-row {
+            margin-bottom: 16px;
         }
 
-        .vehicle-confirmation img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
-
-        .vehicle-confirmation-text {
-            flex: 1;
-        }
-
-        .vehicle-confirmation-text strong {
+        .input-label {
             display: block;
+            font-size: 14px;
+            font-weight: 600;
             color: var(--navy);
-            font-size: 1.1rem;
+            margin-bottom: 8px;
         }
 
-        .vehicle-confirmation-text span {
-            font-size: 0.85rem;
-            color: rgba(26, 19, 72, 0.6);
-        }
-
-        .change-vehicle {
-            font-size: 0.85rem;
+        .text-input {
+            width: 100%;
+            padding: 18px 20px;
+            font-size: 16px;
+            font-family: 'Arial', sans-serif;
+            border: 2px solid rgba(26, 19, 72, 0.15);
+            border-radius: 12px;
+            background: var(--white);
             color: var(--navy);
-            text-decoration: underline;
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-family: inherit;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            box-sizing: border-box;
         }
 
-        .change-vehicle:hover {
-            color: rgba(26, 19, 72, 0.7);
+        .text-input:focus {
+            outline: none;
+            border-color: var(--navy);
+            box-shadow: 0 0 0 4px rgba(26, 19, 72, 0.1);
+        }
+
+        .text-input.error {
+            border-color: #dc3545;
+        }
+
+        .text-input.error:focus {
+            box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.15);
+        }
+
+        .text-input::placeholder {
+            color: rgba(26, 19, 72, 0.4);
+        }
+
+        /* Unsupported vehicle message */
+        .unsupported-message {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 16px;
         }
 
         /* Custom Dropdown Styles */
@@ -558,11 +566,6 @@
             position: relative;
             width: 100%;
             z-index: 100;
-            display: none;
-        }
-
-        .custom-select.show {
-            display: block;
         }
 
         .custom-select.open {
@@ -756,29 +759,6 @@
             border-color: rgba(26, 19, 72, 0.3);
         }
 
-        /* Text Input Styles */
-        .text-input {
-            width: 100%;
-            padding: 18px 20px;
-            font-size: 16px;
-            font-family: 'Arial', sans-serif;
-            border: 2px solid var(--navy-light);
-            border-radius: 12px;
-            background: var(--white);
-            color: var(--navy);
-            transition: all 0.3s ease;
-        }
-
-        .text-input:focus {
-            outline: none;
-            border-color: var(--navy);
-            box-shadow: 0 0 0 4px rgba(26, 19, 72, 0.1);
-        }
-
-        .text-input::placeholder {
-            color: rgba(26, 19, 72, 0.4);
-        }
-
         .input-group {
             display: flex;
             flex-direction: column;
@@ -812,14 +792,6 @@
 
         .error-message.show {
             display: block;
-        }
-
-        .text-input.error {
-            border-color: #dc3545;
-        }
-
-        .text-input.error:focus {
-            box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.15);
         }
 
         /* Button Styles */
@@ -1581,81 +1553,53 @@
                 </div>
 
                 <form id="gvmQuiz">
-                    <!-- Step 1: Vehicle Confirmation -->
+                    <!-- Step 1: Vehicle Selection -->
                     <div class="step active" data-step="1">
-                        <label class="question-label">Confirm your vehicle</label>
+                        <label class="question-label">What vehicle do you need a GVM upgrade for?</label>
 
-                        <div class="vehicle-confirmation" id="vehicleConfirmation">
-                            <img src="https://www.carlogos.org/car-logos/nissan-logo-2020-black-show.png" alt="Nissan">
-                            <div class="vehicle-confirmation-text">
-                                <strong>Nissan Patrol</strong>
-                                <span>Y62 Series (2010 onwards)</span>
-                            </div>
-                            <button type="button" class="change-vehicle" onclick="showVehicleSelect()">Change</button>
-                        </div>
-
-                        <div class="custom-select" id="vehicleSelect">
-                            <select name="vehicle" id="vehicle" required>
-                                <option value="">Select your vehicle</option>
-                                <option value="Nissan Patrol" selected>Nissan Patrol</option>
-                                <option value="Nissan Navara">Nissan Navara</option>
-                                <option value="Toyota HiLux">Toyota HiLux</option>
-                                <option value="Dodge Ram">Dodge Ram</option>
-                                <option value="Ford Ranger">Ford Ranger</option>
-                                <option value="Ford Everest">Ford Everest</option>
-                                <option value="Isuzu D-Max">Isuzu D-Max</option>
-                                <option value="Mitsubishi Triton">Mitsubishi Triton</option>
-                                <option value="Toyota Prado">Toyota Prado</option>
-                                <option value="Toyota LandCruiser">Toyota LandCruiser</option>
-                            </select>
-                            <div class="custom-select-trigger">
-                                <img src="https://www.carlogos.org/car-logos/nissan-logo-2020-black-show.png" alt="Nissan">
-                                <span>Nissan Patrol</span>
-                            </div>
-                            <div class="custom-options">
-                                <div class="custom-option selected" data-value="Nissan Patrol">
-                                    <img src="https://www.carlogos.org/car-logos/nissan-logo-2020-black-show.png" alt="Nissan">
-                                    <span>Nissan Patrol</span>
+                        <!-- Make Selection -->
+                        <div class="form-row">
+                            <label class="input-label">Make</label>
+                            <div class="custom-select" id="makeSelect">
+                                <select name="make" id="make" required>
+                                    <option value="">Select make</option>
+                                </select>
+                                <div class="custom-select-trigger">
+                                    <span class="placeholder">Select make</span>
                                 </div>
-                                <div class="custom-option" data-value="Nissan Navara">
-                                    <img src="https://www.carlogos.org/car-logos/nissan-logo-2020-black-show.png" alt="Nissan">
-                                    <span>Nissan Navara</span>
-                                </div>
-                                <div class="custom-option" data-value="Toyota HiLux">
-                                    <img src="https://www.carlogos.org/car-logos/toyota-logo-2020.png" alt="Toyota">
-                                    <span>Toyota HiLux</span>
-                                </div>
-                                <div class="custom-option" data-value="Toyota LandCruiser">
-                                    <img src="https://www.carlogos.org/car-logos/toyota-logo-2020.png" alt="Toyota">
-                                    <span>Toyota LandCruiser</span>
-                                </div>
-                                <div class="custom-option" data-value="Dodge Ram">
-                                    <img src="https://www.carlogos.org/car-logos/ram-logo.png" alt="Ram">
-                                    <span>Dodge Ram</span>
-                                </div>
-                                <div class="custom-option" data-value="Ford Ranger">
-                                    <img src="https://www.carlogos.org/car-logos/ford-logo-2017.png" alt="Ford">
-                                    <span>Ford Ranger</span>
-                                </div>
-                                <div class="custom-option" data-value="Ford Everest">
-                                    <img src="https://www.carlogos.org/car-logos/ford-logo-2017.png" alt="Ford">
-                                    <span>Ford Everest</span>
-                                </div>
-                                <div class="custom-option" data-value="Isuzu D-Max">
-                                    <img src="https://www.carlogos.org/car-logos/isuzu-logo.png" alt="Isuzu">
-                                    <span>Isuzu D-Max</span>
-                                </div>
-                                <div class="custom-option" data-value="Mitsubishi Triton">
-                                    <img src="https://www.carlogos.org/car-logos/mitsubishi-logo.png" alt="Mitsubishi">
-                                    <span>Mitsubishi Triton</span>
-                                </div>
-                                <div class="custom-option" data-value="Toyota Prado">
-                                    <img src="https://www.carlogos.org/car-logos/toyota-logo-2020.png" alt="Toyota">
-                                    <span>Toyota Prado</span>
+                                <div class="custom-options" id="makeOptions">
+                                    <!-- Populated by JS -->
                                 </div>
                             </div>
                         </div>
-                        <div class="error-message" id="error-1">Please select your vehicle</div>
+
+                        <!-- Model Selection (hidden until make selected) -->
+                        <div class="form-row" id="modelRow" style="display: none;">
+                            <label class="input-label">Model</label>
+                            <div class="custom-select" id="modelSelect">
+                                <select name="model" id="model" required>
+                                    <option value="">Select model</option>
+                                </select>
+                                <div class="custom-select-trigger">
+                                    <span class="placeholder">Select model</span>
+                                </div>
+                                <div class="custom-options" id="modelOptions">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Year Input (hidden until model selected) -->
+                        <div class="form-row" id="yearRow" style="display: none;">
+                            <label class="input-label">Year</label>
+                            <input type="text" id="year" name="year" class="text-input"
+                                   placeholder="e.g., 2022" maxlength="4" inputmode="numeric" required>
+                        </div>
+
+                        <div class="error-message" id="error-1">Please complete all vehicle details</div>
+                        <div class="unsupported-message" id="unsupported-vehicle" style="display: none;">
+                            Unfortunately, at this time GVM Upgrades Australia does not currently offer GVM upgrades for your specific vehicle.
+                        </div>
                         <div class="button-group">
                             <button type="button" class="btn btn-primary" onclick="nextStep(1)">
                                 Continue
@@ -2054,19 +1998,18 @@
             updateProgress();
         }
 
-        function showVehicleSelect() {
-            document.getElementById('vehicleConfirmation').style.display = 'none';
-            document.getElementById('vehicleSelect').classList.add('show');
-        }
-
         function validateStep(step) {
             const errorEl = document.getElementById(`error-${step}`);
             errorEl.classList.remove('show');
 
             switch(step) {
                 case 1:
-                    const vehicle = document.getElementById('vehicle').value;
-                    if (!vehicle) {
+                    const make = document.getElementById('make').value;
+                    const model = document.getElementById('model').value;
+                    const year = document.getElementById('year').value;
+                    const unsupportedVisible = document.getElementById('unsupported-vehicle').style.display !== 'none';
+
+                    if (!make || !model || !year || unsupportedVisible) {
                         errorEl.classList.add('show');
                         return false;
                     }
@@ -2181,7 +2124,9 @@
             submitBtn.innerHTML = 'Submitting';
 
             const formData = {
-                vehicle: document.getElementById('vehicle').value,
+                make: document.getElementById('make').value,
+                model: document.getElementById('model').value,
+                year: document.getElementById('year').value,
                 reason: document.querySelector('input[name="reason"]:checked')?.value,
                 timeline: document.querySelector('input[name="timeline"]:checked')?.value,
                 postcode: document.getElementById('postcode').value,
@@ -2218,71 +2163,322 @@
             this.value = this.value.replace(/[^0-9]/g, '');
         });
 
-        // Custom Select Dropdown
-        const customSelect = document.getElementById('vehicleSelect');
-        const trigger = customSelect.querySelector('.custom-select-trigger');
-        const options = customSelect.querySelectorAll('.custom-option');
-        const hiddenSelect = customSelect.querySelector('select');
+        // Vehicle Data and Custom Select Dropdowns
+        let vehicleData = {};
+        const preselectedMake = 'Nissan'; // Pre-select Nissan for this page
 
-        const vehicleLogos = {
-            'Nissan Patrol': 'https://www.carlogos.org/car-logos/nissan-logo-2020-black-show.png',
-            'Nissan Navara': 'https://www.carlogos.org/car-logos/nissan-logo-2020-black-show.png',
-            'Toyota HiLux': 'https://www.carlogos.org/car-logos/toyota-logo-2020.png',
-            'Toyota LandCruiser': 'https://www.carlogos.org/car-logos/toyota-logo-2020.png',
-            'Dodge Ram': 'https://www.carlogos.org/car-logos/ram-logo.png',
-            'Ford Ranger': 'https://www.carlogos.org/car-logos/ford-logo-2017.png',
-            'Ford Everest': 'https://www.carlogos.org/car-logos/ford-logo-2017.png',
-            'Isuzu D-Max': 'https://www.carlogos.org/car-logos/isuzu-logo.png',
-            'Mitsubishi Triton': 'https://www.carlogos.org/car-logos/mitsubishi-logo.png',
-            'Toyota Prado': 'https://www.carlogos.org/car-logos/toyota-logo-2020.png'
+        // Brand logos for make dropdown
+        const makeLogos = {
+            'Nissan': 'https://www.carlogos.org/car-logos/nissan-logo-2020-black-show.png',
+            'Toyota': 'https://www.carlogos.org/car-logos/toyota-logo-2020.png',
+            'Ford': 'https://www.carlogos.org/car-logos/ford-logo-2017.png',
+            'Mitsubishi': 'https://www.carlogos.org/car-logos/mitsubishi-logo.png',
+            'Isuzu': 'https://www.carlogos.org/car-logos/isuzu-logo.png',
+            'Volkswagen': 'https://www.carlogos.org/car-logos/volkswagen-logo.png',
+            'Jeep': 'https://www.carlogos.org/car-logos/jeep-logo.png',
+            'Mazda': 'https://www.carlogos.org/car-logos/mazda-logo.png',
+            'Chevrolet': 'https://www.carlogos.org/car-logos/chevrolet-logo.png',
+            'Ineos': 'https://static.cdnlogo.com/logos/i/99/ineos.svg',
+            'Ram': 'https://www.carlogos.org/car-logos/ram-logo.png',
+            'Suzuki': 'https://www.carlogos.org/car-logos/suzuki-logo.png'
         };
 
-        trigger.addEventListener('click', function(e) {
-            e.stopPropagation();
-            customSelect.classList.toggle('open');
+        // Custom order for makes
+        const makeOrder = ['Nissan', 'Toyota', 'Ford', 'Mitsubishi', 'Isuzu', 'Volkswagen', 'Jeep', 'Mazda', 'Chevrolet', 'Ineos', 'Ram', 'Suzuki'];
 
-            const step1 = document.querySelector('.quiz-body .step[data-step="1"]');
-            if (customSelect.classList.contains('open')) {
-                step1.style.minHeight = '480px';
-            } else {
-                step1.style.minHeight = 'auto';
+        // Load vehicle data on page load
+        async function loadVehicleData() {
+            try {
+                const response = await fetch('/vehicle-data.json');
+                vehicleData = await response.json();
+                populateMakeDropdown();
+            } catch (error) {
+                console.error('Failed to load vehicle data:', error);
             }
-        });
+        }
 
-        options.forEach(option => {
-            option.addEventListener('click', function() {
-                const value = this.dataset.value;
-                const text = this.querySelector('span:last-child').textContent;
+        // Populate make dropdown
+        function populateMakeDropdown() {
+            const makeSelect = document.getElementById('make');
+            const makeOptions = document.getElementById('makeOptions');
 
-                hiddenSelect.value = value;
+            // Use custom order, filtering to only makes that exist in data
+            const makes = makeOrder.filter(make => vehicleData[make]);
 
-                if (vehicleLogos[value]) {
-                    trigger.innerHTML = `<img src="${vehicleLogos[value]}" alt="${text}"><span>${text}</span>`;
+            makes.forEach(make => {
+                // Add to hidden select
+                const option = document.createElement('option');
+                option.value = make;
+                option.textContent = make;
+                if (make === preselectedMake) option.selected = true;
+                makeSelect.appendChild(option);
+
+                // Add to custom options with logo
+                const customOption = document.createElement('div');
+                customOption.className = 'custom-option';
+                if (make === preselectedMake) customOption.classList.add('selected');
+                customOption.dataset.value = make;
+                const logoUrl = makeLogos[make] || '';
+                if (logoUrl) {
+                    customOption.innerHTML = `<img src="${logoUrl}" alt="${make}"><span>${make}</span>`;
                 } else {
-                    trigger.innerHTML = `<span class="no-logo">?</span><span>${text}</span>`;
+                    customOption.innerHTML = `<span>${make}</span>`;
                 }
-
-                options.forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-
-                customSelect.classList.remove('open');
-                document.querySelector('.quiz-body .step[data-step="1"]').style.minHeight = 'auto';
+                makeOptions.appendChild(customOption);
             });
+
+            // Initialize custom select
+            initCustomSelect('makeSelect');
+
+            // If preselected make, update trigger and show model dropdown
+            if (preselectedMake && vehicleData[preselectedMake]) {
+                const makeTrigger = document.querySelector('#makeSelect .custom-select-trigger');
+                const logoUrl = makeLogos[preselectedMake] || '';
+                if (logoUrl) {
+                    makeTrigger.innerHTML = `<img src="${logoUrl}" alt="${preselectedMake}"><span>${preselectedMake}</span>`;
+                } else {
+                    makeTrigger.innerHTML = `<span>${preselectedMake}</span>`;
+                }
+                // Trigger model population
+                document.getElementById('make').dispatchEvent(new Event('change'));
+            }
+        }
+
+        // Initialize custom select functionality
+        function initCustomSelect(selectId) {
+            const customSelect = document.getElementById(selectId);
+            const trigger = customSelect.querySelector('.custom-select-trigger');
+            const options = customSelect.querySelectorAll('.custom-option');
+            const hiddenSelect = customSelect.querySelector('select');
+
+            trigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                // Close other dropdowns
+                document.querySelectorAll('.custom-select.open').forEach(cs => {
+                    if (cs.id !== selectId) cs.classList.remove('open');
+                });
+                customSelect.classList.toggle('open');
+                updateStep1Height();
+            });
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const value = this.dataset.value;
+                    const text = this.querySelector('span').textContent;
+                    const img = this.querySelector('img');
+
+                    hiddenSelect.value = value;
+                    if (img) {
+                        trigger.innerHTML = `<img src="${img.src}" alt="${text}"><span>${text}</span>`;
+                    } else {
+                        trigger.innerHTML = `<span>${text}</span>`;
+                    }
+
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+
+                    customSelect.classList.remove('open');
+                    updateStep1Height();
+
+                    // Trigger change event
+                    hiddenSelect.dispatchEvent(new Event('change'));
+                });
+            });
+        }
+
+        // Rebuild custom select after options change
+        function rebuildCustomSelect(selectId) {
+            const customSelect = document.getElementById(selectId);
+            const trigger = customSelect.querySelector('.custom-select-trigger');
+            const options = customSelect.querySelectorAll('.custom-option');
+            const hiddenSelect = customSelect.querySelector('select');
+
+            // Reset trigger
+            trigger.innerHTML = `<span class="placeholder">Select ${selectId === 'makeSelect' ? 'make' : 'model'}</span>`;
+
+            // Remove old event listeners by cloning
+            options.forEach(option => {
+                const newOption = option.cloneNode(true);
+                option.parentNode.replaceChild(newOption, option);
+            });
+
+            // Re-add event listeners
+            customSelect.querySelectorAll('.custom-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const value = this.dataset.value;
+                    const text = this.querySelector('span').textContent;
+                    const img = this.querySelector('img');
+
+                    hiddenSelect.value = value;
+                    if (img) {
+                        trigger.innerHTML = `<img src="${img.src}" alt="${text}"><span>${text}</span>`;
+                    } else {
+                        trigger.innerHTML = `<span>${text}</span>`;
+                    }
+
+                    customSelect.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+
+                    customSelect.classList.remove('open');
+                    updateStep1Height();
+
+                    // Trigger change event
+                    hiddenSelect.dispatchEvent(new Event('change'));
+                });
+            });
+        }
+
+        // Update step 1 height based on open dropdowns
+        function updateStep1Height() {
+            const step1 = document.querySelector('.quiz-body .step[data-step="1"]');
+            const hasOpenDropdown = document.querySelector('.custom-select.open');
+            step1.style.minHeight = hasOpenDropdown ? '550px' : 'auto';
+        }
+
+        // Handle make selection
+        document.getElementById('make').addEventListener('change', function() {
+            const make = this.value;
+            const modelRow = document.getElementById('modelRow');
+            const yearRow = document.getElementById('yearRow');
+            const modelSelect = document.getElementById('model');
+            const modelOptions = document.getElementById('modelOptions');
+            const modelTrigger = document.querySelector('#modelSelect .custom-select-trigger');
+
+            // Reset model and year
+            modelSelect.innerHTML = '<option value="">Select model</option>';
+            modelOptions.innerHTML = '';
+            modelTrigger.innerHTML = '<span class="placeholder">Select model</span>';
+            document.getElementById('year').value = '';
+            yearRow.style.display = 'none';
+            hideUnsupportedMessage();
+
+            if (make) {
+                // Populate models for selected make
+                const models = Object.keys(vehicleData[make]).sort();
+                models.forEach(model => {
+                    // Add to hidden select
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelSelect.appendChild(option);
+
+                    // Add to custom options
+                    const customOption = document.createElement('div');
+                    customOption.className = 'custom-option';
+                    customOption.dataset.value = model;
+                    customOption.innerHTML = `<span>${model}</span>`;
+                    modelOptions.appendChild(customOption);
+                });
+
+                modelRow.style.display = 'block';
+                rebuildCustomSelect('modelSelect');
+            } else {
+                modelRow.style.display = 'none';
+            }
         });
 
-        document.addEventListener('click', function(e) {
-            if (!customSelect.contains(e.target)) {
-                customSelect.classList.remove('open');
-                document.querySelector('.quiz-body .step[data-step="1"]').style.minHeight = 'auto';
+        // Handle model selection
+        document.getElementById('model').addEventListener('change', function() {
+            const yearRow = document.getElementById('yearRow');
+            hideUnsupportedMessage();
+            document.getElementById('year').value = '';
+
+            if (this.value) {
+                yearRow.style.display = 'block';
+            } else {
+                yearRow.style.display = 'none';
             }
+        });
+
+        // Year input validation
+        document.getElementById('year').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        document.getElementById('year').addEventListener('blur', validateYear);
+
+        function validateYear() {
+            const make = document.getElementById('make').value;
+            const model = document.getElementById('model').value;
+            const yearInput = document.getElementById('year');
+            const year = parseInt(yearInput.value);
+
+            if (!year || isNaN(year)) return;
+
+            // Basic year bounds check (1975-2027)
+            if (year < 1975 || year > 2027) {
+                showUnsupportedMessage();
+                yearInput.classList.add('error');
+                return;
+            }
+
+            const vehicleInfo = vehicleData[make]?.[model];
+            if (!vehicleInfo) return;
+
+            const yearEnd = vehicleInfo.yearEnd || 2027;
+
+            if (year < vehicleInfo.yearStart || year > yearEnd) {
+                showUnsupportedMessage();
+                yearInput.classList.add('error');
+            } else {
+                hideUnsupportedMessage();
+                yearInput.classList.remove('error');
+            }
+        }
+
+        function showUnsupportedMessage() {
+            document.getElementById('unsupported-vehicle').style.display = 'block';
+            const continueBtn = document.querySelector('.step[data-step="1"] .btn-primary');
+            if (continueBtn) {
+                continueBtn.disabled = true;
+                continueBtn.style.opacity = '0.5';
+                continueBtn.style.cursor = 'not-allowed';
+            }
+        }
+
+        function hideUnsupportedMessage() {
+            document.getElementById('unsupported-vehicle').style.display = 'none';
+            const continueBtn = document.querySelector('.step[data-step="1"] .btn-primary');
+            if (continueBtn) {
+                continueBtn.disabled = false;
+                continueBtn.style.opacity = '1';
+                continueBtn.style.cursor = 'pointer';
+            }
+        }
+
+        // Close dropdowns on click outside
+        document.addEventListener('click', function(e) {
+            document.querySelectorAll('.custom-select').forEach(customSelect => {
+                if (!customSelect.contains(e.target)) {
+                    customSelect.classList.remove('open');
+                }
+            });
+            updateStep1Height();
         });
 
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                customSelect.classList.remove('open');
-                document.querySelector('.quiz-body .step[data-step="1"]').style.minHeight = 'auto';
+                document.querySelectorAll('.custom-select').forEach(customSelect => {
+                    customSelect.classList.remove('open');
+                });
+                updateStep1Height();
             }
         });
+
+        // Initialize model dropdown click handler
+        document.querySelector('#modelSelect .custom-select-trigger').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const customSelect = document.getElementById('modelSelect');
+            // Close other dropdowns
+            document.querySelectorAll('.custom-select.open').forEach(cs => {
+                if (cs.id !== 'modelSelect') cs.classList.remove('open');
+            });
+            customSelect.classList.toggle('open');
+            updateStep1Height();
+        });
+
+        // Load vehicle data when page loads
+        loadVehicleData();
 
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(button => {

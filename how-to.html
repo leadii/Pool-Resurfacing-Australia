@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Team Access - GVM</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <style>
+        @font-face {
+            font-family: 'DIN Condensed Bold';
+            src: url('/public/fonts/DIN Condensed Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Arial';
+            src: url('/public/fonts/Arial.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --yellow: #E7E515;
+            --white: #FFFFFF;
+            --navy: #1A1348;
+            --cream: #F3EBD9;
+            --navy-light: rgba(26, 19, 72, 0.1);
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--white);
+            color: var(--navy);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Password Protection Overlay */
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--navy);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .auth-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .auth-container {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 380px;
+            margin: 1rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-logo-text {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 3rem;
+            color: var(--navy);
+            letter-spacing: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-title {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.5rem;
+            color: var(--navy);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-subtitle {
+            font-size: 0.9rem;
+            color: var(--navy);
+            opacity: 0.6;
+            margin-bottom: 2rem;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--navy-light);
+            border-radius: 8px;
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
+            text-align: center;
+            background: var(--white);
+            color: var(--navy);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: var(--navy);
+            box-shadow: 0 0 0 3px rgba(26, 19, 72, 0.1);
+        }
+
+        .auth-input.error {
+            border-color: #dc2626;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        .auth-btn {
+            background-color: var(--yellow);
+            color: var(--navy);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .auth-btn:hover {
+            background-color: #d4d313;
+            transform: translateY(-1px);
+        }
+
+        .auth-error {
+            color: #dc2626;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .auth-error.show {
+            opacity: 1;
+        }
+
+        /* Page Layout */
+        .page-content {
+            display: none;
+        }
+
+        .page-content.unlocked {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--navy);
+            padding: 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-logo img {
+            height: 36px;
+        }
+
+        .sidebar-tagline {
+            font-size: 0.7rem;
+            color: var(--white);
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .sidebar-content {
+            padding: 1.5rem;
+        }
+
+        .sidebar-section {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 0.75rem;
+            color: var(--white);
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            opacity: 0.85;
+        }
+
+        .sidebar-nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 1;
+        }
+
+        .sidebar-nav a.active {
+            background: var(--yellow);
+            color: var(--navy);
+            font-weight: 600;
+            opacity: 1;
+        }
+
+        .sidebar-nav a.active::after {
+            content: '›';
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            background: var(--cream);
+            min-height: 100vh;
+        }
+
+        .content-header {
+            background: var(--navy);
+            padding: 2rem 4rem;
+        }
+
+        .content-header h1 {
+            color: var(--white);
+            margin: 0;
+        }
+
+        .content-body {
+            padding: 2.5rem 4rem;
+            max-width: 900px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h1 {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 2.5rem;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.4rem;
+            color: var(--navy);
+            margin: 2rem 0 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        h3 {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.1rem;
+            color: var(--navy);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--navy);
+            opacity: 0.85;
+        }
+
+        .intro-text {
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Tool Selection Cards */
+        .tool-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .tool-card {
+            border: 2px solid var(--navy-light);
+            border-radius: 8px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .tool-card:hover {
+            border-color: var(--navy);
+        }
+
+        .tool-card.selected {
+            border-color: var(--yellow);
+            background: rgba(231, 229, 21, 0.08);
+        }
+
+        .tool-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .tool-icon.chatgpt {
+            background: #10a37f;
+            color: white;
+        }
+
+        .tool-icon.claude {
+            background: var(--navy);
+            color: white;
+        }
+
+        .tool-info h4 {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tool-info p {
+            font-size: 0.85rem;
+            margin: 0;
+            opacity: 0.7;
+        }
+
+        .badge {
+            background: var(--yellow);
+            color: var(--navy);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: rgba(231, 229, 21, 0.15);
+            border-left: 4px solid var(--yellow);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .info-box strong {
+            color: var(--navy);
+        }
+
+        /* Steps */
+        .steps {
+            margin: 2rem 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: var(--navy);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 0.25rem;
+        }
+
+        .step-content h4 {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--navy);
+        }
+
+        .step-content p {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-content a {
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: var(--cream);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin: 0.75rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-block.dark {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .code-block code {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(26, 19, 72, 0.1);
+            border: none;
+            color: var(--navy);
+            padding: 0.4rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .code-block.dark .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .copy-btn:hover {
+            background: rgba(26, 19, 72, 0.2);
+        }
+
+        .code-block.dark .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-btn.copied {
+            background: #22c55e;
+            color: white;
+        }
+
+        /* Colour Swatches */
+        .colour-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .colour-swatch {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--navy-light);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .colour-swatch:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 19, 72, 0.15);
+        }
+
+        .colour-preview {
+            height: 70px;
+        }
+
+        .colour-info {
+            background: var(--white);
+            padding: 0.75rem;
+        }
+
+        .colour-name {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 0.85rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .colour-hex {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--navy);
+            opacity: 0.7;
+        }
+
+        .copied-feedback {
+            font-size: 0.7rem;
+            color: #22c55e;
+            margin-top: 0.15rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .copied-feedback.show {
+            opacity: 1;
+        }
+
+        /* Font Examples */
+        .font-sample {
+            margin: 1rem 0;
+            padding: 1.5rem;
+            background: var(--cream);
+            border-radius: 8px;
+        }
+
+        .font-sample-heading {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .font-sample-body {
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .font-meta {
+            font-size: 0.8rem;
+            color: var(--navy);
+            opacity: 0.6;
+            margin-top: 0.75rem;
+        }
+
+        .font-meta code {
+            background: var(--white);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+        }
+
+        /* File List */
+        .file-list {
+            margin: 1rem 0;
+        }
+
+        .file-item {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--navy-light);
+            font-size: 0.9rem;
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-name {
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--navy);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a.file-name:hover {
+            color: var(--yellow);
+            text-decoration: underline;
+        }
+
+        .file-desc {
+            color: var(--navy);
+            opacity: 0.75;
+        }
+
+        /* Placeholder text in code blocks */
+        .placeholder {
+            color: var(--yellow);
+            font-weight: bold;
+        }
+
+        /* Prompt Card */
+        .prompt-card {
+            background: var(--white);
+            border: 1px solid var(--navy-light);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .prompt-title {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1rem;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .prompt-desc {
+            font-size: 0.85rem;
+            color: var(--navy);
+            opacity: 0.7;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Button Examples */
+        .button-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .btn-primary {
+            background-color: var(--yellow);
+            color: var(--navy);
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--navy);
+            padding: 0.875rem 2rem;
+            border: 2px solid var(--navy);
+            border-radius: 8px;
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        /* Note Box */
+        .note {
+            background: rgba(231, 229, 21, 0.15);
+            border-left: 4px solid var(--yellow);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .note strong {
+            color: var(--navy);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+            }
+
+            .tool-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .file-item {
+                grid-template-columns: 1fr;
+                gap: 0.25rem;
+            }
+
+            .colour-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Protection -->
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-container">
+            <div class="auth-logo-text">GVM</div>
+            <h1 class="auth-title">Team Access</h1>
+            <p class="auth-subtitle">Enter password to continue</p>
+            <form class="auth-form" onsubmit="return checkPassword(event)">
+                <input type="password" class="auth-input" id="authPassword" placeholder="Password" autocomplete="off" autofocus>
+                <button type="submit" class="auth-btn">Access</button>
+                <p class="auth-error" id="authError">Incorrect password</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="page-content" id="pageContent">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="/public/GVMLogo.svg" alt="GVM Upgrades Australia">
+                </div>
+                <div class="sidebar-tagline">Admin Guide</div>
+            </div>
+
+            <div class="sidebar-content">
+                <div class="sidebar-section">Guide</div>
+                <ul class="sidebar-nav">
+                    <li><a href="#getting-started" class="active" data-section="getting-started">Getting Started</a></li>
+                    <li><a href="#brand-guidelines" data-section="brand-guidelines">Brand Guidelines</a></li>
+                    <li><a href="#home-page" data-section="home-page">Home Page</a></li>
+                    <li><a href="#vehicle-pages" data-section="vehicle-pages">Vehicle Pages</a></li>
+                    <li><a href="#forms" data-section="forms">Forms</a></li>
+                    <li><a href="#images" data-section="images">Images & Media</a></li>
+                    <li><a href="#quick-reference" data-section="quick-reference">Quick Reference</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Getting Started Section -->
+            <section id="getting-started" class="section active">
+                <div class="content-header">
+                    <h1>Getting Started</h1>
+                </div>
+                <div class="content-body">
+                <p class="intro-text">To make changes to this website, you'll connect our GitHub repository to an AI assistant. Choose your preferred tool below and follow the step-by-step instructions.</p>
+
+                <div class="tool-cards">
+                    <div class="tool-card selected" data-tool="chatgpt" onclick="selectTool('chatgpt')">
+                        <div class="tool-icon chatgpt">G</div>
+                        <div class="tool-info">
+                            <h4>ChatGPT <span class="badge">Recommended</span></h4>
+                            <p>Easier setup, works in browser</p>
+                        </div>
+                    </div>
+                    <div class="tool-card" data-tool="claude" onclick="selectTool('claude')">
+                        <div class="tool-icon claude">C</div>
+                        <div class="tool-info">
+                            <h4>Claude</h4>
+                            <p>More powerful, requires setup</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ChatGPT Instructions -->
+                <div id="chatgpt-instructions" class="tool-instructions">
+                    <div class="info-box">
+                        <strong>Why ChatGPT?</strong> It's the easiest option — works directly in your browser with no software to install. Just connect your GitHub account and start making changes.
+                    </div>
+
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Go to ChatGPT</h4>
+                                <p>Open <a href="https://chat.openai.com" target="_blank">chat.openai.com</a> in your browser. Sign in or create a free account if you don't have one.</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Connect GitHub</h4>
+                                <p>Click the <strong>paperclip icon</strong> in the message box, then select <strong>"Connect to GitHub"</strong>.</p>
+                                <p>You'll be asked to authorise ChatGPT to access your GitHub account. Click <strong>"Authorise"</strong>.</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Select the Repository</h4>
+                                <p>After connecting, click the paperclip again and choose <strong>"GitHub"</strong>. Find and select the <strong>"gvm-website"</strong> repository.</p>
+                                <div class="code-block">
+                                    <code>entialdotcom/gvm-website</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Start Making Changes</h4>
+                                <p>You're ready! Type your request in plain English. For example:</p>
+                                <div class="code-block">
+                                    <code>"Change the hero headline to 'Australia's #1 GVM Upgrade Service'"</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>Review and Commit</h4>
+                                <p>ChatGPT will show you the changes it wants to make. Review them, then say <strong>"commit these changes"</strong> to save them to the repository.</p>
+                                <p>Changes will automatically deploy to the live site within a few minutes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Claude Instructions -->
+                <div id="claude-instructions" class="tool-instructions" style="display: none;">
+                    <div class="info-box">
+                        <strong>Why Claude?</strong> More powerful for complex changes and better at understanding context. Requires desktop app installation but offers more control.
+                    </div>
+
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Install Claude Code</h4>
+                                <p>Download and install <a href="https://claude.ai/download" target="_blank">Claude Code</a> on your computer. Available for Mac and Windows.</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Clone the Repository</h4>
+                                <p>Open Terminal and run:</p>
+                                <div class="code-block dark">
+                                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                                    <code>git clone https://github.com/entialdotcom/gvm-website.git
+cd gvm-website</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Open in Claude Code</h4>
+                                <p>Launch Claude Code and open the <strong>gvm-website</strong> folder. Claude will read the project files and understand the codebase.</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Make Changes</h4>
+                                <p>Ask Claude to make changes in plain English. For example:</p>
+                                <div class="code-block">
+                                    <code>"Add a new vehicle option for Jeep Wrangler to all dropdown menus"</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>Commit and Push</h4>
+                                <p>Ask Claude to <strong>"commit and push these changes"</strong>. Changes will deploy to the live site within a few minutes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <!-- Brand Guidelines Section -->
+            <section id="brand-guidelines" class="section">
+                <div class="content-header">
+                    <h1>Brand Guidelines</h1>
+                </div>
+                <div class="content-body">
+                <p class="intro-text">Essential brand elements to maintain consistency across the site.</p>
+
+                <h2>Colours</h2>
+                <p>Click any swatch to copy the hex code.</p>
+                <div class="colour-grid">
+                    <div class="colour-swatch" onclick="copyColour('#E7E515', this)">
+                        <div class="colour-preview" style="background-color: #E7E515;"></div>
+                        <div class="colour-info">
+                            <div class="colour-name">Electric Yellow</div>
+                            <div class="colour-hex">#E7E515</div>
+                            <div class="copied-feedback">Copied!</div>
+                        </div>
+                    </div>
+                    <div class="colour-swatch" onclick="copyColour('#1A1348', this)">
+                        <div class="colour-preview" style="background-color: #1A1348;"></div>
+                        <div class="colour-info">
+                            <div class="colour-name">Deep Navy</div>
+                            <div class="colour-hex">#1A1348</div>
+                            <div class="copied-feedback">Copied!</div>
+                        </div>
+                    </div>
+                    <div class="colour-swatch" onclick="copyColour('#FFFFFF', this)">
+                        <div class="colour-preview" style="background-color: #FFFFFF; border: 1px solid #ddd;"></div>
+                        <div class="colour-info">
+                            <div class="colour-name">Pure White</div>
+                            <div class="colour-hex">#FFFFFF</div>
+                            <div class="copied-feedback">Copied!</div>
+                        </div>
+                    </div>
+                    <div class="colour-swatch" onclick="copyColour('#F3EBD9', this)">
+                        <div class="colour-preview" style="background-color: #F3EBD9;"></div>
+                        <div class="colour-info">
+                            <div class="colour-name">Warm Cream</div>
+                            <div class="colour-hex">#F3EBD9</div>
+                            <div class="copied-feedback">Copied!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Fonts</h2>
+                <div class="font-sample">
+                    <div class="font-sample-heading">DIN Condensed Bold — Headings</div>
+                    <div class="font-meta">Used for: All headings (h1, h2, h3), buttons, navigation<br>
+                    File: <code>/public/fonts/DIN Condensed Bold.ttf</code></div>
+                </div>
+                <div class="font-sample">
+                    <div class="font-sample-body">Arial — Body Text. This is an example of body copy used throughout the site. It should be easy to read with good line height and spacing.</div>
+                    <div class="font-meta">Used for: All body text, paragraphs, form inputs<br>
+                    File: <code>/public/fonts/Arial.ttf</code></div>
+                </div>
+
+                <h2>Buttons</h2>
+                <div class="button-examples">
+                    <button class="btn-primary">Primary Button</button>
+                    <button class="btn-secondary">Secondary Button</button>
+                </div>
+                <div class="note">
+                    <strong>Important:</strong> All buttons must use <code>border-radius: 8px</code>. Never use pill buttons (50px+).
+                </div>
+
+                <h2>Logo</h2>
+                <p>The logo file is located at <code>/public/GVMLogo.svg</code>. In the header, use height of <code>40px</code>.</p>
+                </div>
+            </section>
+
+            <!-- Home Page Section -->
+            <section id="home-page" class="section">
+                <div class="content-header">
+                    <h1>Home Page</h1>
+                </div>
+                <div class="content-body">
+                <p class="intro-text">The main landing page (index.html) contains the vehicle quiz, hero section, and key messaging.</p>
+
+                <h2>Update Hero Headline</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Change the main headline on the home page</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>Change the hero headline on index.html to "<span class="placeholder">[YOUR NEW HEADLINE]</span>"</code>
+                    </div>
+                </div>
+
+                <h2>Update Hero Subheadline</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Change the supporting text below the headline</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>Change the hero subheadline on index.html to "<span class="placeholder">[YOUR NEW SUBHEADLINE]</span>"</code>
+                    </div>
+                </div>
+
+                <h2>Update Stats/Trust Indicators</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Update the statistics shown on the home page</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>Update the stats section on index.html. Change "<span class="placeholder">[OLD STAT]</span>" to "<span class="placeholder">[NEW STAT]</span>"</code>
+                    </div>
+                </div>
+
+                <h2>Add New Vehicle to Dropdown</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Add a new vehicle option to the quiz dropdown</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>Add <span class="placeholder">[VEHICLE NAME]</span> to the vehicle dropdown on index.html. The vehicle makes are: Nissan, Toyota, Ford, Mitsubishi, Isuzu, Volkswagen, Jeep, Mazda, Chevrolet, Ineos, Ram, Suzuki.</code>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <!-- Vehicle Pages Section -->
+            <section id="vehicle-pages" class="section">
+                <div class="content-header">
+                    <h1>Vehicle Pages</h1>
+                </div>
+                <div class="content-body">
+                <p class="intro-text">Each vehicle has its own dedicated landing page with pre-selected vehicle in the form.</p>
+
+                <h2>Existing Vehicle Pages</h2>
+                <div class="file-list">
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/nissan-patrol-y62" target="_blank" class="file-name">nissan-patrol-y62.html</a>
+                        <span class="file-desc">Nissan Patrol Y62 landing page</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/toyota-landcruiser" target="_blank" class="file-name">toyota-landcruiser.html</a>
+                        <span class="file-desc">Toyota Landcruiser landing page</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/ford-everest" target="_blank" class="file-name">ford-everest.html</a>
+                        <span class="file-desc">Ford Everest landing page</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/isuzu-dmax" target="_blank" class="file-name">isuzu-dmax.html</a>
+                        <span class="file-desc">Isuzu D-MAX landing page</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/dodge-ram" target="_blank" class="file-name">dodge-ram.html</a>
+                        <span class="file-desc">Dodge Ram landing page</span>
+                    </div>
+                </div>
+
+                <h2>Create New Vehicle Page</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Create a dedicated landing page for a new vehicle</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>Create a new vehicle-specific landing page for <span class="placeholder">[VEHICLE NAME]</span> following the pattern of nissan-patrol-y62.html. Use the same structure, styling, and form as existing vehicle pages.</code>
+                    </div>
+                </div>
+
+                <h2>Update Vehicle Page Content</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Change content on a specific vehicle page</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>On the <span class="placeholder">[VEHICLE NAME]</span> page (<span class="placeholder">[filename]</span>.html), update the <span class="placeholder">[SECTION]</span> to "<span class="placeholder">[NEW CONTENT]</span>"</code>
+                    </div>
+                </div>
+
+                <h2>Add Vehicle to All Dropdowns</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Add a vehicle option across all pages</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>Add <span class="placeholder">[VEHICLE NAME]</span> to the vehicle dropdown on ALL pages (index.html and all vehicle-specific pages). Ensure both the native select and custom dropdown elements are updated.</code>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <!-- Forms Section -->
+            <section id="forms" class="section">
+                <div class="content-header">
+                    <h1>Forms</h1>
+                </div>
+                <div class="content-body">
+                <p class="intro-text">The site has two main forms: the vehicle quiz on the home/vehicle pages, and the additional info form.</p>
+
+                <h2>Home Page Quiz (5 Steps)</h2>
+                <p>Located in <code>index.html</code> and vehicle pages. Steps:</p>
+                <ol style="margin: 1rem 0 1rem 1.5rem;">
+                    <li>Vehicle Selection (Make/Model/Year)</li>
+                    <li>Location (Suburb/Postcode)</li>
+                    <li>Primary Reason</li>
+                    <li>Timeline</li>
+                    <li>Contact Details (Name, Email, Phone)</li>
+                </ol>
+
+                <h2>Additional Info Form (4 Steps)</h2>
+                <p>Located in <code>additional-info.html</code>. Steps:</p>
+                <ol style="margin: 1rem 0 1rem 1.5rem;">
+                    <li>Email Confirmation</li>
+                    <li>Budget Range</li>
+                    <li>Additional Services</li>
+                    <li>Notes & Consent</li>
+                </ol>
+
+                <h2>Update Budget Options</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Modify the budget range selections</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>Modify the budget range options in additional-info.html. Current options are: $12,000+, $10,000-$12,000, $8,000-$10,000, $5,000-$8,000, $3,000-$5,000.</code>
+                    </div>
+                </div>
+
+                <h2>Update Form Questions</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Add, remove, or modify form steps</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>Update the additional-info.html form to <span class="placeholder">[ADD/REMOVE/MODIFY]</span> the <span class="placeholder">[QUESTION NAME]</span> step. The form currently has 4 steps: Email, Budget, Additional Services, and Notes & Consent.</code>
+                    </div>
+                </div>
+
+                <div class="note">
+                    <strong>Important:</strong> All form inputs must have WHITE backgrounds (#FFFFFF). Never use cream for form elements.
+                </div>
+                </div>
+            </section>
+
+            <!-- Images Section -->
+            <section id="images" class="section">
+                <div class="content-header">
+                    <h1>Images & Media</h1>
+                </div>
+                <div class="content-body">
+                <p class="intro-text">How to update images and media files on the site.</p>
+
+                <h2>Image Locations</h2>
+                <div class="file-list">
+                    <div class="file-item">
+                        <span class="file-name">/public/</span>
+                        <span class="file-desc">Main images folder (logo, hero images)</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">/public/makes/</span>
+                        <span class="file-desc">Vehicle manufacturer logos</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">/public/fonts/</span>
+                        <span class="file-desc">Font files (DIN Condensed Bold, Arial)</span>
+                    </div>
+                </div>
+
+                <h2>Replace an Image</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Swap an existing image for a new one</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>Replace the image at <span class="placeholder">[/public/filename.jpg]</span> with this new image: <span class="placeholder">[PASTE IMAGE OR PROVIDE URL]</span></code>
+                    </div>
+                </div>
+
+                <h2>Update Hero Image</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Change the main hero/header image</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>Update the hero image on index.html. The new image should be <span class="placeholder">[DESCRIPTION OR URL]</span></code>
+                    </div>
+                </div>
+
+                <h2>Add Vehicle Make Logo</h2>
+                <div class="prompt-card">
+                    <div class="prompt-desc">Add a logo for a new vehicle manufacturer</div>
+                    <div class="code-block dark">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code>Add a logo for <span class="placeholder">[MAKE NAME]</span> to the /public/makes/ folder and update the vehicle dropdown to display it.</code>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <!-- Quick Reference Section -->
+            <section id="quick-reference" class="section">
+                <div class="content-header">
+                    <h1>Quick Reference</h1>
+                </div>
+                <div class="content-body">
+                <p class="intro-text">File structure and CSS variables for quick lookup.</p>
+
+                <h2>All Site Pages</h2>
+                <div class="file-list">
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/" target="_blank" class="file-name">index.html</a>
+                        <span class="file-desc">Main landing page with vehicle quiz</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/additional-info" target="_blank" class="file-name">additional-info.html</a>
+                        <span class="file-desc">Additional info form (4 steps)</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/contact" target="_blank" class="file-name">contact.html</a>
+                        <span class="file-desc">Contact Us form</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/faq" target="_blank" class="file-name">faq.html</a>
+                        <span class="file-desc">FAQ page</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/thanks" target="_blank" class="file-name">thanks.html</a>
+                        <span class="file-desc">Thank you page (main form)</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/thanks-additional" target="_blank" class="file-name">thanks-additional.html</a>
+                        <span class="file-desc">Thank you page (additional form)</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/terms" target="_blank" class="file-name">terms.html</a>
+                        <span class="file-desc">Terms & Conditions</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/privacy" target="_blank" class="file-name">privacy.html</a>
+                        <span class="file-desc">Privacy Policy</span>
+                    </div>
+                    <div class="file-item">
+                        <a href="https://gvmupgradesaustralia.com.au/404" target="_blank" class="file-name">404.html</a>
+                        <span class="file-desc">404 error page</span>
+                    </div>
+                </div>
+
+                <h2>CSS Variables</h2>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>:root {
+    --yellow: #E7E515;
+    --navy: #1A1348;
+    --cream: #F3EBD9;
+    --white: #FFFFFF;
+    --navy-light: rgba(26, 19, 72, 0.1);
+}</code>
+                </div>
+
+                <h2>Key Rules</h2>
+                <ol style="margin: 1rem 0 1rem 1.5rem; line-height: 2;">
+                    <li>All buttons: <code>border-radius: 8px</code></li>
+                    <li>Max content width: <code>800px</code></li>
+                    <li>Headings font: <strong>DIN Condensed Bold</strong></li>
+                    <li>Body font: <strong>Arial</strong></li>
+                    <li>Primary buttons: <strong>Yellow with navy text</strong></li>
+                    <li>Form elements: <strong>White backgrounds only</strong></li>
+                </ol>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // Password protection
+        const CORRECT_PASS = 'GVM2026';
+        const SESSION_KEY = 'gvm_auth';
+
+        if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+            unlockPage();
+        }
+
+        function checkPassword(event) {
+            event.preventDefault();
+            const input = document.getElementById('authPassword');
+            const error = document.getElementById('authError');
+
+            if (input.value === CORRECT_PASS) {
+                sessionStorage.setItem(SESSION_KEY, 'true');
+                unlockPage();
+            } else {
+                input.classList.add('error');
+                error.classList.add('show');
+                setTimeout(() => {
+                    input.classList.remove('error');
+                }, 500);
+                input.value = '';
+                input.focus();
+            }
+            return false;
+        }
+
+        function unlockPage() {
+            document.getElementById('authOverlay').classList.add('hidden');
+            document.getElementById('pageContent').classList.add('unlocked');
+        }
+
+        // Sidebar navigation
+        document.querySelectorAll('.sidebar-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.dataset.section;
+
+                // Update active nav
+                document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+
+                // Show section
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // Tool selection
+        function selectTool(tool) {
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.classList.toggle('selected', card.dataset.tool === tool);
+            });
+            document.getElementById('chatgpt-instructions').style.display = tool === 'chatgpt' ? 'block' : 'none';
+            document.getElementById('claude-instructions').style.display = tool === 'claude' ? 'block' : 'none';
+        }
+
+        // Copy functions
+        function copyColour(hex, element) {
+            navigator.clipboard.writeText(hex);
+            const feedback = element.querySelector('.copied-feedback');
+            feedback.classList.add('show');
+            setTimeout(() => feedback.classList.remove('show'), 1500);
+        }
+
+        function copyCode(button) {
+            const codeBlock = button.parentElement;
+            const code = codeBlock.querySelector('code').textContent;
+            navigator.clipboard.writeText(code);
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(() => {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

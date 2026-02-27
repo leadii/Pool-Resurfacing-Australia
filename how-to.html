@@ -647,6 +647,70 @@
             font-weight: bold;
         }
 
+        /* File Tree */
+        .file-tree {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .file-tree-section {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid var(--navy-light);
+        }
+
+        .file-tree-title {
+            font-family: 'DIN Condensed Bold', sans-serif;
+            font-size: 0.85rem;
+            color: var(--navy);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--yellow);
+        }
+
+        .file-tree-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--navy-light);
+        }
+
+        .file-tree-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-tree-item a {
+            font-family: monospace;
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .file-tree-item a:hover {
+            color: var(--yellow);
+            text-decoration: underline;
+        }
+
+        .file-tree-item span {
+            font-size: 0.8rem;
+            color: var(--navy);
+            opacity: 0.6;
+        }
+
+        .file-tree-note {
+            font-size: 0.8rem;
+            color: var(--navy);
+            opacity: 0.5;
+            margin-top: 0.5rem;
+        }
+
         /* Prompt Card */
         .prompt-card {
             background: var(--white);
@@ -743,6 +807,18 @@
             .colour-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .file-tree {
+                grid-template-columns: 1fr;
+            }
+
+            .content-header {
+                padding: 1.5rem;
+            }
+
+            .content-body {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -797,6 +873,41 @@
                 <div class="content-body">
                 <p class="intro-text">To make changes to this website, you'll connect our GitHub repository to an AI assistant. Choose your preferred tool below and follow the step-by-step instructions.</p>
 
+                <h2>Site Overview</h2>
+                <!-- FILE_TREE_START - Auto-updated by /update-howto skill -->
+                <div class="file-tree">
+                    <div class="file-tree-section">
+                        <div class="file-tree-title">Main Pages</div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/" target="_blank">index.html</a><span>Home page with vehicle quiz</span></div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/contact" target="_blank">contact.html</a><span>Contact form</span></div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/faq" target="_blank">faq.html</a><span>FAQ page</span></div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/additional-info" target="_blank">additional-info.html</a><span>Additional info form</span></div>
+                    </div>
+                    <div class="file-tree-section">
+                        <div class="file-tree-title">Vehicle Landing Pages</div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/nissan-patrol-y62" target="_blank">nissan-patrol-y62.html</a><span>Nissan Patrol Y62</span></div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/toyota-landcruiser" target="_blank">toyota-landcruiser.html</a><span>Toyota Landcruiser</span></div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/ford-everest" target="_blank">ford-everest.html</a><span>Ford Everest</span></div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/isuzu-dmax" target="_blank">isuzu-dmax.html</a><span>Isuzu D-MAX</span></div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/dodge-ram" target="_blank">dodge-ram.html</a><span>Dodge Ram</span></div>
+                    </div>
+                    <div class="file-tree-section">
+                        <div class="file-tree-title">Thank You Pages</div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/thanks" target="_blank">thanks.html</a><span>Main form thank you</span></div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/thanks-additional" target="_blank">thanks-additional.html</a><span>Additional info thank you</span></div>
+                    </div>
+                    <div class="file-tree-section">
+                        <div class="file-tree-title">Legal & Other</div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/terms" target="_blank">terms.html</a><span>Terms & Conditions</span></div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/privacy" target="_blank">privacy.html</a><span>Privacy Policy</span></div>
+                        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/404" target="_blank">404.html</a><span>Error page</span></div>
+                        <div class="file-tree-item">how-to.html<span>This admin guide</span></div>
+                    </div>
+                </div>
+                <p class="file-tree-note">Last updated: <span id="lastUpdated">28 Feb 2026</span></p>
+                <!-- FILE_TREE_END -->
+
+                <h2>Choose Your Tool</h2>
                 <div class="tool-cards">
                     <div class="tool-card selected" data-tool="chatgpt" onclick="selectTool('chatgpt')">
                         <div class="tool-icon chatgpt">G</div>

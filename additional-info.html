@@ -801,6 +801,107 @@
             }
         }
 
+        /* Textarea */
+        .textarea-wrapper {
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .textarea-wrapper textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            border: 1px solid rgba(26, 19, 72, 0.08);
+            border-radius: 12px;
+            background: var(--white);
+            color: var(--navy);
+            font-family: inherit;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .textarea-wrapper textarea:focus {
+            outline: none;
+            border-color: var(--navy);
+            box-shadow: 0 0 0 4px rgba(26, 19, 72, 0.1);
+        }
+
+        .textarea-wrapper textarea::placeholder {
+            color: rgba(26, 19, 72, 0.4);
+        }
+
+        /* Consent Checkboxes */
+        .consent-checkboxes {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .consent-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 1rem 1.25rem;
+            background: var(--white);
+            border-radius: 12px;
+            border: 1px solid rgba(26, 19, 72, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .consent-option:hover {
+            border-color: rgba(26, 19, 72, 0.15);
+        }
+
+        .consent-option:has(input:checked) {
+            border-color: var(--yellow);
+        }
+
+        .consent-option input[type="checkbox"] {
+            display: none;
+        }
+
+        .consent-checkbox-custom {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(26, 19, 72, 0.2);
+            border-radius: 6px;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.3s ease;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1px;
+        }
+
+        .consent-checkbox-custom svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--navy);
+            stroke-width: 3;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .consent-option input[type="checkbox"]:checked + .consent-checkbox-custom {
+            background: var(--yellow);
+            border-color: var(--yellow);
+        }
+
+        .consent-option input[type="checkbox"]:checked + .consent-checkbox-custom svg {
+            opacity: 1;
+        }
+
+        .consent-text {
+            font-size: 0.9rem;
+            color: var(--navy);
+            line-height: 1.5;
+        }
+
         /* Toast Notification */
         .toast {
             position: fixed;
@@ -883,12 +984,13 @@
 
             <!-- Progress Header -->
             <div class="progress-header">
-                <div class="step-indicator">Step <span id="currentStep">1</span> of 4</div>
+                <div class="step-indicator">Step <span id="currentStep">1</span> of 5</div>
                 <div class="progress-dots">
                     <div class="progress-dot active" data-step="1"></div>
                     <div class="progress-dot" data-step="2"></div>
                     <div class="progress-dot" data-step="3"></div>
                     <div class="progress-dot" data-step="4"></div>
+                    <div class="progress-dot" data-step="5"></div>
                 </div>
             </div>
 
@@ -1066,7 +1168,53 @@
                     </div>
                     <div class="nav-buttons">
                         <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-primary" id="step4Continue" onclick="nextStep()" disabled>Continue</button>
+                    </div>
+                    <div class="back-link-wrapper">
+                        <a href="/" class="back-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                            </svg>
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Step 5: Additional Notes & Consent -->
+                <div class="question-step" data-step="5">
+                    <span class="question-label">
+                        Is there anything additional you'd like to share about your GVM upgrade?
+                    </span>
+                    <p class="question-subtitle">Optional - share any details that might help the installer better understand your needs.</p>
+                    <div class="textarea-wrapper">
+                        <textarea id="additional_notes" name="additional_notes" rows="4" placeholder="e.g. specific accessories you're carrying, planned trips, weight requirements..."></textarea>
+                    </div>
+
+                    <div class="consent-checkboxes">
+                        <label class="consent-option">
+                            <input type="checkbox" name="consent_contact" id="consent_contact" required>
+                            <span class="consent-checkbox-custom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="consent-text">I consent to be contacted by a GVM upgrade installer about my enquiry (by phone, SMS and/or email).</span>
+                        </label>
+                        <label class="consent-option">
+                            <input type="checkbox" name="consent_responsibility" id="consent_responsibility" required>
+                            <span class="consent-checkbox-custom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span class="consent-text">I understand I'm responsible for confirming that any GVM upgrade I choose is engineered, certified, and legally compliant for my vehicle and intended use.</span>
+                        </label>
+                        <span class="error-message" id="error-consent">Please accept both checkboxes to continue</span>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
+                        <button type="submit" class="btn btn-primary" disabled>Submit</button>
                     </div>
                     <div class="back-link-wrapper">
                         <a href="/" class="back-link">
@@ -1094,7 +1242,7 @@
 
     <script>
         let currentStep = 1;
-        const totalSteps = 4;
+        const totalSteps = 5;
 
         // Auto-fill email from URL parameter
         document.addEventListener('DOMContentLoaded', function() {
@@ -1236,15 +1384,28 @@
 
         // Step 4: Additional services validation
         const serviceCheckboxes = document.querySelectorAll('input[name="additional_services"]');
-        const submitBtn = document.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
+        const step4Continue = document.getElementById('step4Continue');
 
         serviceCheckboxes.forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 const anyChecked = Array.from(serviceCheckboxes).some(cb => cb.checked);
-                submitBtn.disabled = !anyChecked;
+                step4Continue.disabled = !anyChecked;
             });
         });
+
+        // Step 5: Consent checkboxes validation
+        const consentContact = document.getElementById('consent_contact');
+        const consentResponsibility = document.getElementById('consent_responsibility');
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+
+        function validateConsent() {
+            const bothChecked = consentContact.checked && consentResponsibility.checked;
+            submitBtn.disabled = !bothChecked;
+        }
+
+        consentContact.addEventListener('change', validateConsent);
+        consentResponsibility.addEventListener('change', validateConsent);
 
         // Form submission handler
         document.getElementById('additionalInfoForm').addEventListener('submit', async function(e) {
@@ -1275,6 +1436,10 @@
                 showToast('Please select at least one additional service.');
                 return;
             }
+            if (!document.getElementById('consent_contact').checked || !document.getElementById('consent_responsibility').checked) {
+                showToast('Please accept both consent checkboxes before submitting.');
+                return;
+            }
 
             const submitBtn = document.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
@@ -1286,7 +1451,10 @@
                 email: document.getElementById('email')?.value?.trim(),
                 manufacture_year: document.getElementById('manufacture_year')?.value,
                 budget: document.querySelector('input[name="budget"]:checked')?.value,
-                additional_services: Array.from(document.querySelectorAll('input[name="additional_services"]:checked')).map(cb => cb.value)
+                additional_services: Array.from(document.querySelectorAll('input[name="additional_services"]:checked')).map(cb => cb.value),
+                additional_notes: document.getElementById('additional_notes')?.value?.trim() || '',
+                consent_contact: document.getElementById('consent_contact').checked,
+                consent_responsibility: document.getElementById('consent_responsibility').checked
             };
 
             try {

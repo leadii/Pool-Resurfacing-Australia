@@ -511,43 +511,6 @@
             border-color: #dc3545;
         }
 
-        /* Year Input */
-        .year-input-wrapper {
-            margin-top: 1rem;
-        }
-
-        .year-input-wrapper input[type="number"] {
-            width: 100%;
-            max-width: 200px;
-            padding: 1rem 1.25rem;
-            font-size: 1.25rem;
-            border: 1px solid rgba(26, 19, 72, 0.08);
-            border-radius: 12px;
-            background: var(--white);
-            color: var(--navy);
-            font-family: inherit;
-            transition: all 0.3s ease;
-            -moz-appearance: textfield;
-            text-align: center;
-            letter-spacing: 0.1em;
-        }
-
-        .year-input-wrapper input[type="number"]::-webkit-outer-spin-button,
-        .year-input-wrapper input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        .year-input-wrapper input[type="number"]:focus {
-            outline: none;
-            border-color: var(--navy);
-            box-shadow: 0 0 0 4px rgba(26, 19, 72, 0.1);
-        }
-
-        .year-input-wrapper input[type="number"].error {
-            border-color: #dc3545;
-        }
-
         .error-message {
             display: none;
             color: #dc3545;
@@ -835,28 +798,17 @@
         .consent-checkboxes {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.75rem;
             margin-bottom: 1.5rem;
         }
 
         .consent-option {
             display: flex;
             align-items: flex-start;
-            gap: 0.75rem;
+            gap: 0.5rem;
             cursor: pointer;
-            padding: 1rem 1.25rem;
-            background: var(--white);
-            border-radius: 12px;
-            border: 1px solid rgba(26, 19, 72, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .consent-option:hover {
-            border-color: rgba(26, 19, 72, 0.15);
-        }
-
-        .consent-option:has(input:checked) {
-            border-color: var(--yellow);
+            padding: 0;
+            background: transparent;
         }
 
         .consent-option input[type="checkbox"] {
@@ -864,27 +816,27 @@
         }
 
         .consent-checkbox-custom {
-            width: 24px;
-            height: 24px;
-            border: 2px solid rgba(26, 19, 72, 0.2);
-            border-radius: 6px;
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid rgba(26, 19, 72, 0.3);
+            border-radius: 3px;
             flex-shrink: 0;
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             background: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 1px;
+            margin-top: 2px;
         }
 
         .consent-checkbox-custom svg {
-            width: 14px;
-            height: 14px;
+            width: 10px;
+            height: 10px;
             stroke: var(--navy);
             stroke-width: 3;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s ease;
         }
 
         .consent-option input[type="checkbox"]:checked + .consent-checkbox-custom {
@@ -897,9 +849,9 @@
         }
 
         .consent-text {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--navy);
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         /* Toast Notification */
@@ -984,13 +936,12 @@
 
             <!-- Progress Header -->
             <div class="progress-header">
-                <div class="step-indicator">Step <span id="currentStep">1</span> of 5</div>
+                <div class="step-indicator">Step <span id="currentStep">1</span> of 4</div>
                 <div class="progress-dots">
                     <div class="progress-dot active" data-step="1"></div>
                     <div class="progress-dot" data-step="2"></div>
                     <div class="progress-dot" data-step="3"></div>
                     <div class="progress-dot" data-step="4"></div>
-                    <div class="progress-dot" data-step="5"></div>
                 </div>
             </div>
 
@@ -1019,39 +970,8 @@
                     </div>
                 </div>
 
-                <!-- Step 2: Vehicle Age -->
+                <!-- Step 2: Budget Range -->
                 <div class="question-step" data-step="2">
-                    <span class="question-label tooltip-wrapper">
-                        What year was your car manufactured?
-                        <span class="tooltip-icon" tabindex="0">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                            </svg>
-                        </span>
-                        <span class="tooltip-text">The year you bought your vehicle is not necessarily the year it was manufactured. Check your registration papers for the model year.</span>
-                    </span>
-                    <div class="year-input-wrapper">
-                        <input type="number" id="manufacture_year" name="manufacture_year" placeholder="e.g. 2020" min="1900" max="2026" required>
-                        <span class="error-message" id="error-year">Please enter a valid year (1900 - present)</span>
-                    </div>
-                    <div class="nav-buttons">
-                        <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-                        <button type="button" class="btn btn-primary" id="step2Continue" onclick="nextStep()" disabled>Continue</button>
-                    </div>
-                    <div class="back-link-wrapper">
-                        <a href="/" class="back-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7"/>
-                            </svg>
-                            Back to Home
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Step 3: Budget Range -->
-                <div class="question-step" data-step="3">
                     <span class="question-label">
                         What's your budget range for the GVM upgrade?
                     </span>
@@ -1084,7 +1004,7 @@
                     </div>
                     <div class="nav-buttons">
                         <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-                        <button type="button" class="btn btn-primary" id="step3Continue" onclick="nextStep()" disabled>Continue</button>
+                        <button type="button" class="btn btn-primary" id="step2Continue" onclick="nextStep()" disabled>Continue</button>
                     </div>
                     <div class="back-link-wrapper">
                         <a href="/" class="back-link">
@@ -1096,8 +1016,8 @@
                     </div>
                 </div>
 
-                <!-- Step 4: Additional Services -->
-                <div class="question-step" data-step="4">
+                <!-- Step 3: Additional Services -->
+                <div class="question-step" data-step="3">
                     <span class="question-label">
                         Are you interested in any additional services?
                     </span>
@@ -1168,7 +1088,7 @@
                     </div>
                     <div class="nav-buttons">
                         <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-                        <button type="button" class="btn btn-primary" id="step4Continue" onclick="nextStep()" disabled>Continue</button>
+                        <button type="button" class="btn btn-primary" id="step3Continue" onclick="nextStep()" disabled>Continue</button>
                     </div>
                     <div class="back-link-wrapper">
                         <a href="/" class="back-link">
@@ -1180,8 +1100,8 @@
                     </div>
                 </div>
 
-                <!-- Step 5: Additional Notes & Consent -->
-                <div class="question-step" data-step="5">
+                <!-- Step 4: Additional Notes & Consent -->
+                <div class="question-step" data-step="4">
                     <span class="question-label">
                         Is there anything additional you'd like to share about your GVM upgrade?
                     </span>
@@ -1242,7 +1162,7 @@
 
     <script>
         let currentStep = 1;
-        const totalSteps = 5;
+        const totalSteps = 4;
 
         // Auto-fill email from URL parameter
         document.addEventListener('DOMContentLoaded', function() {
@@ -1333,67 +1253,28 @@
             }
         });
 
-        // Step 2: Manufacture year validation
-        const yearInput = document.getElementById('manufacture_year');
-        const step2Continue = document.getElementById('step2Continue');
-        const yearError = document.getElementById('error-year');
-
-        function validateYear() {
-            const year = parseInt(yearInput.value);
-            const currentYear = new Date().getFullYear();
-
-            if (!yearInput.value || yearInput.value.length !== 4) {
-                step2Continue.disabled = true;
-                if (yearInput.value.length > 0) {
-                    yearInput.classList.add('error');
-                    yearError.classList.add('show');
-                }
-                return false;
-            }
-
-            if (year < 1900 || year > currentYear) {
-                step2Continue.disabled = true;
-                yearInput.classList.add('error');
-                yearError.textContent = `Please enter a valid year (1900 - ${currentYear})`;
-                yearError.classList.add('show');
-                return false;
-            }
-
-            step2Continue.disabled = false;
-            yearInput.classList.remove('error');
-            yearError.classList.remove('show');
-            return true;
-        }
-
-        yearInput.addEventListener('input', validateYear);
-        yearInput.addEventListener('blur', function() {
-            if (this.value.length > 0) {
-                validateYear();
-            }
-        });
-
-        // Step 3: Budget validation
+        // Step 2: Budget validation
         const budgetRadios = document.querySelectorAll('input[name="budget"]');
-        const step3Continue = document.getElementById('step3Continue');
+        const step2Continue = document.getElementById('step2Continue');
 
         budgetRadios.forEach(radio => {
             radio.addEventListener('change', function() {
-                step3Continue.disabled = false;
+                step2Continue.disabled = false;
             });
         });
 
-        // Step 4: Additional services validation
+        // Step 3: Additional services validation
         const serviceCheckboxes = document.querySelectorAll('input[name="additional_services"]');
-        const step4Continue = document.getElementById('step4Continue');
+        const step3Continue = document.getElementById('step3Continue');
 
         serviceCheckboxes.forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 const anyChecked = Array.from(serviceCheckboxes).some(cb => cb.checked);
-                step4Continue.disabled = !anyChecked;
+                step3Continue.disabled = !anyChecked;
             });
         });
 
-        // Step 5: Consent checkboxes validation
+        // Step 4: Consent checkboxes validation
         const consentContact = document.getElementById('consent_contact');
         const consentResponsibility = document.getElementById('consent_responsibility');
         const submitBtn = document.querySelector('button[type="submit"]');
@@ -1414,18 +1295,12 @@
             // Validate all required fields before submission
             const email = document.getElementById('email')?.value?.trim();
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const manufactureYear = document.getElementById('manufacture_year')?.value;
-            const currentYear = new Date().getFullYear();
             const budget = document.querySelector('input[name="budget"]:checked');
             const services = document.querySelectorAll('input[name="additional_services"]:checked');
 
             // Check all required fields
             if (!email || !emailRegex.test(email)) {
                 showToast('Please enter a valid email address.');
-                return;
-            }
-            if (!manufactureYear || manufactureYear.length !== 4 || parseInt(manufactureYear) < 1900 || parseInt(manufactureYear) > currentYear) {
-                showToast('Please enter a valid manufacture year.');
                 return;
             }
             if (!budget) {
@@ -1449,7 +1324,6 @@
             // Collect form data
             const formData = {
                 email: document.getElementById('email')?.value?.trim(),
-                manufacture_year: document.getElementById('manufacture_year')?.value,
                 budget: document.querySelector('input[name="budget"]:checked')?.value,
                 additional_services: Array.from(document.querySelectorAll('input[name="additional_services"]:checked')).map(cb => cb.value),
                 additional_notes: document.getElementById('additional_notes')?.value?.trim() || '',

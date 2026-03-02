@@ -1,5 +1,7 @@
 # Skill: Update How-To Page File Tree
 
+**Related:** This page was created using the `/admin-guide` skill from ClaudeSkills.
+
 Use this skill to regenerate the file tree in the how-to.html admin guide when HTML files are added, removed, or renamed.
 
 ## When to Use

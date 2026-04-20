@@ -8,6 +8,10 @@
       <stop offset="0%" style="stop-color:#F0ED2A"/>
       <stop offset="100%" style="stop-color:#E7E515"/>
     </linearGradient>
+    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4FC3F7"/>
+      <stop offset="100%" style="stop-color:#0288D1"/>
+    </linearGradient>
     <filter id="glow">
       <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
       <feMerge>
@@ -23,16 +27,13 @@
   <!-- Subtle corner accent -->
   <path d="M512 160 L512 0 L352 0 Q512 0 512 160" fill="#E7E515" opacity="0.15"/>
 
-  <!-- GVM Text - DIN Condensed Bold style -->
-  <text x="256" y="340"
-        font-family="DIN Condensed, Arial Black, sans-serif"
-        font-weight="700"
-        font-size="260"
-        fill="url(#yellowGrad)"
-        text-anchor="middle"
-        letter-spacing="-8"
-        filter="url(#glow)">GVM</text>
+  <!-- Pool shape (rounded rectangle) -->
+  <rect x="80" y="160" width="352" height="220" rx="40" ry="40" fill="url(#waterGrad)" opacity="0.9"/>
+
+  <!-- Water waves -->
+  <path d="M100 260 Q140 240 180 260 T260 260 T340 260 T412 260" stroke="#ffffff" stroke-width="8" fill="none" opacity="0.6"/>
+  <path d="M100 300 Q140 280 180 300 T260 300 T340 300 T412 300" stroke="#ffffff" stroke-width="6" fill="none" opacity="0.4"/>
 
   <!-- Underline accent -->
-  <rect x="80" y="380" width="352" height="12" rx="6" fill="#E7E515"/>
+  <rect x="80" y="410" width="352" height="12" rx="6" fill="#E7E515"/>
 </svg>

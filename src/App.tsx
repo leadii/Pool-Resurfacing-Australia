@@ -2,9 +2,10 @@ import { useState, type ReactNode } from 'react'
 
 // Types
 interface FormData {
-  vehicle: string
-  vehicleYear: string
-  currentGVM: string
+  poolType: string
+  poolSize: string
+  currentCondition: string
+  preferredFinish: string
   location: string
   contactDetails: {
     name: string
@@ -46,17 +47,16 @@ function Header() {
   return (
     <header className="bg-[#1A1348] px-4 sm:px-8 lg:px-12 py-4 flex items-center justify-between">
       <div className="flex items-center gap-1">
-        <span className="text-[#E7E515] font-black text-xl sm:text-2xl tracking-tight">GVM</span>
+        <span className="text-[#E7E515] font-black text-xl sm:text-2xl tracking-tight">Pool Resurfacing</span>
         <div className="text-white text-[8px] sm:text-[9px] leading-[1.1] font-medium tracking-wide">
-          <div>UPGRADES</div>
           <div>AUSTRALIA</div>
         </div>
       </div>
       <button
         onClick={scrollToForm}
-        className="bg-[#E7E515] text-[#1A1348] font-bold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm hover:brightness-105 transition-all"
+        className="bg-[#E7E515] text-[#1A1348] font-bold px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm hover:brightness-105 transition-all"
       >
-        CONTACT US
+        GET QUOTES
       </button>
     </header>
   )
@@ -84,17 +84,17 @@ function HeroSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 pt-12 sm:pt-16 pb-32 sm:pb-40">
         <div className="max-w-xl">
           <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] mb-5">
-            Find a GVM Upgrade<br />
-            Installer in 60 Seconds
+            Find a Pool Resurfacing<br />
+            Specialist in 60 Seconds
           </h1>
           <p className="text-white/75 text-sm sm:text-base leading-relaxed mb-7 max-w-md">
-            Connect with experienced GVM upgrade installers in your local area. Submit your details and a suitable installer will contact you within 24 hours to discuss your vehicle and requirements.
+            Connect with experienced pool resurfacing specialists in your local area. Submit your details and a trusted specialist will contact you within 24 hours to discuss your pool and provide a quote.
           </p>
           <button
             onClick={scrollToForm}
-            className="bg-[#E7E515] text-[#1A1348] font-bold px-6 py-3 rounded-full text-sm hover:brightness-105 transition-all inline-flex items-center gap-2"
+            className="bg-[#E7E515] text-[#1A1348] font-bold px-6 py-3 rounded-lg text-sm hover:brightness-105 transition-all inline-flex items-center gap-2"
           >
-            FIND INSTALLER
+            GET FREE QUOTES
             <ArrowIcon />
           </button>
         </div>
@@ -106,21 +106,21 @@ function HeroSection() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
             <StatCard
               icon="wrench"
-              number="150+"
-              title="Local Installer Network."
-              subtitle="Matched by location across Australia."
+              number="100+"
+              title="Local Specialist Network"
+              subtitle="Matched by location across Australia"
             />
             <StatCard
-              icon="truck"
-              number="5,000+"
-              title="GVM Upgrade Specialists."
-              subtitle="Passenger & commercial vehicles."
+              icon="pool"
+              number="10,000+"
+              title="Pools Resurfaced"
+              subtitle="All pool types and finishes"
             />
             <StatCard
               icon="shield"
               number="100%"
-              title="Installer-led compliance."
-              subtitle="Requirements confirmed directly."
+              title="Free, No-Obligation Quotes"
+              subtitle="Compare options before you commit"
             />
           </div>
         </div>
@@ -141,10 +141,9 @@ function StatCard({ icon, number, title, subtitle }: {
         <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
       </svg>
     ),
-    truck: (
+    pool: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-        <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H11a1 1 0 001-1v-1h3.05a2.5 2.5 0 014.9 0H20a1 1 0 001-1v-5a1 1 0 00-.293-.707l-4-4A1 1 0 0016 3h-5a1 1 0 00-1 1v1H3zm12 0h2.586L20 6.414V8h-5V4z" />
+        <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
       </svg>
     ),
     shield: (
@@ -172,30 +171,47 @@ function StatCard({ icon, number, title, subtitle }: {
 function FormSection() {
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState<FormData>({
-    vehicle: '',
-    vehicleYear: '',
-    currentGVM: '',
+    poolType: '',
+    poolSize: '',
+    currentCondition: '',
+    preferredFinish: '',
     location: '',
     contactDetails: { name: '', email: '', phone: '' }
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const totalSteps = 5
+  const totalSteps = 6
 
-  const vehicles = [
-    'Toyota LandCruiser 200 Series',
-    'Toyota LandCruiser 300 Series',
-    'Toyota Hilux',
-    'Toyota Prado',
-    'Ford Ranger',
-    'Ford Everest',
-    'Nissan Patrol',
-    'Nissan Navara',
-    'Mitsubishi Triton',
-    'Mitsubishi Pajero Sport',
-    'Isuzu D-Max',
-    'Isuzu MU-X',
-    'Mazda BT-50',
-    'Other'
+  const poolTypes = [
+    'Concrete',
+    'Fibreglass',
+    'Vinyl Liner',
+    'Not sure'
+  ]
+
+  const poolSizes = [
+    'Small (under 30,000L)',
+    'Medium (30,000-50,000L)',
+    'Large (50,000-80,000L)',
+    'Extra Large (over 80,000L)',
+    'Not sure'
+  ]
+
+  const conditions = [
+    'Cracked or chipped',
+    'Faded or discoloured',
+    'Rough or abrasive surface',
+    'Stained or marked',
+    'Leaking',
+    'Multiple issues',
+    'Just looking to refresh'
+  ]
+
+  const finishes = [
+    'Pebblecrete',
+    'Fibreglass coating',
+    'Pool tiles',
+    'Quartz aggregate',
+    'Not sure yet'
   ]
 
   const handleNext = () => {
@@ -209,11 +225,12 @@ function FormSection() {
 
   const canProceed = () => {
     switch (step) {
-      case 1: return formData.vehicle !== ''
-      case 2: return formData.vehicleYear !== ''
-      case 3: return formData.currentGVM !== ''
-      case 4: return formData.location !== ''
-      case 5: return formData.contactDetails.name && formData.contactDetails.email && formData.contactDetails.phone
+      case 1: return formData.poolType !== ''
+      case 2: return formData.poolSize !== ''
+      case 3: return formData.currentCondition !== ''
+      case 4: return formData.preferredFinish !== ''
+      case 5: return formData.location !== ''
+      case 6: return formData.contactDetails.name && formData.contactDetails.email && formData.contactDetails.phone
       default: return false
     }
   }
@@ -228,7 +245,7 @@ function FormSection() {
             </div>
             <h2 className="text-2xl font-bold text-[#1A1348] mb-3">Thank you!</h2>
             <p className="text-gray-600 text-sm">
-              A local GVM specialist will contact you within 24 hours to discuss your {formData.vehicle} upgrade options.
+              A local pool resurfacing specialist will contact you within 24 hours to discuss your {formData.preferredFinish.toLowerCase()} options and provide a quote.
             </p>
           </div>
         </div>
@@ -240,9 +257,9 @@ function FormSection() {
     <section id="form-section" className="bg-[#F3EBD9] pt-12 sm:pt-16 pb-16 px-4 sm:px-8">
       <div className="max-w-xl mx-auto">
         <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#1A1348] mb-1">Find a local GVM installer</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-[#1A1348] mb-1">Get free pool resurfacing quotes</h2>
           <p className="text-gray-500 text-sm mb-6">
-            Takes 60 seconds. A local expert will contact you within 24 hours.
+            Takes 60 seconds. A local specialist will contact you within 24 hours.
           </p>
 
           {/* Progress */}
@@ -252,7 +269,7 @@ function FormSection() {
               {Array.from({ length: totalSteps }).map((_, i) => (
                 <div
                   key={i}
-                  className={`w-8 h-1.5 rounded-full transition-colors ${
+                  className={`w-6 h-1.5 rounded-full transition-colors ${
                     i + 1 <= step ? 'bg-[#E7E515]' : 'bg-gray-200'
                   }`}
                 />
@@ -265,15 +282,15 @@ function FormSection() {
             {step === 1 && (
               <div>
                 <label className="block text-[#1A1348] text-sm font-medium mb-3">
-                  What vehicle do you need a GVM upgrade for?
+                  What type of pool do you have?
                 </label>
                 <select
-                  value={formData.vehicle}
-                  onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
+                  value={formData.poolType}
+                  onChange={(e) => setFormData({ ...formData, poolType: e.target.value })}
                   className="w-full p-3.5 pr-10 border border-gray-200 rounded-xl text-[#1A1348] text-sm focus:outline-none focus:ring-2 focus:ring-[#E7E515]/50 focus:border-[#E7E515] bg-white"
                 >
-                  <option value="">Select your vehicle</option>
-                  {vehicles.map((v) => <option key={v} value={v}>{v}</option>)}
+                  <option value="">Select pool type</option>
+                  {poolTypes.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
             )}
@@ -281,17 +298,15 @@ function FormSection() {
             {step === 2 && (
               <div>
                 <label className="block text-[#1A1348] text-sm font-medium mb-3">
-                  What year is your vehicle?
+                  What size is your pool?
                 </label>
                 <select
-                  value={formData.vehicleYear}
-                  onChange={(e) => setFormData({ ...formData, vehicleYear: e.target.value })}
+                  value={formData.poolSize}
+                  onChange={(e) => setFormData({ ...formData, poolSize: e.target.value })}
                   className="w-full p-3.5 pr-10 border border-gray-200 rounded-xl text-[#1A1348] text-sm focus:outline-none focus:ring-2 focus:ring-[#E7E515]/50 focus:border-[#E7E515] bg-white"
                 >
-                  <option value="">Select year</option>
-                  {Array.from({ length: 25 }, (_, i) => 2025 - i).map((y) =>
-                    <option key={y} value={y}>{y}</option>
-                  )}
+                  <option value="">Select pool size</option>
+                  {poolSizes.map((s) => <option key={s} value={s}>{s}</option>)}
                 </select>
               </div>
             )}
@@ -299,17 +314,15 @@ function FormSection() {
             {step === 3 && (
               <div>
                 <label className="block text-[#1A1348] text-sm font-medium mb-3">
-                  What's your current GVM?
+                  What's the current condition of your pool surface?
                 </label>
                 <select
-                  value={formData.currentGVM}
-                  onChange={(e) => setFormData({ ...formData, currentGVM: e.target.value })}
+                  value={formData.currentCondition}
+                  onChange={(e) => setFormData({ ...formData, currentCondition: e.target.value })}
                   className="w-full p-3.5 pr-10 border border-gray-200 rounded-xl text-[#1A1348] text-sm focus:outline-none focus:ring-2 focus:ring-[#E7E515]/50 focus:border-[#E7E515] bg-white"
                 >
-                  <option value="">Select GVM</option>
-                  {["I don't know", "Under 3,000 kg", "3,000 - 3,500 kg", "3,500 - 4,000 kg", "4,000 - 4,500 kg", "Over 4,500 kg"].map((g) =>
-                    <option key={g} value={g}>{g}</option>
-                  )}
+                  <option value="">Select condition</option>
+                  {conditions.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
             )}
@@ -317,7 +330,23 @@ function FormSection() {
             {step === 4 && (
               <div>
                 <label className="block text-[#1A1348] text-sm font-medium mb-3">
-                  Where are you located?
+                  What resurfacing finish are you interested in?
+                </label>
+                <select
+                  value={formData.preferredFinish}
+                  onChange={(e) => setFormData({ ...formData, preferredFinish: e.target.value })}
+                  className="w-full p-3.5 pr-10 border border-gray-200 rounded-xl text-[#1A1348] text-sm focus:outline-none focus:ring-2 focus:ring-[#E7E515]/50 focus:border-[#E7E515] bg-white"
+                >
+                  <option value="">Select finish</option>
+                  {finishes.map((f) => <option key={f} value={f}>{f}</option>)}
+                </select>
+              </div>
+            )}
+
+            {step === 5 && (
+              <div>
+                <label className="block text-[#1A1348] text-sm font-medium mb-3">
+                  Where is your pool located?
                 </label>
                 <select
                   value={formData.location}
@@ -332,7 +361,7 @@ function FormSection() {
               </div>
             )}
 
-            {step === 5 && (
+            {step === 6 && (
               <div className="space-y-3">
                 <label className="block text-[#1A1348] text-sm font-medium mb-3">
                   Your contact details
@@ -376,7 +405,7 @@ function FormSection() {
             {step > 1 && (
               <button
                 onClick={handleBack}
-                className="px-6 py-3.5 border border-gray-200 text-[#1A1348] font-semibold rounded-full text-sm hover:bg-gray-50 transition-colors"
+                className="px-6 py-3.5 border border-gray-200 text-[#1A1348] font-semibold rounded-lg text-sm hover:bg-gray-50 transition-colors"
               >
                 Back
               </button>
@@ -384,13 +413,13 @@ function FormSection() {
             <button
               onClick={handleNext}
               disabled={!canProceed()}
-              className={`flex-1 py-3.5 rounded-full font-bold text-sm flex items-center justify-center gap-2 transition-all ${
+              className={`flex-1 py-3.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2 transition-all ${
                 canProceed()
                   ? 'bg-[#E7E515] text-[#1A1348] hover:brightness-105'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
             >
-              {step === totalSteps ? 'SUBMIT' : 'CONTINUE'}
+              {step === totalSteps ? 'GET MY QUOTES' : 'CONTINUE'}
               <ArrowIcon />
             </button>
           </div>
@@ -403,9 +432,9 @@ function FormSection() {
 // How It Works Section
 function HowItWorksSection() {
   const steps = [
-    { number: 1, badge: '60 seconds', title: 'Tell us about your vehicle', description: 'Complete the 60-second form with your vehicle details.' },
-    { number: 2, badge: '24 hours', title: 'Speak with a local GVM specialist', description: 'A local GVM installer will reach out to assess your vehicle and next steps.' },
-    { number: 3, badge: '2-4 weeks', title: 'Become compliant and capable', description: 'Compare your options and choose the best GVM solution to safely and legally carry your load.' }
+    { number: 1, badge: '60 seconds', title: 'Tell us about your pool', description: 'Complete the 60-second form with your pool details and resurfacing preferences.' },
+    { number: 2, badge: '24 hours', title: 'Speak with a local specialist', description: 'A trusted pool resurfacing specialist will contact you to discuss your options and provide a quote.' },
+    { number: 3, badge: '1-2 weeks', title: 'Get your pool transformed', description: 'Compare quotes, choose your preferred specialist, and enjoy a beautifully resurfaced pool.' }
   ]
 
   return (
@@ -413,21 +442,20 @@ function HowItWorksSection() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10 sm:mb-14">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1A1348] mb-2">How It Works</h2>
-          <p className="text-gray-500 text-sm">Get your GVM upgrade sorted in three simple steps</p>
+          <p className="text-gray-500 text-sm">Get your pool resurfaced in three simple steps</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {steps.map((step) => (
             <div key={step.number}>
               {/* Image Placeholder */}
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-5 bg-gradient-to-br from-gray-200 to-gray-300">
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-5 bg-gradient-to-br from-[#1A1348]/10 to-[#1A1348]/20">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <svg className="w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                    <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H11a1 1 0 001-1v-1h3.05a2.5 2.5 0 014.9 0H20a1 1 0 001-1v-5a1 1 0 00-.293-.707l-4-4A1 1 0 0016 3h-5a1 1 0 00-1 1v1H3zm12 0h2.586L20 6.414V8h-5V4z" />
+                  <svg className="w-12 h-12 text-[#1A1348]/30" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <div className="absolute top-3 right-3 bg-[#E7E515] text-[#1A1348] text-[10px] font-bold px-2.5 py-1 rounded-full">
+                <div className="absolute top-3 right-3 bg-[#E7E515] text-[#1A1348] text-[10px] font-bold px-2.5 py-1 rounded-lg">
                   {step.badge}
                 </div>
               </div>
@@ -450,8 +478,8 @@ function HowItWorksSection() {
   )
 }
 
-// Why GVM Section
-function WhyGVMSection() {
+// Why Pool Resurfacing Section
+function WhyPoolResurfacingSection() {
   const features = [
     {
       icon: (
@@ -459,8 +487,8 @@ function WhyGVMSection() {
           <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
         </svg>
       ),
-      title: 'Compliance-aware',
-      description: 'We connect you with installers who understand engineering, certification, and state-based registration requirements relevant to GVM upgrades.'
+      title: 'Vetted specialists only',
+      description: 'We connect you with experienced, licensed pool resurfacing professionals who deliver quality workmanship and stand behind their work.'
     },
     {
       icon: (
@@ -468,8 +496,8 @@ function WhyGVMSection() {
           <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
         </svg>
       ),
-      title: 'Nationwide installer network',
-      description: 'Access a broad network of GVM specialists across Australia, supporting both pre-registration and post-registration upgrades.'
+      title: 'Australia-wide network',
+      description: 'Access our network of pool resurfacing specialists across Australia, from metro areas to regional locations.'
     },
     {
       icon: (
@@ -477,8 +505,8 @@ function WhyGVMSection() {
           <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
         </svg>
       ),
-      title: 'Total transparency',
-      description: "You're connected directly with installers, so you can ask the right questions and decide what works for your vehicle — no pressure, no middleman."
+      title: 'Compare before you commit',
+      description: "Get quotes and speak with specialists before making any decisions. No pressure, no obligation - just the information you need."
     }
   ]
 
@@ -486,8 +514,8 @@ function WhyGVMSection() {
     <section className="bg-[#F3EBD9] py-16 sm:py-20 px-4 sm:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10 sm:mb-14">
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#1A1348] mb-2">Why GVM Upgrades Australia?</h2>
-          <p className="text-gray-500 text-sm">A simpler way to connect with the right GVM installer</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#1A1348] mb-2">Why Pool Resurfacing Australia?</h2>
+          <p className="text-gray-500 text-sm">A simpler way to find the right pool resurfacing specialist</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -511,11 +539,11 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const faqs = [
-    { question: 'How much does a GVM upgrade typically cost?', answer: 'GVM upgrade costs vary depending on your vehicle and the type of upgrade required. Typical costs range from $2,000 to $8,000+ including engineering certification and compliance.' },
-    { question: 'Are GVM upgrades legal in Australia?', answer: 'Yes, GVM upgrades are legal in Australia when performed by certified installers and approved by a qualified engineer.' },
-    { question: 'How long does the process take?', answer: 'The typical GVM upgrade process takes 2-4 weeks from initial consultation to completion.' },
-    { question: 'Will my insurance cover the vehicle?', answer: "Most insurance providers will cover vehicles with properly certified GVM upgrades. It's important to notify your insurer of the modification." },
-    { question: "What does 'ADR Compliant' mean?", answer: 'ADR stands for Australian Design Rules. An ADR-compliant GVM upgrade means the modification meets federal safety standards.' }
+    { question: 'How much does pool resurfacing cost?', answer: 'Pool resurfacing costs typically range from $10,000 to $35,000+ depending on pool size, condition, and the finish you choose. Pebblecrete starts around $10,000, while premium quartz aggregate finishes can exceed $30,000 for larger pools.' },
+    { question: 'How long does pool resurfacing take?', answer: 'Most pool resurfacing projects take 1-2 weeks from start to finish, depending on the size of your pool and the type of finish. Your specialist will provide a timeline specific to your project.' },
+    { question: 'How do I know if my pool needs resurfacing?', answer: 'Common signs include rough or abrasive surfaces, visible cracks or chips, staining that won\'t clean off, fading colour, and water loss from leaks. If your pool surface is more than 10-15 years old, it\'s worth getting an assessment.' },
+    { question: 'What resurfacing options are available?', answer: 'The main options are pebblecrete (natural pebble finish), fibreglass coating (smooth, waterproof), ceramic or glass tiles (premium look), and quartz aggregate (luxurious crystal finish). Each has different lifespans, aesthetics, and price points.' },
+    { question: 'Is the quote really free?', answer: 'Yes, completely free and no-obligation. Our specialists will assess your pool, discuss your options, and provide a detailed quote at no cost. You\'re under no pressure to proceed.' }
   ]
 
   const scrollToForm = () => {
@@ -527,7 +555,7 @@ function FAQSection() {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1A1348] mb-2">Common Questions</h2>
-          <p className="text-gray-500 text-sm">Everything you need to know about GVM upgrades</p>
+          <p className="text-gray-500 text-sm">Everything you need to know about pool resurfacing</p>
         </div>
 
         <div className="space-y-3 mb-10">
@@ -550,9 +578,9 @@ function FAQSection() {
         <div className="text-center">
           <button
             onClick={scrollToForm}
-            className="bg-[#E7E515] text-[#1A1348] font-bold px-8 py-3.5 rounded-full text-sm hover:brightness-105 transition-all inline-flex items-center gap-2"
+            className="bg-[#E7E515] text-[#1A1348] font-bold px-8 py-3.5 rounded-lg text-sm hover:brightness-105 transition-all inline-flex items-center gap-2"
           >
-            FIND AN INSTALLER
+            GET FREE QUOTES
             <ArrowIcon />
           </button>
         </div>
@@ -571,16 +599,16 @@ function FinalCTASection() {
     <section className="bg-[#1A1348] py-16 sm:py-20 px-4 sm:px-8">
       <div className="max-w-2xl mx-auto text-center">
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-          Ready to upgrade your vehicle?
+          Ready to transform your pool?
         </h2>
         <p className="text-white/60 text-sm mb-8 max-w-md mx-auto">
-          Get connected with a local GVM installer to discuss the right setup for your vehicle and move forward.
+          Get connected with a local pool resurfacing specialist to discuss your options and receive a free, no-obligation quote.
         </p>
         <button
           onClick={scrollToForm}
-          className="bg-[#E7E515] text-[#1A1348] font-bold px-8 py-3.5 rounded-full text-sm hover:brightness-105 transition-all inline-flex items-center gap-2"
+          className="bg-[#E7E515] text-[#1A1348] font-bold px-8 py-3.5 rounded-lg text-sm hover:brightness-105 transition-all inline-flex items-center gap-2"
         >
-          FIND AN INSTALLER
+          GET FREE QUOTES
           <ArrowIcon />
         </button>
       </div>
@@ -596,7 +624,7 @@ function App() {
       <HeroSection />
       <FormSection />
       <HowItWorksSection />
-      <WhyGVMSection />
+      <WhyPoolResurfacingSection />
       <FAQSection />
       <FinalCTASection />
     </div>

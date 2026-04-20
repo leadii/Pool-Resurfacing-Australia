@@ -1,11 +1,11 @@
-# robots.txt for GVM Upgrades Australia
-# https://gvmupgradesaustralia.com.au
+# robots.txt for Pool Resurfacing Australia
+# https://poolresurfacingaustralia.com.au
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://gvmupgradesaustralia.com.au/sitemap.xml
+Sitemap: https://poolresurfacingaustralia.com.au/sitemap.xml
 
 # Disallow utility pages from indexing
 Disallow: /thanks.html

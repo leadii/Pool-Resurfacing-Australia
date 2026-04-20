@@ -1,17 +1,17 @@
-# GVM Upgrades Australia
+# Pool Resurfacing Australia
 
-A lead generation website that connects Australian vehicle owners with certified GVM (Gross Vehicle Mass) upgrade installers. Built as a static HTML site deployed on Vercel.
+A lead generation website that connects Australian pool owners with trusted pool resurfacing specialists. Built as a static HTML site deployed on Vercel.
 
-**Live site:** [gvmupgradesaustralia.com.au](https://gvmupgradesaustralia.com.au)
+**Live site:** [poolresurfacingaustralia.com.au](https://poolresurfacingaustralia.com.au)
 
 ## Overview
 
-GVM Upgrades Australia is an installer matching service that helps 4WD and truck owners find certified professionals to increase their vehicle's legal payload capacity. The site captures leads through a multi-step quiz form and connects users with local installers.
+Pool Resurfacing Australia is a specialist matching service that helps pool owners find qualified professionals to resurface their pools. The site captures leads through a multi-step quiz form and connects users with local resurfacing specialists.
 
 ### Key Features
 
-- **Multi-step quiz form** — Captures vehicle details, location, and contact info
-- **Vehicle-specific landing pages** — SEO-optimised pages for popular models
+- **Multi-step quiz form** — Captures pool details, condition, preferences, and contact info
+- **Resurfacing type landing pages** — SEO-optimised pages for different finishes
 - **Additional info collection** — Follow-up form for detailed quotes
 - **Mobile-responsive design** — Works across all device sizes
 - **Google Analytics & GTM integration** — Full conversion tracking
@@ -27,24 +27,23 @@ GVM Upgrades Australia is an installer matching service that helps 4WD and truck
 ## Project Structure
 
 ```
-/GVM
+/Pool-Resurfacing-Australia
 ├── index.html              # Main landing page with quiz form
 ├── additional-info.html    # Follow-up multi-step quiz
 ├── contact.html            # Contact Us form
-├── faq.html                # Legal & Compliance FAQ
-├── how-to.html             # How GVM upgrades work
+├── faq.html                # Pool Resurfacing FAQ
+├── pool-resurfacing-guide.html  # Team documentation
 ├── thanks.html             # Form success page
 ├── thanks-additional.html  # Additional info success page
 ├── terms.html              # Terms & Conditions
 ├── privacy.html            # Privacy Policy
 ├── 404.html                # Custom 404 with interactive game
 │
-├── # Vehicle-specific landing pages
-├── nissan-patrol-y62.html
-├── toyota-landcruiser.html
-├── ford-everest.html
-├── isuzu-dmax.html
-├── dodge-ram.html
+├── # Resurfacing type landing pages
+├── pebblecrete.html        # Pebblecrete resurfacing
+├── fibreglass.html         # Fibreglass resurfacing
+├── pool-tiling.html        # Pool tiling
+├── quartz-aggregate.html   # Quartz aggregate resurfacing
 │
 ├── # Config & docs
 ├── BRAND_GUIDELINES.md     # Design system documentation
@@ -54,31 +53,25 @@ GVM Upgrades Australia is an installer matching service that helps 4WD and truck
 ├── robots.txt              # Crawler instructions
 │
 ├── /public
-│   ├── GVMLogo.svg         # Brand logo
+│   ├── PoolResurfacingLogo.svg  # Brand logo
 │   ├── Header.png          # Hero background
-│   ├── vehicle-data.json   # Vehicle makes/models database
 │   ├── /fonts              # DIN Condensed Bold, Arial
-│   ├── /vehicles           # Vehicle-specific images
+│   ├── /pools              # Pool-specific images
 │   └── /email-icons        # Email template assets
 │
 └── /src                    # Vite/React setup (unused for main site)
 ```
 
-## Supported Vehicles
+## Resurfacing Types
 
-The quiz form supports 50+ vehicle models including:
+The site covers four main pool resurfacing options:
 
-- **Toyota:** LandCruiser (200/300/70 series), Prado, Hilux, Tundra
-- **Nissan:** Patrol Y62/Y61, Navara
-- **Ford:** Ranger, Everest, F-150, F-250/F-350
-- **Isuzu:** D-MAX, MU-X
-- **Ram:** 1500, 2500
-- **Chevrolet:** Silverado 1500, 2500HD
-- **Jeep:** Gladiator, Wrangler, Rubicon
-- **Mitsubishi:** Triton, Pajero Sport
-- **Others:** VW Amarok, Mazda BT-50, Suzuki Jimny, Ineos Grenadier
-
-Full list in `/public/vehicle-data.json`.
+| Type | Lifespan | Price Range |
+|------|----------|-------------|
+| **Pebblecrete** | 15-20 years | $10,000-$18,000 |
+| **Fibreglass** | 20+ years | $12,000-$25,000 |
+| **Pool Tiling** | 25+ years | $15,000-$30,000+ |
+| **Quartz Aggregate** | 20-25 years | $18,000-$35,000+ |
 
 ## Local Development
 
@@ -100,7 +93,7 @@ Deployed automatically via Vercel on push to `main`. Configuration in `vercel.js
 
 - Clean URLs enabled (no `.html` extensions)
 - No trailing slashes
-- Static file rewrites for fonts, favicons, and vehicle images
+- Static file rewrites for fonts, favicons, and pool images
 
 ## Brand Guidelines
 
@@ -131,7 +124,7 @@ Located in `/public/`:
 - Schema.org structured data on all pages
 - Open Graph and Twitter Card meta tags
 - Sitemap at `/sitemap.xml`
-- Vehicle-specific landing pages target long-tail keywords
+- Resurfacing-specific landing pages target long-tail keywords
 
 ## Licence
 

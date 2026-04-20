@@ -1,4 +1,4 @@
-# GVM Upgrades Australia - Project Instructions
+# Pool Resurfacing Australia - Project Instructions
 
 ## Brand Guidelines
 
@@ -23,13 +23,27 @@
 ### Pages
 
 - `index.html` - Main landing page with quiz form
+- `pebblecrete.html` - Pebblecrete resurfacing landing page
+- `fibreglass.html` - Fibreglass resurfacing landing page
+- `pool-tiling.html` - Pool tiling landing page
+- `quartz-aggregate.html` - Quartz aggregate resurfacing landing page
+- `pool-resurfacing-guide.html` - Guide to pool resurfacing
 - `additional-info.html` - Additional info multi-step quiz
 - `contact.html` - Contact Us form page
-- `faq.html` - Legal & Compliance FAQ
+- `faq.html` - Pool resurfacing FAQ
 - `thanks.html` - Form submission success page
 - `terms.html` - Terms & Conditions
 - `privacy.html` - Privacy Policy
-- `404.html` - 404 error page with interactive monster truck game
+- `404.html` - 404 error page
+
+### Business Model
+
+Pool Resurfacing Australia is a **lead generation service**. We connect pool owners with trusted resurfacing specialists. We do NOT perform the resurfacing work ourselves.
+
+Copy should focus on:
+- Connecting pool owners with local specialists
+- Getting free, no-obligation quotes
+- Comparing options before committing
 
 ### Key Rules
 
@@ -40,6 +54,13 @@
 5. Primary buttons are yellow with navy text
 6. Form submissions redirect to `thanks.html`
 7. **All form elements must have WHITE backgrounds (`#FFFFFF`)** - inputs, radio options, checkboxes, textareas, selects. Never use cream for form elements.
+
+### Pool Resurfacing Types
+
+1. **Pebblecrete** - Natural pebble aggregate finish, 15-20 year lifespan, $10,000-$18,000
+2. **Fibreglass** - Smooth waterproof coating, 20+ year lifespan, $12,000-$25,000
+3. **Pool Tiling** - Ceramic or mosaic tiles, premium aesthetics, $15,000-$30,000+
+4. **Quartz Aggregate** - Premium crystal finish, luxury option, $18,000-$35,000+
 
 ### Creating New Pages
 

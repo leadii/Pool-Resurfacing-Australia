@@ -2,10 +2,10 @@
 
 **Related:** This page was created using the `/admin-guide` skill from ClaudeSkills.
 
-Use this skill to regenerate the file tree in the how-to.html admin guide when HTML files are added, removed, or renamed.
+Use this skill to regenerate the file tree in the pool-resurfacing-guide.html admin guide when HTML files are added, removed, or renamed.
 
 ## When to Use
-- After creating a new vehicle landing page
+- After creating a new resurfacing type landing page
 - After adding any new HTML page to the site
 - After renaming or removing pages
 - When the user asks to update or refresh the how-to page
@@ -14,28 +14,28 @@ Use this skill to regenerate the file tree in the how-to.html admin guide when H
 
 1. **Scan the project for HTML files:**
    ```bash
-   find . -maxdepth 1 -name "*.html" -not -name "how-to.html" | sort
+   find . -maxdepth 1 -name "*.html" -not -name "pool-resurfacing-guide.html" | sort
    ```
 
 2. **Categorise files into these groups:**
    - **Main Pages:** index.html, contact.html, faq.html, additional-info.html
-   - **Vehicle Landing Pages:** Any file with a vehicle name (e.g., nissan-patrol-y62.html, toyota-landcruiser.html)
+   - **Resurfacing Type Pages:** pebblecrete.html, fibreglass.html, pool-tiling.html, quartz-aggregate.html
    - **Thank You Pages:** thanks.html, thanks-additional.html
-   - **Legal & Other:** terms.html, privacy.html, 404.html, how-to.html
+   - **Legal & Other:** terms.html, privacy.html, 404.html, pool-resurfacing-guide.html
 
-3. **Update the file tree section in how-to.html:**
+3. **Update the file tree section in pool-resurfacing-guide.html:**
    - Find the section between `<!-- FILE_TREE_START -->` and `<!-- FILE_TREE_END -->`
    - Replace the content with the updated file tree
-   - Each file should link to `https://gvmupgradesaustralia.com.au/[filename-without-extension]`
-   - index.html links to `https://gvmupgradesaustralia.com.au/`
+   - Each file should link to `https://poolresurfacingaustralia.com.au/[filename-without-extension]`
+   - index.html links to `https://poolresurfacingaustralia.com.au/`
    - Update the "Last updated" date to today's date
 
 4. **File tree item format:**
    ```html
-   <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/[path]" target="_blank">[filename].html</a><span>[Description]</span></div>
+   <div class="file-tree-item"><a href="https://poolresurfacingaustralia.com.au/[path]" target="_blank">[filename].html</a><span>[Description]</span></div>
    ```
 
-5. **Vehicle page descriptions** should be the vehicle name (e.g., "Nissan Patrol Y62")
+5. **Resurfacing page descriptions** should be the resurfacing type (e.g., "Pebblecrete resurfacing")
 
 ## Example Output
 
@@ -44,7 +44,7 @@ Use this skill to regenerate the file tree in the how-to.html admin guide when H
 <div class="file-tree">
     <div class="file-tree-section">
         <div class="file-tree-title">Main Pages</div>
-        <div class="file-tree-item"><a href="https://gvmupgradesaustralia.com.au/" target="_blank">index.html</a><span>Home page with vehicle quiz</span></div>
+        <div class="file-tree-item"><a href="https://poolresurfacingaustralia.com.au/" target="_blank">index.html</a><span>Home page with pool quiz</span></div>
         <!-- ... more items -->
     </div>
     <!-- ... more sections -->
@@ -54,6 +54,6 @@ Use this skill to regenerate the file tree in the how-to.html admin guide when H
 ```
 
 ## After Updating
-- Verify the file tree renders correctly by viewing how-to.html
+- Verify the file tree renders correctly by viewing pool-resurfacing-guide.html
 - Ensure all links point to the correct production URLs
 - Confirm the date has been updated

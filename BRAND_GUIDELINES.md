@@ -1,4 +1,4 @@
-# GVM Upgrades Australia - Brand Guidelines
+# Pool Resurfacing Australia - Brand Guidelines
 
 ## Brand Colors
 
@@ -458,23 +458,25 @@ transform: translateY(-2px);
 ## File Structure
 
 ```
-/GVM
+/Pool-Resurfacing-Australia
 ├── index.html              # Main landing page with quiz form
+├── pebblecrete.html        # Pebblecrete resurfacing landing page
+├── fibreglass.html         # Fibreglass resurfacing landing page
+├── pool-tiling.html        # Pool tiling landing page
+├── quartz-aggregate.html   # Quartz aggregate landing page
 ├── additional-info.html    # Additional info multi-step quiz
 ├── contact.html            # Contact Us form page
-├── faq.html                # Legal & Compliance FAQ
+├── faq.html                # Pool resurfacing FAQ
 ├── thanks.html             # Form submission success page
 ├── terms.html              # Terms & Conditions
 ├── privacy.html            # Privacy Policy
-├── 404.html                # 404 error page with monster truck game
+├── 404.html                # 404 error page
 ├── BRAND_GUIDELINES.md     # This file
 ├── CLAUDE.md               # AI assistant instructions
 └── public/
-    ├── GVMLogo.svg         # SVG logo
-    ├── Header.png          # Hero background image
-    ├── image1.png          # How It Works step 1
-    ├── image2.png          # How It Works step 2
-    ├── image3.png          # How It Works step 3
+    ├── PoolResurfacingLogo.svg  # SVG logo
+    ├── Header.png               # Hero background image
+    ├── pools/                   # Pool resurfacing photos
     └── fonts/
         ├── DIN Condensed Bold.ttf  # Heading font
         └── Arial.ttf               # Body font
@@ -484,15 +486,15 @@ transform: translateY(-2px);
 
 ## Logo
 
-- **File**: `/public/GVMLogo.svg` (use this SVG file on all pages)
+- **File**: `/public/PoolResurfacingLogo.svg` (use this SVG file on all pages)
 - **Height**: `40px` in header
-- **Text**: "GVM" in Electric Yellow (`#E7E515`)
-- **Subtext**: "UPGRADES AUSTRALIA" in White (`#FFFFFF`)
+- **Text**: "POOL RESURFACING" in Electric Yellow (`#E7E515`)
+- **Subtext**: "AUSTRALIA" in White (`#FFFFFF`)
 - **Font**: DIN Condensed Bold (700)
 
 ```html
 <a href="index.html" class="logo">
-    <img src="/GVMLogo.svg" alt="GVM Upgrades Australia" height="40">
+    <img src="/PoolResurfacingLogo.svg" alt="Pool Resurfacing Australia" height="40">
 </a>
 ```
 
@@ -557,7 +559,7 @@ Footer links must always appear in this order:
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms & Conditions</a>
     </div>
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> GVM Upgrades Australia. All rights reserved.</p>
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Pool Resurfacing Australia. All rights reserved.</p>
 </footer>
 ```
 
